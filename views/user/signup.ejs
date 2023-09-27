@@ -1,0 +1,48 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="login-page d-inline-flex justify-content-center align-items-center">
+
+  <div class="card w-25 h-75 bg-dark rounded-0 rounded-start">
+    <div class="card-body">
+       <h3 class="text-light">SignUp</h3>
+       <h4 class="text-light">Create an Account</h4>
+       <h4 class="text-light">and Start Shopping</h4>
+    </div>
+  </div>
+
+  <div class="card w-25 h-75 bg-warning rounded-0 rounded-end">
+    <div class="card-body d-flex justify-content-center align-items-center">
+      <form action="/register" id="registerForm" method="post">
+        <div class="d-flex flex-column align-items-center">
+          <!-- User Name -->
+          <div>
+            <label for="userName" class="form-label fw-medium">Enter Your UserName</label>
+              <div class="input-group has-validation">
+                <input type="text" class="form-control" id="userName" placeholder="UserName" name="username" required>
+              </div>
+          </div>
+          <!-- Email Address -->
+          <div>
+            <label for="emailaddress" class="form-label fw-medium">Email address</label>
+              <div class="input-group has-validation">
+                <input type="text" class="form-control" id="emailaddress" placeholder="abcd@gmail.com" name="emailaddress" required>
+              </div>
+          </div>
+          <!-- Password -->
+          <div class="">
+            <label for="password" class="form-label fw-medium">Password</label>
+              <input type="password" id="password" class="form-control" name="password" required>
+          </div>
+          <!-- Confirm password -->
+          <div class="">
+            <label for="passwordConfirmation" class="form-label fw-medium">Password Confirmation</label>
+              <input type="password" id="passwordConfirmation" class="form-control" name="confirmPassword" required>
+          </div>
+          <button type="submit" class="btn btn-dark mt-3" style="width : 100px">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<script src="/script/register.js" defer></script>
