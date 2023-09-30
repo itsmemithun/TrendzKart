@@ -13,17 +13,17 @@
 
   <div class="card w-25 h-75 bg-warning rounded-0 rounded-end">
     <div class="card-body d-flex justify-content-center align-items-center">
-      <form action="/user_signin" method="post">
+      <form action="/user_login" method="post">
         <div class="d-flex flex-column align-items-center">
           <div class="mb-3">
             <label for="userName" class="form-label fw-medium">Enter Your UserName</label>
               <div class="input-group has-validation">
-               <input type="text" class="form-control" id="userName" placeholder="UserName" required>
+               <input type="text" class="form-control" name="username" id="userName" placeholder="username" required>
               </div>
           </div>
           <div class="">
-            <label for="validateOTP" class="form-label fw-medium">Enter Your OTP</label>
-              <input type="number" id="validateOTP" class="form-control" required>
+            <label for="validateOTP" class="form-label fw-medium">Enter Your Password</label>
+              <input type="password" id="validateOTP" class="form-control" name="password" required>
           </div>
           <button type="submit" class="btn btn-dark mt-3" style="width : 100px">Login</button>
         </div>
