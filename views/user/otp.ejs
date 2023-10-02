@@ -4,13 +4,13 @@
 
   <div class="card w-50 h-75 bg-dark">
     <div class="card-body d-flex justify-content-center align-items-center">
-      <form action="/register" id="registerForm" method="post">
+      <form action="/register/otp" id="registerForm" method="post">
         <div class="d-flex flex-column align-items-center">
           <!-- User Name -->
           <div>
             <label for="otp-verification" class="form-label fw-medium text-light">Enter the Verification code</label>
               <div class="input-group has-validation">
-                <input type="number" class="form-control" id="otp-verification" placeholder="Enter Your Code here" name="username" required>
+                <input type="number" class="form-control" id="otp-verification" placeholder="Enter Your Code here" name="otp" required>
               </div>
               <p class="text-light mb-0">Did't receive the verification OTP?<a href="/resend" class="text-primary">Resend Again?</a></p>
           </div>

@@ -15,4 +15,6 @@ router.get('/user_signup', nocache(), usercontroller.userSignup);
 
 router.post('/register', usercontroller.userRegister);
 
+router.post('/register/otp', usercontroller.emailVerificationRegister);
+
 export default router;
