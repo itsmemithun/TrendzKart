@@ -20,16 +20,10 @@ const transporter = nodemailer.createTransport({
    },
 });
 
-
-
 export default  {
 
 //  <<< Home Route >>> //
-   home : async(req,res) => {
-      if(!req.isAuthenticated()){
-         console.log('you are not authenticated');
-         return res.send('try again..');
-      }
+   home : async(req,res) => {      
       res.render('user/home.ejs');
    },
  
@@ -58,28 +52,29 @@ export default  {
       }
       else{
       // <<< Creating a Temp user and Saving it to the DB do that we can Access it in the next route >>> //  
-      const tempUser = new userRegistration({ username : username, email : emailaddress, password : password, verified : false });
+      const tempUser = new userRegistration({ username : username, email : emailaddress, password : password, verified : false, expireAt : new Date() });
       await tempUser.save();
       const otp = OTP();
+      console.log(otp);
       req.session.Otp = otp;
       req.session._userid = tempUser._id;
       /// <<< Sending The Email >>> ///
-      transporter.sendMail({                                
-         from : process.env._EMAIL,
-         to   : emailaddress,
-         subject : 'OTP Verification',
-         text   : 'Verify Your Email Using the OTP',
-         html   : `<h3>Verify Your Email Using this OTP:${otp}</h3>`
-      },(err,info)=>{
-         if(err){
-            console.log('we got an error'+err);
-         }else{
-            console.log(info.messageId);
-         }
-      });
+      // transporter.sendMail({                                
+      //    from : process.env._EMAIL,
+      //    to   : emailaddress,
+      //    subject : 'OTP Verification',
+      //    text   : 'Verify Your Email Using the OTP',
+      //    html   : `<h3>Verify Your Email Using this OTP:${otp}</h3>`
+      // },(err,info)=>{
+      //    if(err){
+      //       console.log('we got an error'+err);
+      //    }else{
+      //       console.log(info.messageId);
+      //    }
+      // });
       res.render('user/otp.ejs');
       }
-   },
+     },
 
    emailVerificationRegister : async(req,res) => {
       const { otp } = req.body;
@@ -88,6 +83,7 @@ export default  {
          const {username , email , password} = tempuser;
          const user = new User({ username : username, email : email, verified : true });
          const registeredUser = await User.register(user, password);
+         req.session.isLoggedIn = true;
          res.redirect('/');
       }else{
          res.send('somethings wrong try again');

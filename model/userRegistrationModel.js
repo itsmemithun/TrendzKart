@@ -18,8 +18,14 @@ const userRegistrationSchema = new Schema({
   verified : {
     type : Boolean,
     required : true
-  } 
+  }, 
+  expireAt : {
+    type : Date,
+    expires: 120
+  }
 })
+
+// userRegistrationSchema.index({ expiredAt : 1 });
 
 const userRegistration = mongoose.model('userRegistrations', userRegistrationSchema);
 

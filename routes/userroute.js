@@ -3,9 +3,9 @@ const router = express.Router();
 import usercontroller from '../controller/userController.js';
 import nocache from 'nocache';
 import passport from 'passport';
+import  { isLoggedIn }  from '../middleware/user_middleware.js'
 
-
-router.get('/', usercontroller.home)
+router.get('/', isLoggedIn, usercontroller.home);
 
 router.get('/user_login', nocache(), usercontroller.userLogin);
 
