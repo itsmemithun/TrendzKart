@@ -1,0 +1,56 @@
+<% layout('layouts/adminboilerplate.ejs') %>
+<div class="login-page">
+
+    <div class="card border-0 ms-3 mt-5 h-75 side-bar" style="width: 18rem;">
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Dash Board
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Products
+      </a>
+      <a href="/admin/panel/user_management" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        User's
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Order's
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Coupons
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Collections
+      </a>
+    </div> 
+    
+    <div class="edit-container d-flex flex-column align-items-center justify-content-center bg-color w-75 h-75">
+      <h4 class="text-decoration-underline">
+        Edit User
+      </h4>
+
+      <div class="w-50 h-100 p-2">
+        <div class="row g-3 w-100 d-inline-flex flex-column">
+
+          <div class="col">
+            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+          </div>
+
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+
+        </div>
+      </div>
+       
+    </div>
+
+</div>

@@ -1,6 +1,5 @@
 import User from '../model/usermodel.js';
 import userRegistration from '../model/userRegistrationModel.js';
-import passport from 'passport';
 import nodemailer from 'nodemailer'
 import otpGenerator from 'otp-generator';
 import dotenv from 'dotenv';

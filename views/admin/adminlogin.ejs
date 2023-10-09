@@ -1,0 +1,25 @@
+<% layout('layouts/adminboilerplate.ejs') %>
+
+<div class="login-page d-inline-flex justify-content-center align-items-center">
+
+  <div class="card w-50 h-75 bg-dark rounded">
+    <div class="card-body d-flex justify-content-center align-items-center">
+      <form action="/admin/login" method="post">
+        <div class="d-flex flex-column align-items-center">
+          <div class="mb-3">
+            <label for="userName" class="form-label text-light fw-medium">Enter Your UserName</label>
+              <div class="input-group has-validation">
+               <input type="text" class="form-control" name="username" id="userName" placeholder="Username" required>
+              </div>
+          </div>
+          <div class="">
+            <label for="validateOTP" class="form-label text-light fw-medium">Enter Your Password</label>
+              <input type="password" id="validateOTP" class="form-control" name="password" placeholder="Password" required>
+          </div>
+          <button type="submit" class="btn btn-warning mt-3" style="width : 100px">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

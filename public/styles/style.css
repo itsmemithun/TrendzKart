@@ -1,7 +1,7 @@
 /* <<< Body Styles >>> 
 ______________________*/
 body{
-   overflow-x: hidden;
+   /* overflow-x: hidden; */
 }
 
 /*<<< Login Page >>>
@@ -13,3 +13,42 @@ body{
 }
 
 
+/* <<< Admin Page >>> */
+
+.main-body{
+  width : auto;
+}
+
+.login-page{
+   position : relative;
+}
+
+.side-bar{
+  /* position : fixed!important; */
+  background-color : rgb(217, 217, 217)!important;
+}
+
+.main-body{
+  position : absolute;
+  left : 350px;
+  top : 60px;
+}
+
+.user-scrollable {
+  height : 400px!important;
+  overflow-y: scroll;
+}
+
+.user-nav{
+  background-color: rgb(217, 217, 217)!important;
+}
+
+.bg-color{
+  background-color: rgb(217, 217, 217)!important;
+}
+
+.edit-container{
+   position : absolute;
+   left : 350px;
+   top : 0px;
+}

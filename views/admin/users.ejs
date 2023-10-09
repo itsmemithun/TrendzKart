@@ -1,0 +1,86 @@
+<% layout('layouts/adminboilerplate.ejs') %>
+<div class="login-page">
+
+    <div class="card border-0 ms-3 mt-5 h-75 side-bar" style="width: 18rem;">
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Dash Board
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Products
+      </a>
+      <a href="/admin/panel/user_management" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        User's
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Order's
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Coupons
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Collections
+      </a>
+    </div> 
+    
+     <div class="main-body w-75">
+
+      <div class="usercount-container">
+        <div class="d-flex p-2">
+          <div class="card border-0 border-end" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item fw-medium">Total User's</li>
+              <h4 class="list-group-item"><%= userCount %></h4>
+            </ul>
+          </div>
+ 
+          <div class="card border-0" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item fw-medium">Blocked</li>
+              <h4 class="list-group-item">--</h4>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="userlist-container w-75">
+        <h4 class="p-2 text-decoration-underline">User's List</h4>
+        <nav class="navbar bg-dark rounded">
+          <div class="container-fluid">
+            <span class="text-light">Username</span>
+            <span class="text-light ms-4">Gmail</span>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+
+        <div data-bs-spy="scroll" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2 user-scrollable" tabindex="0">
+             <% for(user of users){ %>
+              
+              <nav class="navbar mt-1 user-nav rounded">
+                <div class="container">
+                  <div class="">
+                    <img class="img-thumbnail" src="https://cdn-icons-png.flaticon.com/512/5511/5511365.png" alt="Bootstrap" width="30" height="24">
+                    <span><%=  user.username %></span>
+                  </div>
+                  <div>
+                    <p class="pe-5"><%= user.email %></p>
+                  </div>
+                  <div>
+                    <a href="/admin/panel/user_management/delete_user/<%= user._id %>"><button type="button" class="btn btn-danger">Delete</button></a>
+                    <a href="/admin/panel/user_management/edit_user/<%= user._id %>"><button type="button" class="btn btn-primary">Edit</button></a>
+                  </div>
+                </div>
+              </nav>
+              
+             <% } %>
+        </div>
+
+        
+      </div>
+
+  
+     </div>
+
+</div>
