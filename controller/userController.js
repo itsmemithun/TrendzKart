@@ -11,6 +11,14 @@ const OTP = function(){
    return otp;
 }
 
+function loginCheck(req){
+   if(req.session.isLoggedIn == true){
+      return true;
+    }else{
+      return false;
+    }
+}
+
 const transporter = nodemailer.createTransport({
    service : 'Gmail',
    auth: {
@@ -22,24 +30,34 @@ const transporter = nodemailer.createTransport({
 export default  {
 
 //  <<< Home Route >>> //
-   home : async(req,res) => {      
-      res.render('user/home.ejs');
+   home : async(req,res) => { 
+      if(!req.user){
+         res.locals.userPurpose = "login"
+         return res.render('user/home.ejs');
+      }else{
+         res.render('user/home.ejs'); 
+      }    
+      
    },
  
 // <<< Login Page Render Route >>> //
    userLogin : (req,res) => {
-    res.render('user/login.ejs');
+    res.locals.userPurpose = "login";
+    res.render('user/login.ejs',);
   },
 
 //  <<< Login Page Form Data Validation Route, The Validation Has Been Done By Passport's Inbuilt Methods So This Route Doesn't 
 //  Need to do Anything >>> //  
    userValidate : (req,res) => { 
+     req.session.account = req.user._id;
      res.redirect('/');
   },
 
 // <<< SignUp page render Route >>> //  
    userSignup : (req,res) => {
-     res.render('user/signup.ejs');
+     const navDataLog = loginCheck(req);
+     res.locals.userPurpose = "signup"
+     res.render('user/signup.ejs',);
   },
 
 // Temp User Creation,Otp generation,Email sending and OTP verification page rendering is done through this route
@@ -87,5 +105,24 @@ export default  {
       }else{
          res.send('somethings wrong try again');
       }
+   },
+
+   userdashboard : async(req,res) => {
+      const id = req.session.account;
+      const user = await User.findById(id);
+      res.render('user/userdashboard.ejs', {user});
+   },
+
+   userdashboardedit : async(req,res) => {
+      const id = req.session.account;
+      const data = req.body
+      const user = await User.findByIdAndUpdate(id,data,{ new : true });
+      res.send('success');
+   },
+
+   userLogout : (req,res) => {
+      req.session.destroy();
+      res.redirect('/user_login');
    }
+   
 }

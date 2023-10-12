@@ -5,7 +5,7 @@ import nocache from 'nocache';
 import passport from 'passport';
 import  { isLoggedIn }  from '../middleware/user_middleware.js'
 
-router.get('/', isLoggedIn, usercontroller.home);
+router.get('/', usercontroller.home);
 
 router.get('/user_login', nocache(), usercontroller.userLogin);
 
@@ -16,5 +16,11 @@ router.get('/user_signup', nocache(), usercontroller.userSignup);
 router.post('/register', usercontroller.userRegister);
 
 router.post('/register/otp', usercontroller.emailVerificationRegister);
+
+router.get('/user/user_account',isLoggedIn, usercontroller.userdashboard);
+
+router.post('/user/user_account', usercontroller.userdashboardedit)
+
+router.get('/user/user_logout', usercontroller.userLogout);
 
 export default router;

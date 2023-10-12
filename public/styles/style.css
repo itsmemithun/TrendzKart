@@ -1,7 +1,7 @@
 /* <<< Body Styles >>> 
 ______________________*/
 body{
-   /* overflow-x: hidden; */
+   overflow-x: hidden;
 }
 
 /*<<< Login Page >>>
@@ -12,6 +12,56 @@ body{
   height : 100vh;
 }
 
+
+/*<<< User Side >>> */
+
+.custom-carousel{
+  height : 470px!important;
+  width : auto;
+}
+
+.product-img{
+  
+  height : 186px;
+  width  : 186px;
+
+}
+
+.banner-1{
+  height : 400px;
+  width  : 100%
+}
+
+.banner-1 img{
+  height : 100%!important;
+  width  : 100%!important
+}
+
+.product-scroll{
+  overflow-x : scroll;
+  white-space: nowrap;
+}
+
+.card-container{
+  display : flex;
+}
+
+.card{
+  flex : 0 0 auto;
+}
+
+.side-nav{
+  height : 90vh;
+  width  : 250px;
+  margin : 10px;
+  background-color: rgb(41, 45, 50)!important;
+}
+
+.profile-container{
+  background-color : rgb(217, 217, 217)!important;
+  height : 90vh;
+  margin-bottom : 10px;
+}
 
 /* <<< Admin Page >>> */
 

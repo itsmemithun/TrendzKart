@@ -56,9 +56,18 @@ export default {
     } 
   },
 
-  useredit : (req,res) => {
-    res.render('admin/useredit.ejs');
-  }
+  useredit : async(req,res) => {
+    const { id } = req.params;
+    const user = await userModel.findById({  _id : id });
+    res.render('admin/useredit.ejs',{ user });
+  },
 
+  usereditpost : async(req,res) => {
+    const { id } = req.params;
+    const {username,address,email} = req.body;
+    const user = await userModel.findByIdAndUpdate(id,{username : username, address : address, email : email});
+    res.redirect('/admin/panel/user_management');
+  },
 
+  
 }

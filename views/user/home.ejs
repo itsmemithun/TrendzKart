@@ -1,28 +1,83 @@
 <% layout('layouts/boilerplate')  %>
 
-<div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<div class="mt-5 mb-5">
+  <div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner custom-carousel">
+      <div class="carousel-item active">
+        <img src="https://plus.unsplash.com/premium_photo-1673429738942-5cb00ddc06fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item custom-carousel">
+        <img src="https://plus.unsplash.com/premium_photo-1664201889896-6a42c19e953a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c2FsZXxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item custom-carousel">
+        <img src="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNhbGV8ZW58MHwwfDB8fHww&auto=format&fit=crop&w=500&q=60" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
+
+
+<div class="container">
+  <h2>Fashion -></h2>
+  <div class="d-inline-flex w-100 product-scroll">
+    <div class="card-container">
+      <% for(i=0; i<9; i++){ %>
+        <a class="text-decoration-none" href="">
+         <div class="card me-3" style="width: 186px;">
+           <img class="product-img object-fit-contain" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+           <div class="card-body">
+             <h5 class="card-title">Card title</h5>
+             <p class="card-text">lllll</p>
+             <a href="#" class="btn btn-primary">Go somewhere</a>
+           </div>
+         </div>
+        </a>
+        <% } %>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<div class="container mt-5">
+  <h2>Mobile's -></h2>
+  <div class="d-inline-flex w-100 product-scroll">
+
+    <div class="card-container">
+      <% for(i=0; i<9; i++){ %>
+        <a class="text-decoration-none" href="">
+         <div class="card me-3" style="width: 186px;">
+            <img class="product-img rounded object-fit-contain" src="https://images.unsplash.com/photo-1634403665481-74948d815f03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNtYXJwaG9uZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+           <div class="card-body">
+             <h5 class="card-title">Card title</h5>
+             <p class="card-text">lllll</p>
+             <a href="#" class="btn btn-primary">Go somewhere</a>
+           </div>
+         </div>
+        </a>
+        <% } %>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="banner-1 mt-5 mb-5  w-100">
+  <img class="object-fit-cover" src="https://images.unsplash.com/photo-1590845947670-c009801ffa74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmFubmVyfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
+</div>
+
+

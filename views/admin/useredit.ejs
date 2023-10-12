@@ -23,32 +23,30 @@
     </div> 
     
     <div class="edit-container d-flex flex-column align-items-center justify-content-center bg-color w-75 h-75">
-      <h4 class="text-decoration-underline">
+      <h4 class="text-decoration-underline mt-2">
         Edit User
       </h4>
 
-      <div class="w-50 h-100 p-2">
-        <div class="row g-3 w-100 d-inline-flex flex-column">
-
+      <div class="w-50 h-100 p-2 mt-5">
+       <form action="/admin/panel/user_management/edit_user/<%= user._id %>" method="POST">
+        <div class="row g-3 w-100 d-inline-flex flex-column justify-content-center align-items-center">
           <div class="col">
-            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-          </div>
-
-          <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+            <label for="userNameInput" class="form-label">Username</label>
+            <input type="text" id="userNameInput" class="form-control" name="username" placeholder="First name" value="<%= user.username %>" aria-label="First name">
           </div>
 
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="emailInput" name="email" value="<%= user.email %>" placeholder="name@example.com">
           </div>
 
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label for="addressInput" class="form-label">Address</label>
+            <textarea class="form-control" value="<%= user.address %>" name="address" id="addressInput" rows="3"></textarea>
           </div>
-
+          <button type="submit" class="btn btn-primary d-inline btn-sm col-3">Save Changes</button>
         </div>
+       </form>
       </div>
        
     </div>

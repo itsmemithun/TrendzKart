@@ -8,6 +8,14 @@ const userSchema = new Schema({
          required : true,
          unique  : true
      },
+     address: {
+        type : String,
+        default : ''
+     },
+     phone : {
+       type : Number,
+       default : ''
+     },
      verified : {
         type  : Boolean,
         default : false

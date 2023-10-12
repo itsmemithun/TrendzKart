@@ -4,7 +4,7 @@ export const isLoggedIn = (req,res,next)=>{
     return next();
   }else{
     console.log('you are not authenticated');
-    return res.send('try again..');
+    return res.redirect('/user_login');
   }
 }
 
