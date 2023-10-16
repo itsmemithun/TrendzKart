@@ -30,7 +30,10 @@ const __dirname  = dirname(__filename);
 const sessionConfig = {
    secret: process.env._SECRET_KEY_WORD,
    resave : false,
-   saveUninitialized : true
+   saveUninitialized : true,
+   cookie: {
+      httpOnly : true,
+   }
 }
 
 // app.use(test);
@@ -48,6 +51,12 @@ app.set('views',join(__dirname,'views'));
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use((req,res,next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+})
 
 app.use('/', userRoute);
 app.use('/admin', adminRoute);

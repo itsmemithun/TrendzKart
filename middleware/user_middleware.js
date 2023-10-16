@@ -4,6 +4,7 @@ export const isLoggedIn = (req,res,next)=>{
     return next();
   }else{
     console.log('you are not authenticated');
+    req.flash('error', 'You Must Loggin!');
     return res.redirect('/user_login');
   }
 }

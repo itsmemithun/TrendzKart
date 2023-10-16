@@ -29,15 +29,20 @@
 
       <div class="w-50 h-100 p-2 mt-5">
        <form action="/admin/panel/user_management/edit_user/<%= user._id %>" method="POST">
-        <div class="row g-3 w-100 d-inline-flex flex-column justify-content-center align-items-center">
+        <div class="row g-2 w-100 d-inline-flex flex-column justify-content-center align-items-center">
           <div class="col">
             <label for="userNameInput" class="form-label">Username</label>
             <input type="text" id="userNameInput" class="form-control" name="username" placeholder="First name" value="<%= user.username %>" aria-label="First name">
           </div>
 
-          <div class="mb-3">
+          <div class="mb-2">
             <label for="emailInput" class="form-label">Email address</label>
             <input type="email" class="form-control" id="emailInput" name="email" value="<%= user.email %>" placeholder="name@example.com">
+          </div>
+
+          <div class="mb-2">
+            <label for="phone">Phone</label>
+            <input type="number" class="form-control w-50" value="<%= user.phone %>" placeholder="Enter Your Phone Number" name="phone" aria-label=""> 
           </div>
 
           <div class="mb-3">

@@ -8,8 +8,8 @@
           <a class="text-decoration-none text-light ms-2" href="">Category</a>
         </div>
         <span class="d-flex">
-          <%if(typeof userPurpose !== 'undefined'){ %>
-          <% if(userPurpose == "login" ){ %>
+          <% if(typeof userPurpose !== 'undefined'){ %>
+          <% if(userPurpose == "login"){ %>
             <a href="/user_signup"><button type="button" class="btn btn-light mx-2">SignUp</button></a>
           <% } %>
           <% if(userPurpose && !userPurpose == 'signup'){ %>
@@ -19,10 +19,12 @@
           </form>
           <% } %>
           <% } %>
-          <i class="bi bi-cart3 text-light mx-2" style="font-size: 1.5rem"></i>
-          <i class="bi bi-heart-fill text-light mx-2" style="font-size: 1.5rem"></i>
-          <a href="/user/user_logout" class="text-decoration-none pt-1 text-light mx-2">Logout</a>
-          <a href="/user/user_account"><i class="bi bi-person-circle text-light mx-2" style="font-size: 1.5rem"></i></a>
+          <% if(typeof userPurpose == 'undefined'){ %>
+            <i class="bi bi-cart3 text-light mx-2" style="font-size: 1.5rem"></i>
+            <i class="bi bi-heart-fill text-light mx-2" style="font-size: 1.5rem"></i>
+            <a href="/user/user_logout" class="text-decoration-none pt-1 text-light mx-2">Logout</a>
+            <a href="/user/user_account"><i class="bi bi-person-circle text-light mx-2" style="font-size: 1.5rem"></i></a>
+          <% } %>
         </span>
       </div>
     </div>

@@ -12,7 +12,7 @@
 
   <div class="card w-25 h-75 bg-warning rounded-0 rounded-end">
     <div class="card-body d-flex justify-content-center align-items-center">
-      <form action="/register" id="registerForm" method="post">
+      <form action="/register" id="form" method="post">
         <div class="d-flex flex-column align-items-center">
           <!-- User Name -->
           <div>
@@ -30,8 +30,9 @@
           </div>
           <!-- Password -->
           <div class="">
-            <label for="password" class="form-label fw-medium">Password</label>
-              <input type="password" id="password" class="form-control" name="password" required>
+            <label for="password-input" class="form-label fw-medium">Password</label>
+              <input  id="password-input" type="password" class="form-control" name="password" required>
+              <p class="m-0 text-danger" id="password-d"></p>
           </div>
           <!-- Confirm password -->
           <div class="">
@@ -46,4 +47,3 @@
   </div>
 
 </div>
-<script src="/script/register.js" defer></script>

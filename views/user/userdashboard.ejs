@@ -6,11 +6,12 @@
     <i class="bi bi-person-circle text-light" style="font-size: 5rem"></i>
     <h2 class="text-light">Username</h2>
       <div class="m-2 px-2 w-100 d-flex flex-column">
-        <button class="btn btn-light mb-3 ">Profile</button>
-        <button class="btn btn-light mb-3 ">My Orders</button>
-        <button class="btn btn-light mb-3 ">Cart</button>
-        <button class="btn btn-light mb-3 ">My Coupons</button>
-        <button class="btn btn-light mb-3 ">Manage Address</button>
+        <a href="/user/user_account"><button class="btn btn-light w-100 mb-3">Profile</button></a>
+        <a href=""><button class="btn btn-light w-100 mb-3 ">My Orders</button></a>
+        <a href=""><button class="btn btn-light w-100 mb-3 ">Cart</button></a>
+        <a href=""><button class="btn btn-light w-100 mb-3 ">My Coupons</button></a>
+        <a href=""><button class="btn btn-light w-100 mb-3 ">Manage Address</button></a>
+        
       </div>
   </div>
   
@@ -35,11 +36,12 @@
           <label for="">Email</label>
           <input type="email" class="form-control w-50" value="<%= user.email %>" placeholder="Enter Your EmailAddress" name="email" aria-label=""> 
         </div>
-  
+
         <div class="mb-3 mb-2">
-          <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-          <textarea class="form-control w-50" id="exampleFormControlTextarea1" value="<%= user.address %>" name="address" rows="3"></textarea>
+          <label for="exampleFormControlTextarea1" class="form-label">Address</label> 
+          <textarea class="form-control w-50" id="exampleFormControlTextarea1"name="address" rows="3"><%= user.address %></textarea>
         </div>
+         <% console.log(user.address); %>
         <button type="submit" class="btn btn-primary">edit</button>
       </div> 
     </form>
