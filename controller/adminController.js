@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import adminModel from '../model/admin/adminmodel.js'
 import userModel from '../model/usermodel.js'
-
+import multer from 'multer';
 
 function countUser(users){
   let count = 0;
@@ -58,16 +58,30 @@ export default {
 
   useredit : async(req,res) => {
     const { id } = req.params;
-    const user = await userModel.findById({  _id : id });
+    const user = await userModel.findById({ _id : id });
     res.render('admin/useredit.ejs',{ user });
   },
 
   usereditpost : async(req,res) => {
     const { id } = req.params;
-    const {username,address,email} = req.body;
-    const user = await userModel.findByIdAndUpdate(id,{username : username, address : address, email : email});
+    const userData = req.body;
+    console.log(userData);
+    const user = await userModel.findByIdAndUpdate(id, userData);
     res.redirect('/admin/panel/user_management');
   },
+
+  products : (req,res) => {
+    res.render('admin/products.ejs');
+  },
+
+  addproduct : (req,res) => {
+    res.render('admin/addproduct.ejs');
+  },
+
+  addproductdata : (req,res) =>{
+    console.log('hello');
+    console.log(req.body);
+  }
 
   
 }

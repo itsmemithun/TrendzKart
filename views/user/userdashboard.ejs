@@ -11,12 +11,11 @@
         <a href=""><button class="btn btn-light w-100 mb-3 ">Cart</button></a>
         <a href=""><button class="btn btn-light w-100 mb-3 ">My Coupons</button></a>
         <a href=""><button class="btn btn-light w-100 mb-3 ">Manage Address</button></a>
-        
       </div>
   </div>
   
   <div class="profile-container w-100 mt-2 me-2">
-    <form action="/user/user_account" method="post">
+    <form id="usereditform" action="/user/user_account" method="post">
       <div class="w-75 mt-5 ms-2">
         <div class="row mb-2">
 
@@ -34,14 +33,14 @@
   
         <div class="col mb-2">
           <label for="">Email</label>
-          <input type="email" class="form-control w-50" value="<%= user.email %>" placeholder="Enter Your EmailAddress" name="email" aria-label=""> 
+          <input type="email" id="useremailinput" class="form-control w-50" value="<%= user.email %>" placeholder="Enter Your EmailAddress" name="email"> 
+          <p class="m-0 text-danger" id="useremailmsg"></p>
         </div>
 
         <div class="mb-3 mb-2">
           <label for="exampleFormControlTextarea1" class="form-label">Address</label> 
           <textarea class="form-control w-50" id="exampleFormControlTextarea1"name="address" rows="3"><%= user.address %></textarea>
-        </div>
-         <% console.log(user.address); %>
+        </div> 
         <button type="submit" class="btn btn-primary">edit</button>
       </div> 
     </form>

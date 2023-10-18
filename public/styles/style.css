@@ -10,10 +10,11 @@ body{
 .login-page{
   width : 100vw;
   height : 100vh;
+  position : relative;
 }
 
 
-/*<<< User Side >>> */
+/*<<<🔥 User Side >>> 🔥*/
 
 .custom-carousel{
   height : 470px!important;
@@ -63,25 +64,19 @@ body{
   margin-bottom : 10px;
 }
 
-/* <<< Admin Page >>> */
+/*🔥 <<< Admin Page >>> 🔥*/
 
 .main-body{
   width : auto;
-}
-
-.login-page{
-   position : relative;
+  position : absolute;
+  left : 350px;
+  top : 60px;
 }
 
 .side-bar{
   /* position : fixed!important; */
   background-color : rgb(217, 217, 217)!important;
-}
-
-.main-body{
-  position : absolute;
-  left : 350px;
-  top : 60px;
+  height : 90vh;
 }
 
 .user-scrollable {
@@ -101,4 +96,45 @@ body{
    position : absolute;
    left : 350px;
    top : 0px;
+}
+
+.product-list{
+   height : 400px;
+   width  : 1150px;
+   overflow-y : scroll;
+}
+
+.product-card{
+  height : 84px!important;
+}
+
+.product-card-img{
+  height : 75px;
+  width  : 75px
+}
+
+.product-price{
+  margin-left : 110px;
+}
+
+.product-category{
+  margin-left : 170px;
+}
+
+.product-stock{
+  margin-left : 170px;
+}
+
+.add-product-btn{
+  margin-left : 600px;
+}
+
+.add-product-container{
+  height : 90vh;
+  background-color : rgb(217, 217, 217)!important;
+}
+
+.add-product-btn{
+  margin-left : 50%;
+  transform : translateX(-50%)
 }

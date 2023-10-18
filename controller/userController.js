@@ -125,7 +125,6 @@ export default  {
    userdashboard : async(req,res) => {
          const id = req.session.account;
          const user = await User.findById(id);
-         console.log(user.address);
          res.render('user/userdashboard.ejs', {user});
    }, 
 

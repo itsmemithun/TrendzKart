@@ -5,7 +5,7 @@
       <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
         Dash Board
       </a>
-      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      <a href="/admin/panel/products" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
         Products
       </a>
       <a href="/admin/panel/user_management" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
@@ -28,7 +28,7 @@
       </h4>
 
       <div class="w-50 h-100 p-2 mt-5">
-       <form action="/admin/panel/user_management/edit_user/<%= user._id %>" method="POST">
+       <form id="userEditForm" action="/admin/panel/user_management/edit_user/<%= user._id %>" method="POST">
         <div class="row g-2 w-100 d-inline-flex flex-column justify-content-center align-items-center">
           <div class="col">
             <label for="userNameInput" class="form-label">Username</label>
@@ -38,6 +38,7 @@
           <div class="mb-2">
             <label for="emailInput" class="form-label">Email address</label>
             <input type="email" class="form-control" id="emailInput" name="email" value="<%= user.email %>" placeholder="name@example.com">
+            <p class="m-0 text-danger" id="emailvalidationmsg"></p>
           </div>
 
           <div class="mb-2">
@@ -45,15 +46,14 @@
             <input type="number" class="form-control w-50" value="<%= user.phone %>" placeholder="Enter Your Phone Number" name="phone" aria-label=""> 
           </div>
 
-          <div class="mb-3">
+          <d-iv class="mb-3">
             <label for="addressInput" class="form-label">Address</label>
-            <textarea class="form-control" value="<%= user.address %>" name="address" id="addressInput" rows="3"></textarea>
+            <textarea class="form-control" name="address" id="addressInput" rows="3"><%= user.address %></textarea>
           </div>
           <button type="submit" class="btn btn-primary d-inline btn-sm col-3">Save Changes</button>
         </div>
        </form>
       </div>
-       
     </div>
 
 </div>
