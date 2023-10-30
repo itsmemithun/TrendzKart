@@ -37,7 +37,7 @@ const sessionConfig = {
 }
 
 // app.use(test);
-app.use(morgan('tiny'));
+// app.use(morgan('tiny'));
 app.use(session(sessionConfig));
 app.use(express.static('public'));
 app.use(express.urlencoded({extended : true}));
@@ -60,6 +60,11 @@ app.use((req,res,next) => {
 
 app.use('/', userRoute);
 app.use('/admin', adminRoute);
+
+app.all('*', (req,res)=>{
+  res.status(404);
+  res.render('user/error.ejs');
+})
 
 app.listen(port,(req,res) => {
   console.log(`server started on port ${port}`);

@@ -24,6 +24,4 @@ router.post('/user/user_account', isLoggedIn, usercontroller.userdashboardedit);
 // user Logout route
 router.get('/user/user_logout', isLoggedIn, usercontroller.userLogout);
 
-
-
 export default router;

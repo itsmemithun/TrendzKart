@@ -24,52 +24,52 @@
   </div> 
 
   <div class="w-100 d-flex flex-column align-items-center">
-    
-    <div class="d-flex mt-5">
-
-      <div class="ms-4 pe-4 border-end">
-        <h5>Total Products</h5>
-        <h2>456</h2>
-      </div>
-      <div class="ms-4 pe-4 border-end">
-        <h5>Out of Stocks</h5>
-        <h2>63</h2>
-      </div>
-      <div class="ms-4 pe-4 border-end">
-        <h5>Categories</h5>
-        <h2>5</h2>
-      </div>
-
+    <div class="">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Total Products</th>
+            <th scope="col">Out Stocks</th>
+            <th scope="col">Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>456</td>
+            <td>6</td>
+            <td>5</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-    <div class="mt-5">
-      <div class="w-75 border-bottom">
-        <ul class="d-flex m-0 list-unstyled justify-content-around">
-          <li>Name</li>
-          <li>Price</li>
-          <li>Category</li>
-          <li>Stock</li>
-        </ul>
-      </div>
-
-      <div class="product-list">
-        <% for(i=0;i<10;i++){ %>
-        <div class="product-card w-100 card mt-4 d-flex flex-row align-items-center">
-              <img class="rounded product-card-img m-1" src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHNob2VzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
-              <h6 class="">Product Name</h6>
-              <h6 class="product-price">000.0</h6>
-              <h6 class="product-category">Disabled</h6>
-              <h6 class="product-stock">000</h6>
-              <div class="ms-5">
-                <button class="btn btn-danger me-2">Delete</button>
-                <button class="btn btn-primary me-2">Edit</button>
-              </div>
+    
+    <a href="/admin/panel/products/add_product" class="btn btn-primary mt-3 add-product-btn">Add Product+</a>
+    <div class="container text-center mt-3 user-scrollable">
+      <div class="row">
+        <% for(product of products){ %>
+          <% product.image[0] = product.image[0].replace('public', '') %>
+        <div class="col col-12 col-md-6 col-lg-4 col-xl-3 g-3">
+          <div class="card" style="width: 18rem;">
+            <div class="product-image">
+              <img src="<%= product.image[0] %>" class="card-img-top card-img object-fit-contain" alt="...">
+            </div>           
+            <div class="card-body text-start">
+            <h5 class="card-title"><b>Name:</b><%= product.productName %></h5>
+              <p class="card-text"><b>Price:</b> <%= product.price  %></p>
+              <p class="card-text text-success"><b>Stock:</b> <%= product.stock %></p>
+              <a href="#" class="btn btn-primary">Edit</a>
+              <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
         </div>
         <% } %>
       </div>
     </div>
 
-    <a href="/admin/panel/products/add_product" class="btn btn-primary mt-3 add-product-btn">Add Product+</a>
+    
+      
+
+
   </div>
 
 

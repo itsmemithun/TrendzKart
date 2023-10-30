@@ -10,7 +10,7 @@ body{
 .login-page{
   width : 100vw;
   height : 100vh;
-  position : relative;
+  
 }
 
 
@@ -64,6 +64,16 @@ body{
   margin-bottom : 10px;
 }
 
+
+@media only screen and (max-width : 768px) {
+  .signup-pge-lft{
+    display : none!important;
+  }
+  .login-pge-lft{
+    display : none!important;
+  }
+}
+
 /*🔥 <<< Admin Page >>> 🔥*/
 
 .main-body{
@@ -80,7 +90,7 @@ body{
 }
 
 .user-scrollable {
-  height : 400px!important;
+  height : 600px!important;
   overflow-y: scroll;
 }
 
@@ -98,43 +108,20 @@ body{
    top : 0px;
 }
 
-.product-list{
-   height : 400px;
-   width  : 1150px;
-   overflow-y : scroll;
-}
-
-.product-card{
-  height : 84px!important;
-}
-
-.product-card-img{
-  height : 75px;
-  width  : 75px
-}
-
-.product-price{
-  margin-left : 110px;
-}
-
-.product-category{
-  margin-left : 170px;
-}
-
-.product-stock{
-  margin-left : 170px;
-}
-
-.add-product-btn{
-  margin-left : 600px;
-}
 
 .add-product-container{
   height : 90vh;
   background-color : rgb(217, 217, 217)!important;
 }
 
-.add-product-btn{
-  margin-left : 50%;
-  transform : translateX(-50%)
+.card-img{
+  height : 100%;
+  width  : 100%;
 }
+
+.product-image{
+  height : 200px;
+  width  : 18rem;
+}
+
+

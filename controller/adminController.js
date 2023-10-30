@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
-import adminModel from '../model/admin/adminmodel.js'
-import userModel from '../model/usermodel.js'
-import multer from 'multer';
+import adminModel from '../model/admin/adminmodel.js';
+import userModel from '../model/usermodel.js';
+import productModel from '../model/product/product.js';
+
 
 function countUser(users){
   let count = 0;
@@ -70,18 +71,21 @@ export default {
     res.redirect('/admin/panel/user_management');
   },
 
-  products : (req,res) => {
-    res.render('admin/products.ejs');
+  products : async(req,res) => {
+    const products = await productModel.find({});
+    console.log(products);
+    res.render('admin/products.ejs', { products });
   },
 
   addproduct : (req,res) => {
     res.render('admin/addproduct.ejs');
   },
 
-  addproductdata : (req,res) =>{
-    console.log('hello');
-    console.log(req.body);
+  addproductdata : async(req,res) =>{
+    const productData = req.body;
+    const productImg = req.file.path;
+    const product = new productModel(productData);
+    await product.image.push(productImg);
+    await product.save();
   }
-
-  
 }

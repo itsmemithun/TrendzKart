@@ -1,34 +1,41 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="login-page d-inline-flex justify-content-center align-items-center">
 
-  <div class="card w-25 h-75 bg-dark rounded-0 rounded-start">
-    <div class="card-body">
-       <h3 class="text-light">Login</h3>
-       <h4 class="text-light">Get access</h4>
-       <h4 class="text-light">to your Account</h4>
-       <h4 class="text-light">by Just Logging In-</h4>
-    </div>
-  </div>
+<div class="container">
+  <div class="row">
+    <div class="col login-page d-inline-flex justify-content-center align-items-center">
 
-  <div class="card w-25 h-75 bg-warning rounded-0 rounded-end">
-    <div class="card-body d-flex justify-content-center align-items-center">
-      <form action="/user_login" method="post">
-        <div class="d-flex flex-column align-items-center">
-          <div class="mb-3">
-            <label for="userName" class="form-label fw-medium">Enter Your UserName</label>
-              <div class="input-group has-validation">
-               <input type="text" class="form-control" name="username" id="userName" placeholder="username" required>
-              </div>
-          </div>
-          <div class="">
-            <label for="validateOTP" class="form-label fw-medium">Enter Your Password</label>
-              <input type="password" id="validateOTP" class="form-control" name="password" required>
-          </div>
-          <button type="submit" class="btn btn-dark mt-3" style="width : 100px">Login</button>
+      <div class="card h-75 login-pge-lft bg-dark rounded-0 rounded-start">
+        <div class="card-body">
+           <h3 class="text-light">Login</h3>
+           <h4 class="text-light">Get access</h4>
+           <h4 class="text-light">to your Account</h4>
+           <h4 class="text-light">by Just Logging In-</h4>
         </div>
-      </form>
+      </div>
+    
+      <div class="card h-75 bg-warning rounded-end">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <form action="/user_login" method="post">
+            <div class="d-flex flex-column align-items-center">
+              <div class="mb-3">
+                <label for="userName" class="form-label fw-medium">Enter Your UserName</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" name="username" id="userName" placeholder="username" required>
+                  </div>
+              </div>
+              <div class="">
+                <label for="validateOTP" class="form-label fw-medium">Enter Your Password</label>
+                  <input type="password" id="validateOTP" class="form-control" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-dark mt-3" style="width : 100px">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+  
     </div>
   </div>
-
 </div>
+
+

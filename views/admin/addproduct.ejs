@@ -31,17 +31,17 @@
 
       <div class="mb-3">
         <label for="addProductName" class="form-label">Product Name</label>
-        <input type="text" class="form-control" id="addProductName" name="productname" placeholder="Enter Your Product Name">
+        <input type="text" class="form-control" id="addProductName" name="productName" placeholder="Enter Your Product Name">
       </div>
 
       <div class="mb-3">
         <label for="addProductPrice" class="form-label">Price</label>
-        <input type="number" class="form-control" id="addProductPrice" name="productprice" placeholder="Enter Your Price">
+        <input type="number" class="form-control" id="addProductPrice" name="price" placeholder="Enter Your Price">
       </div>
 
       <div class="mb-3">
         <label for="addProductCategory" class="form-label">Category</label>
-        <select class="form-select" name="productcategory" aria-label="Default select example">
+        <select class="form-select" name="category" aria-label="Default select example">
           <option selected>None</option>
           <option value="1">One</option>
           <option value="2">Two</option>
@@ -49,14 +49,19 @@
         </select>
       </div>
 
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" id="productDescription" name="description" style="height: 100px"></textarea>
+        <label for="productDescription">Description</label>
+      </div>
+
       <div class="mb-3">
         <label for="productimage" class="form-label">Upload Your Images</label>
-        <input type="file" class="form-control" name="productimage" id="productimage">
+        <input type="file" class="form-control" name="image" id="productimage">
       </div>
 
       <div class="mb-3">
         <label for="productquantity" class="form-label">Quantity</label>
-        <input type="number" class="form-control" id="productquantity" name="productquantity" placeholder="Enter Your Product Quantity">
+        <input type="number" class="form-control" id="productquantity" name="stock" placeholder="Enter Your Product Quantity">
       </div>
 
       <button class="add-product-btn btn btn-primary">Add Product+</button>
