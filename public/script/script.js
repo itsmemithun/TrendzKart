@@ -7,8 +7,9 @@ const emailinput = document.getElementById('emailaddress');
 const usereditform = document.getElementById('usereditform');
 const useremailinput = document.getElementById('useremailinput');
 const useremailmsg = document.getElementById('useremailmsg');
+const addtowishlist = document.querySelectorAll('.addtowish-btn');
+const addtowishabtn = document.querySelectorAll('.addtowish-a-btn');
 
-console.log(useremailinput);
 
 passwordPattern = /^[a-zA-Z1-9@-]{8,}$/i;
 emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
@@ -69,5 +70,54 @@ if(usereditform){
       alert('Invalid Email');
     }
   })
+} 
+
+if(addtowishlist){
+  for(let btn of addtowishlist){
+    btn.addEventListener("click", function(event){
+      event.preventDefault();
+      btn.classList.forEach((data)=>{
+       if(data == "bi-suit-heart"){
+         // Adding bootstrap classes for styling
+         btn.classList.remove("bi-suit-heart");
+         btn.classList.add("bi-suit-heart-fill","text-danger");
+         
+         const href = btn.getAttribute('href');
+         let productid = href.replace('user/wishlist/add','');                                                                                                                                                                                                             
+         const res = fetch(href,{
+             method : "POST",
+             headers : {
+                 "Content-type" : "application/json"
+             },
+             body : JSON.stringify({
+               productid : productid
+             })
+   
+         })
+            res.then((response) =>{
+               return response.json();
+            }).then((data)=>{
+               console.log(data);
+            }).catch((error) => {
+               console.log("Error :"+error);
+            })
+
+      }else if(data == "bi-suit-heart-fill"){
+         btn.classList.remove("bi-suit-heart-fill", "text-danger");
+         btn.classList.add("bi-suit-heart");
+       }
+      })
+    });
+  }
 }
 
+
+
+if(addtowishabtn){
+  for(let btn of addtowishabtn){
+    btn.addEventListener("click", function(event){
+      event.preventDefault();
+     
+    })
+  }
+}

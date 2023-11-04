@@ -19,6 +19,11 @@ const userSchema = new Schema({
      verified : {
         type  : Boolean,
         default : false
+     },
+     wishlist : {
+        type  : [{ 
+         productid : {type : String} 
+      }],
      }
 });
 

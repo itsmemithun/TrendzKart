@@ -43,6 +43,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended : true}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.json());
 app.use(flash());
 app.set('view engine', 'ejs');
 app.engine('ejs', ejsmate);

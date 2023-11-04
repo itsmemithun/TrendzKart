@@ -23,5 +23,7 @@ router.get('/user/user_account', nocache(), isLoggedIn, usercontroller.userdashb
 router.post('/user/user_account', isLoggedIn, usercontroller.userdashboardedit);
 // user Logout route
 router.get('/user/user_logout', isLoggedIn, usercontroller.userLogout);
+// Add product to wish list
+router.post('/user/wishlist/add/:id', usercontroller.addtowishlist);
 
 export default router;

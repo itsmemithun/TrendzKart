@@ -1,5 +1,6 @@
 import User from '../model/usermodel.js';
 import userRegistration from '../model/userRegistrationModel.js';
+import productModel from '../model/product/product.js';
 import nodemailer from 'nodemailer'
 import otpGenerator from 'otp-generator';
 import dotenv from 'dotenv';
@@ -33,11 +34,13 @@ export default  {
 
 //  <<< Home Route >>> //
    home : async(req,res) => { 
+      const products = await productModel.find({});
+      // console.log(products);
       if(!req.user){
          res.locals.userPurpose = "login"
-         return res.render('user/home.ejs');
+         return res.render('user/home.ejs',{ products });
       }else{
-         res.render('user/home.ejs'); 
+         res.render('user/home.ejs', { products }); 
       }    
    },
  
@@ -139,5 +142,25 @@ export default  {
    userLogout : (req,res) => {
       req.session.destroy();
       res.redirect('/user_login');
+   },
+  
+   addtowishlist : async (req,res) => {
+      try{
+         const productid = req.body;
+         let wishlistcheck = req.body.productid;
+         console.log(wishlistcheck);
+         const id = req.session.account;
+         const pro = await User.findOne({ _id : id, wishlist : { $elemMatch : { productid : wishlistcheck }}});
+         console.log('wishlist :'+pro);
+         // const user = await User.findByIdAndUpdate(id, { $push : { wishlist : productid } });
+         // console.log(user.wishlist);
+         // await user.wishlist.push(productid); 
+         res.json({a: 1});
+
+      }catch(e){
+         console.log(e);
+         console.log(e.message);
+      }
    }
+
 }

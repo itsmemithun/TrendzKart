@@ -33,21 +33,21 @@
 <div class="container">
   <h2>Fashion -></h2>
   <div class="d-inline-flex w-100 product-scroll">
-    <div class="card-container">
-      <% for(i=0; i<9; i++){ %>
-        <a class="text-decoration-none" href="">
+    <div class="card-container"
+      <% for(let product of products){ %>
+        <% product.image[0] = product.image[0].replace('public', '') %>
+        <div class="text-decoration-none" href="">
          <div class="card me-3" style="width: 186px;">
-           <img class="product-img object-fit-contain" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
+           <img class="product-img rounded object-fit-contain" src="<%= product.image[0] %>" class="card-img-top" alt="...">
            <div class="card-body">
-             <h5 class="card-title">Card title</h5>
-             <p class="card-text">lllll</p>
-             <a href="#" class="btn btn-primary">Go somewhere</a>
+             <h5 class="card-title text-dark"><%= product.productName %></h5>
+             <p class="card-text text-dark">₹: <%= product.price %></p>
+             <a class="text-decoration-none addtowish-btn bi bi-suit-heart" href="user/wishlist/add/<%= product._id %>" style="font-size: 1.5rem;"></a>
            </div>
          </div>
-        </a>
+        </div>
         <% } %>
-    </div>
-    
+    </div>  
   </div>
 </div>
 
@@ -62,8 +62,8 @@
          <div class="card me-3" style="width: 186px;">
             <img class="product-img rounded object-fit-contain" src="https://images.unsplash.com/photo-1634403665481-74948d815f03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNtYXJwaG9uZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" class="card-img-top" alt="...">
            <div class="card-body">
-             <h5 class="card-title">Card title</h5>
-             <p class="card-text">lllll</p>
+             <h5 class="card-title"><%= i %></h5>
+             <p class="card-text">sajdhkjas</p>
              <a href="#" class="btn btn-primary">Go somewhere</a>
            </div>
          </div>

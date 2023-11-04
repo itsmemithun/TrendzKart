@@ -50,7 +50,6 @@ export default {
     try{
       const { id } = req.params;
       const user = await userModel.findByIdAndDelete({ _id : id});
-      console.log(user);
       res.redirect('/admin/panel/user_management');
     }catch(e){
       console.log(e.message);
@@ -73,7 +72,6 @@ export default {
 
   products : async(req,res) => {
     const products = await productModel.find({});
-    console.log(products);
     res.render('admin/products.ejs', { products });
   },
 
