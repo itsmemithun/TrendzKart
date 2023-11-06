@@ -28,9 +28,13 @@
           <% } %>
           <% } %>
           <% if(typeof userPurpose == 'undefined'){ %>
-            <i class="bi bi-cart3 text-light mx-2" style="font-size: 1.5rem"></i>
-            <i class="bi bi-heart-fill text-light mx-2" style="font-size: 1.5rem"></i>
+             <!-- Cart button -->
+            <a class="bi bi-cart3 text-light mx-2" style="font-size: 1.5rem"></a>
+            <!-- // wishlist button -->
+            <a href="/user/wishlist" class="bi bi-heart-fill text-light mx-2" style="font-size: 1.5rem"></a>
+            <!-- // Logout button -->
             <a href="/user/user_logout" class="text-decoration-none pt-1 text-light mx-2">Logout</a>
+            <!-- // Profile button -->
             <a href="/user/user_account"><i class="bi bi-person-circle text-light mx-2" style="font-size: 1.5rem"></i></a>
           <% } %>
         </span>

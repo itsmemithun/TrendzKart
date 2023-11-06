@@ -173,6 +173,10 @@ export default  {
       catch(e){
          console.log(e);
       }
+   },
+
+   showwishlist : async (req,res)=>{
+      res.render('user/wishlist.ejs');
    }
 
 }
