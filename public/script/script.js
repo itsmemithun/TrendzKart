@@ -10,8 +10,6 @@ const useremailmsg = document.getElementById('useremailmsg');
 const addtowishlist = document.querySelectorAll('.addtowish-btn');
 const wishlistalert = document.querySelector('.wishlist-alert');
 const alertdata = document.querySelector('.alert-data');
-console.log(alertdata);
-
 
 passwordPattern = /^[a-zA-Z1-9@-]{8,}$/i;
 emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
@@ -96,32 +94,31 @@ if(addtowishlist){
                productid : productid
              })
          })
-         if(res.ok){
-          res.then((response) =>{
-            return response.json();
-          }).then((data)=>{
-           alertdata.innerHTML = data.result;
-            wishlistalert.classList.remove("display-none")
-            wishlistalert.classList.add("alert-on-active");
-            setTimeout(()=>{
-            wishlistalert.classList.add("display-none");
-            wishlistalert.classList.remove("alert-on-active");
-            },1500);
-            console.log(data);
-          }).catch((error) => {
-            console.log("Error :"+error);
-          })
-         }else if(res.status === 401){
-           console.log('req is hitting');
-           window.location.href = "/user_login";
-         }           
+         res.then((response)=>{
+          if(response.ok){
+            res.then((response) =>{
+              return response.json();
+            }).then((data)=>{
+             alertdata.innerHTML = data.result;
+              wishlistalert.classList.remove("display-none")
+              wishlistalert.classList.add("alert-on-active");
+              setTimeout(()=>{
+              wishlistalert.classList.add("display-none");
+              wishlistalert.classList.remove("alert-on-active");
+              },1500);
+            }).catch((error) => {
+              console.log("Error :"+error);
+            })
+           }else if(response.status === 401){
+             window.location.href = "/user_login";
+           }    
+         })                
       }
       else if(data == "bi-suit-heart-fill"){
          btn.classList.remove("bi-suit-heart-fill", "text-danger");
          btn.classList.add("bi-suit-heart");
          let href = btn.getAttribute('href');
          let href2 = href.replace('add', 'remove');
-         console.log('href : '+href2);
          let productid = href.replace('user/wishlist/add','');                                                                                                                                                                                                             
          const res = fetch(href2,{
              method : "POST",
@@ -141,8 +138,7 @@ if(addtowishlist){
               setTimeout(()=>{
               wishlistalert.classList.add("display-none");
               wishlistalert.classList.remove("alert-on-active");
-              },1500);
-               console.log(data);
+              },1500);            
             }).catch((error) => {
                console.log("Error :"+error);
             })  
