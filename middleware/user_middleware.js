@@ -9,5 +9,14 @@ export const isLoggedIn = (req,res,next)=>{
   }
 }
 
+export const fetchisLoggedIn = (req,res,next)=>{
+  console.log('this is test');
+  if(req.isAuthenticated() || req.session.isLoggedIn == true){
+    return next();
+  }else{
+    res.status(401).json({ error : 'Unauthorized'});
+  }
+}
+
 
 

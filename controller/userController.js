@@ -86,7 +86,7 @@ export default  {
       await tempUser.save();
       const otp = OTP();
       console.log(otp);
-      req.session.Otp = otp;
+      req.session.Otp = otp; 
       req.session._userid = tempUser._id;
       / <<< Sending The Email >>> ///
       transporter.sendMail({                                
@@ -143,23 +143,35 @@ export default  {
       req.session.destroy();
       res.redirect('/user_login');
    },
-  
+   // Adding product to Wishlist
    addtowishlist : async (req,res) => {
       try{
          const productid = req.body;
          let wishlistcheck = req.body.productid;
-         console.log(wishlistcheck);
          const id = req.session.account;
-         const pro = await User.findOne({ _id : id, wishlist : { $elemMatch : { productid : wishlistcheck }}});
-         console.log('wishlist :'+pro);
-         // const user = await User.findByIdAndUpdate(id, { $push : { wishlist : productid } });
+         const user = await User.findByIdAndUpdate(id, { $push : { wishlist : productid } });
+         const product = await User.findOne({ _id : id, wishlist : { $elemMatch : { productid : wishlistcheck }}});
+         console.log('wishlist :'+product);
          // console.log(user.wishlist);
          // await user.wishlist.push(productid); 
-         res.json({a: 1});
-
+         res.json({result: 'Added'});
       }catch(e){
          console.log(e);
          console.log(e.message);
+      }
+   },
+   // Removing product from wishlist
+   removefromwishlist : async (req,res) => {
+      try{
+         console.log('wishlist remove');
+         const productid = req.body;
+         let wishlistcheck = req.body.productid;
+         const id = req.session.account;
+         const user = await User.findByIdAndUpdate(id, {$pull : { wishlist : productid }});
+         res.json({ result : 'Removed'});
+      }
+      catch(e){
+         console.log(e);
       }
    }
 

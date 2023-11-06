@@ -37,7 +37,7 @@ const sessionConfig = {
 }
 
 // app.use(test);
-// app.use(morgan('tiny'));
+app.use(morgan('tiny'));
 app.use(session(sessionConfig));
 app.use(express.static('public'));
 app.use(express.urlencoded({extended : true}));

@@ -3,7 +3,7 @@ const router = express.Router();
 import usercontroller from '../controller/userController.js';
 import nocache from 'nocache';
 import passport from 'passport';
-import  { isLoggedIn }  from '../middleware/user_middleware.js';
+import  { isLoggedIn,fetchisLoggedIn }  from '../middleware/user_middleware.js';
 
 //home route
 router.get('/',nocache(), usercontroller.home);
@@ -24,6 +24,8 @@ router.post('/user/user_account', isLoggedIn, usercontroller.userdashboardedit);
 // user Logout route
 router.get('/user/user_logout', isLoggedIn, usercontroller.userLogout);
 // Add product to wish list
-router.post('/user/wishlist/add/:id', usercontroller.addtowishlist);
+router.post('/user/wishlist/add/:id', fetchisLoggedIn, usercontroller.addtowishlist);
+// Remove product from wishlist
+router.post('/user/wishlist/remove/:id', fetchisLoggedIn, usercontroller.removefromwishlist);
 
 export default router;

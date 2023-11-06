@@ -8,7 +8,9 @@ const usereditform = document.getElementById('usereditform');
 const useremailinput = document.getElementById('useremailinput');
 const useremailmsg = document.getElementById('useremailmsg');
 const addtowishlist = document.querySelectorAll('.addtowish-btn');
-const addtowishabtn = document.querySelectorAll('.addtowish-a-btn');
+const wishlistalert = document.querySelector('.wishlist-alert');
+const alertdata = document.querySelector('.alert-data');
+console.log(alertdata);
 
 
 passwordPattern = /^[a-zA-Z1-9@-]{8,}$/i;
@@ -77,11 +79,12 @@ if(addtowishlist){
     btn.addEventListener("click", function(event){
       event.preventDefault();
       btn.classList.forEach((data)=>{
+        // Adding product to wishlist 
        if(data == "bi-suit-heart"){
          // Adding bootstrap classes for styling
          btn.classList.remove("bi-suit-heart");
          btn.classList.add("bi-suit-heart-fill","text-danger");
-         
+         // Sending fetch request
          const href = btn.getAttribute('href');
          let productid = href.replace('user/wishlist/add','');                                                                                                                                                                                                             
          const res = fetch(href,{
@@ -92,20 +95,58 @@ if(addtowishlist){
              body : JSON.stringify({
                productid : productid
              })
-   
+         })
+         if(res.ok){
+          res.then((response) =>{
+            return response.json();
+          }).then((data)=>{
+           alertdata.innerHTML = data.result;
+            wishlistalert.classList.remove("display-none")
+            wishlistalert.classList.add("alert-on-active");
+            setTimeout(()=>{
+            wishlistalert.classList.add("display-none");
+            wishlistalert.classList.remove("alert-on-active");
+            },1500);
+            console.log(data);
+          }).catch((error) => {
+            console.log("Error :"+error);
+          })
+         }else if(res.status === 401){
+           console.log('req is hitting');
+           window.location.href = "/user_login";
+         }           
+      }
+      else if(data == "bi-suit-heart-fill"){
+         btn.classList.remove("bi-suit-heart-fill", "text-danger");
+         btn.classList.add("bi-suit-heart");
+         let href = btn.getAttribute('href');
+         let href2 = href.replace('add', 'remove');
+         console.log('href : '+href2);
+         let productid = href.replace('user/wishlist/add','');                                                                                                                                                                                                             
+         const res = fetch(href2,{
+             method : "POST",
+             headers : {
+                 "Content-type" : "application/json"
+             },
+             body : JSON.stringify({
+               productid : productid
+             })
          })
             res.then((response) =>{
                return response.json();
             }).then((data)=>{
+              alertdata.innerHTML = data.result;
+              wishlistalert.classList.remove("display-none")
+              wishlistalert.classList.add("alert-on-active");
+              setTimeout(()=>{
+              wishlistalert.classList.add("display-none");
+              wishlistalert.classList.remove("alert-on-active");
+              },1500);
                console.log(data);
             }).catch((error) => {
                console.log("Error :"+error);
-            })
-
-      }else if(data == "bi-suit-heart-fill"){
-         btn.classList.remove("bi-suit-heart-fill", "text-danger");
-         btn.classList.add("bi-suit-heart");
-       }
+            })  
+        }
       })
     });
   }
@@ -113,11 +154,3 @@ if(addtowishlist){
 
 
 
-if(addtowishabtn){
-  for(let btn of addtowishabtn){
-    btn.addEventListener("click", function(event){
-      event.preventDefault();
-     
-    })
-  }
-}
