@@ -1,17 +1,19 @@
 <% layout('layouts/boilerplate') %>
 
 <main class="min-vh-100 min-vw-100">
-  <div class="container mt-4">
+  <div class="container mt-4 mb-4">
    <h4>My Wishlist</h4>
-   <div class="card">
+   <% for(let product of products){ %>
+    <% product.image[0] = product.image[0].replace('public','') %>
+   <div class="card my-1">
     <div class="row">
       <div class="col-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-        <img class="img-thumbnail object-fit-contain m-1" style="height : 200px; width : 200px" src="https://images.unsplash.com/photo-1634403665481-74948d815f03?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c21hcnBob25lfGVufDB8MXwwfHx8MA%3D%3D"  alt="...">
+        <img class="img-thumbnail object-fit-contain m-1" style="height : 200px; width : 200px" src="<%= product.image[0] %>"  alt="...">
       </div>
       <div class="col d-flex flex-column justify-content-center">
-        <p>Demo</p>
-        <p>Price</p>
-        <button type="button" class="btn btn-dark mt-1" style="width : 150px;">Add to Cart</button>
+        <p class="fs-4 text-capitalize fw-medium"><%= product.productName %></p>
+        <p class="fw-medium">Price : <%= product.price %></p>
+        <a class="addtocart" href="/user/cart/add/<%= product._id %>"><button type="button" class="btn btn-dark mt-1" style="width : 150px;">Add to Cart</button></a>
         <button type="button" class="btn btn-warning mt-1" style="width : 150px;">Buy Now</button>
       </div>
       <div class="col position-relative mx-3">
@@ -19,5 +21,9 @@
       </div>
     </div>
   </div>
+  <% } %>
   </div>
-</main>
+  <div class="display-none cart-alert">
+    <div class="alert-data"></div>
+  </div>
+</main>                                                    

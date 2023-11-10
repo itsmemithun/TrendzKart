@@ -20,6 +20,11 @@ const userSchema = new Schema({
         type  : Boolean,
         default : false
      },
+     cart : {
+       type : [{
+         productid : {type : String}
+       }]
+     },
      wishlist : {
         type  : [{ 
          productid : {type : String} 

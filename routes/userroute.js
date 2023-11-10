@@ -29,5 +29,9 @@ router.post('/user/wishlist/add/:id', fetchisLoggedIn, usercontroller.addtowishl
 router.post('/user/wishlist/remove/:id', fetchisLoggedIn, usercontroller.removefromwishlist);
 // Show wishlist Route 
 router.get('/user/wishlist', isLoggedIn, usercontroller.showwishlist);
+// Show cart 
+router.get('/user/cart', usercontroller.showcart);
+// Add to Cart 
+router.post('/user/cart/add/:id', usercontroller.addtocart);
 
 export default router;

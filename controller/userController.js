@@ -150,10 +150,7 @@ export default  {
          let wishlistcheck = req.body.productid;
          const id = req.session.account;
          const user = await User.findByIdAndUpdate(id, { $push : { wishlist : productid } });
-         const product = await User.findOne({ _id : id, wishlist : { $elemMatch : { productid : wishlistcheck }}});
-         console.log('wishlist :'+product);
-         // console.log(user.wishlist);
-         // await user.wishlist.push(productid); 
+         const product = await User.findOne({ _id : id, wishlist : { $elemMatch : { productid : wishlistcheck }}}); 
          res.json({result: 'Added'});
       }catch(e){
          console.log(e);
@@ -176,7 +173,41 @@ export default  {
    },
 
    showwishlist : async (req,res)=>{
-      res.render('user/wishlist.ejs');
+      let products = [];
+      const userid = req.session.account;
+      const userdata = await User.findById({ _id : userid });
+      const wishlist = userdata.wishlist;
+      for(let data of wishlist){
+         const result = await productModel.findById({_id:data.productid});
+         products.push(result);
+      } 
+      res.render('user/wishlist.ejs', { products });
+   },
+
+   showcart : async (req,res) => {
+      let cart_products = [];
+      const userid = req.session.account;
+      const userdata = await User.findById({ _id : userid });
+      const cartlist = userdata.cart;
+      for(let data of cartlist){
+         const result = await productModel.findById({ _id : data.productid })
+         cart_products.push(result);
+      }
+      res.render('user/cart.ejs', {cart_products});
+   },
+
+   addtocart : async (req,res) => {
+    try{
+      const id = req.session.account;
+      const productid = req.body;
+      console.log('productId:'+productid);
+      const userdata = await User.findByIdAndUpdate(id, { $push : { cart : productid } });
+      console.log(userdata);
+      res.json({ result : 'Added'});
+   }catch(e){
+      console.log(e)
+    }
+   
    }
 
 }

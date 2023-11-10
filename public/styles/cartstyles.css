@@ -1,0 +1,25 @@
+#productcountdecrementbtn{
+   height : 28px;
+   width : 28px;
+   padding-top : 0px;
+   border : 1px solid #c2c2c2;
+   border-radius : 50%;  
+}
+#productcountincrementbtn{
+   height : 28px;
+   width : 28px;
+   padding-top : 0px;
+   border : 1px solid #c2c2c2;
+   border-radius : 50%;
+}
+#productcount{
+  width : 32px;
+  height : 20px;
+  padding-inline : 3px;
+  padding-block : 12.5px;
+  margin-inline : 5px;
+  font-size : 14px;
+  font-weight : 500;
+  vertical-align: middle;
+  text-align: center;
+}

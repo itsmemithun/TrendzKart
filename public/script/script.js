@@ -10,6 +10,8 @@ const useremailmsg = document.getElementById('useremailmsg');
 const addtowishlist = document.querySelectorAll('.addtowish-btn');
 const wishlistalert = document.querySelector('.wishlist-alert');
 const alertdata = document.querySelector('.alert-data');
+const addtocart = document.querySelectorAll('.addtocart');
+const cartalert = document.querySelector('.cart-alert');
 
 passwordPattern = /^[a-zA-Z1-9@-]{8,}$/i;
 emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
@@ -84,7 +86,7 @@ if(addtowishlist){
          btn.classList.add("bi-suit-heart-fill","text-danger");
          // Sending fetch request
          const href = btn.getAttribute('href');
-         let productid = href.replace('user/wishlist/add','');                                                                                                                                                                                                             
+         let productid = href.replace('user/wishlist/add/','');                                                                                                                                                                                                             
          const res = fetch(href,{
              method : "POST",
              headers : {
@@ -99,7 +101,7 @@ if(addtowishlist){
             res.then((response) =>{
               return response.json();
             }).then((data)=>{
-             alertdata.innerHTML = data.result;
+              alertdata.innerHTML = data.result;
               wishlistalert.classList.remove("display-none")
               wishlistalert.classList.add("alert-on-active");
               setTimeout(()=>{
@@ -119,7 +121,7 @@ if(addtowishlist){
          btn.classList.add("bi-suit-heart");
          let href = btn.getAttribute('href');
          let href2 = href.replace('add', 'remove');
-         let productid = href.replace('user/wishlist/add','');                                                                                                                                                                                                             
+         let productid = href.replace('user/wishlist/add/','');                                                                                                                                                                                                             
          const res = fetch(href2,{
              method : "POST",
              headers : {
@@ -145,6 +147,38 @@ if(addtowishlist){
         }
       })
     });
+  }
+}
+
+if(addtocart){
+  for(let cart of addtocart){
+    cart.addEventListener("click", function(e){
+      e.preventDefault();
+      let href = cart.getAttribute('href');
+      let productid = href.replace('/user/cart/add/', '');
+      console.log(productid);
+      const res = fetch(href, {
+        method : "POST",
+        headers : {
+          "Content-type" : "application/json"
+        },
+        body : JSON.stringify({
+          productid : productid
+        })
+      })
+      res.then((response)=>{
+        return response.json();
+      }).then((data)=>{
+        console.log(data);
+        alertdata.innerHTML = data.result;
+        cartalert.classList.remove('display-none');
+        cartalert.classList.add('alert-on-active');
+        setTimeout(()=>{
+        cartalert.classList.remove('alert-on-active');
+        cartalert.classList.add('display-none');
+        },1500) 
+      })
+    })
   }
 }
 
