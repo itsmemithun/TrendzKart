@@ -12,6 +12,7 @@ const wishlistalert = document.querySelector('.wishlist-alert');
 const alertdata = document.querySelector('.alert-data');
 const addtocart = document.querySelectorAll('.addtocart');
 const cartalert = document.querySelector('.cart-alert');
+const cartbtn = document.querySelector('.cart-btn');
 
 passwordPattern = /^[a-zA-Z1-9@-]{8,}$/i;
 emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
@@ -182,5 +183,11 @@ if(addtocart){
   }
 }
 
+if(cartbtn){
+   cartbtn.addEventListener("click", function(event){
+      event.preventDefault();
+      
+   })
+}
 
 

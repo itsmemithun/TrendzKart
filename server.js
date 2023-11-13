@@ -13,6 +13,7 @@ import LocalStrategy from 'passport-local';
 import User from './model/usermodel.js';
 import morgan from 'morgan';
 
+
 // connection to DB 
 mongoose.connect('mongodb://127.0.0.1:27017/TrendzzDB')
      .then(async()=>{

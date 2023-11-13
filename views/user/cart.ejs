@@ -14,9 +14,9 @@
           <p class="fw-medium">Price : <%= product.price %></p>
           <div>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" id="productcountdecrementbtn">-</button>
-              <input type="text" id="productcount" value="1" readonly>
-              <button type="button" id="productcountincrementbtn">+</button>
+              <button type="button" class="productcountdecrementbtn">-</button>
+              <input type="text" class="productcount" value="1" readonly>
+              <button type="button" class="productcountincrementbtn">+</button>
             </div>
             <button type="button" class="btn btn-warning mt-1" style="width : 150px;">Buy Now</button>
           </div>
@@ -27,7 +27,39 @@
       </div>
     </div>
    <% } %>
+
+   <div class="row">
+
+    <div class="col">
+
+    </div>
+
+    <div class="col">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Total Items(0)</td>
+            <td>Price:</td>
+            <td>₹:<%= productSum %></td>
+          </tr>
+          <tr>
+            <td>Delivery Charges</td>
+            <td>(00)</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-end">To Pay:</td>
+            <td>₹<%= productSum %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-warning">Proceed to Pay</button>
+      <button type="button" class="btn btn-danger">Remove All</button>
+    </div>
+
    </div>
+
+  </div>
 </main>
 
 <script src="/script/cartScript.js"></script>

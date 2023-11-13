@@ -185,15 +185,27 @@ export default  {
    },
 
    showcart : async (req,res) => {
-      let cart_products = [];
-      const userid = req.session.account;
-      const userdata = await User.findById({ _id : userid });
-      const cartlist = userdata.cart;
-      for(let data of cartlist){
-         const result = await productModel.findById({ _id : data.productid })
-         cart_products.push(result);
+      try{
+         let cart_products = [];
+         const product_total = [];
+         const userid = req.session.account;
+         const userdata = await User.findById({ _id : userid });
+         const cartlist = userdata.cart;
+         for(let data of cartlist){
+            const result = await productModel.findById({ _id : data.productid })
+            cart_products.push(result);
+         }
+         const productpriceData = cart_products.map(function(product){
+          return product.price;
+         });
+         let productSum = 0;
+         for(let i=0; i<productpriceData.length; i++){
+            productSum += productpriceData[i];
+         }        
+         res.render('user/cart.ejs', {cart_products,productSum});
+      }catch(e){
+         console.log(e.message);
       }
-      res.render('user/cart.ejs', {cart_products});
    },
 
    addtocart : async (req,res) => {
@@ -206,7 +218,7 @@ export default  {
       res.json({ result : 'Added'});
    }catch(e){
       console.log(e)
-    }
+   }
    
    }
 
