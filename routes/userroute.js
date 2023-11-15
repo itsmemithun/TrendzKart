@@ -33,5 +33,8 @@ router.get('/user/wishlist', isLoggedIn, usercontroller.showwishlist);
 router.get('/user/cart', usercontroller.showcart);
 // Add to Cart 
 router.post('/user/cart/add/:id', usercontroller.addtocart);
+// route to get product price from the Server Side
+router.get('/user/getproductprice/', usercontroller.getPriceofProduct);
+
 
 export default router;

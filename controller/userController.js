@@ -220,6 +220,14 @@ export default  {
       console.log(e)
    }
    
+   },
+
+   getPriceofProduct : async(req,res)=>{
+      try{
+         
+      }catch(e){
+         console.log(e.message);
+      }
    }
 
 }

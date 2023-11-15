@@ -183,11 +183,11 @@ if(addtocart){
   }
 }
 
-if(cartbtn){
-   cartbtn.addEventListener("click", function(event){
-      event.preventDefault();
+// if(cartbtn){
+//    cartbtn.addEventListener("click", function(event){
+//       event.preventDefault();
       
-   })
-}
+//    })
+// }
 
 
