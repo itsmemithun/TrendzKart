@@ -10,7 +10,7 @@
           <img class="img-thumbnail object-fit-contain m-1" style="height : 200px; width : 200px" src="https://images.unsplash.com/photo-1682686580950-960d1d513532?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"  alt="...">
         </div>
         <div class="col card-body-grp d-flex flex-column justify-content-center">
-          <p class="fs-4 text-capitalize fw-medium"><%= product.productName %></p>
+          <p class="fs-4 text-capitalize product-name fw-medium" data-product-id="<%= product._id %>"><%= product.productName %></p>
           <p class="fw-medium cart-product-price">Price : <%= product.price %></p>
           <div>
             <div class="btn-group" role="group" aria-label="Basic example">

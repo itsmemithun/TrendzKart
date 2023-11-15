@@ -18,5 +18,7 @@ router.get('/panel/products', nocache(), admincontroller.products);
 router.get('/panel/products/add_product', isAdmin, admincontroller.addproduct);
 // Add product post req Route
 router.post('/panel/products/add_product', uploadProductimage.single("image"), admincontroller.addproductdata);
+// edit product route 
+router.get('/panel/products/edit_product/:id', admincontroller.editproduct);
 
 export default router;

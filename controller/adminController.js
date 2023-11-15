@@ -85,5 +85,17 @@ export default {
     const product = new productModel(productData);
     await product.image.push(productImg);
     await product.save();
+  },
+  
+  editproduct : async(req,res) => {
+    try{
+      const id = req.params.id;
+      const product = await productModel.findById(id);
+      console.log(product);
+      res.render('admin/productedit.ejs', { product });
+    }
+    catch(e){
+      console.log(e.message);
+    }
   }
 }

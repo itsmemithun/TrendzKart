@@ -4,7 +4,7 @@ const productcounts = document.querySelectorAll(".productcount");
 const productsum = document.querySelector(".product-sum");
 
 
-
+// Product Quantity Increase Button //
 for(let productincrementbtn of productincrementbtns ){
     productincrementbtn.addEventListener('click', function(){
      const btnGrp = this.closest(".btn-group");
@@ -12,15 +12,28 @@ for(let productincrementbtn of productincrementbtns ){
      let count = parseInt(productcount.value) || 1;
      count++;
      productcount.value = count;
-     const cardBodyGrp = this.closest('.card-body-grp');
-     const productPrize = cardBodyGrp.querySelector(".cart-product-price");
-     let resultaftercalculation = parseInt(productPrize.innerHTML.replace("Price : ", "")) + parseInt(productsum.innerHTML.replace("₹", ""));
-     console.log(resultaftercalculation);
-     console.log(productPrize.innerHTML);
-     console.log(productsum.innerHTML);
+     const productbodygrp = this.closest(".card-body-grp");
+     const productid = productbodygrp.querySelector(".product-name").getAttribute("data-product-id");
+     const result = fetch('/user/getproductprice' ,{
+       method : "POST",
+       headers : {
+         "Content-type" : "application/json"
+       },
+       body : JSON.stringify({
+         productid : productid
+       })
+     })
+     result.then((response)=>{
+      return response.json();
+     })
+     .then((data)=>{
+      console.log(data);
+      productsum.innerHTML = `₹${parseInt(productsum.innerHTML.replace("₹", "")) + parseInt(data.result)}`;
+     })
     })
 }
 
+// Product Quantity Decrease Button //
 for(let productdecrementbtn of productdecrementbtns){
   productdecrementbtn.addEventListener('click', function(){
     const btnGrp = this.closest(".btn-group");
@@ -29,6 +42,24 @@ for(let productdecrementbtn of productdecrementbtns){
   if(count>1){
     count--;
     productcount.value = count;
+    const productbodygrp = this.closest(".card-body-grp");
+    const productid = productbodygrp.querySelector(".product-name").getAttribute("data-product-id");
+    const result = fetch('/user/getproductprice' ,{
+      method : "POST",
+      headers : {
+        "Content-type" : "application/json"
+      },
+      body : JSON.stringify({
+        productid : productid
+      })
+    })
+    result.then((response)=>{
+     return response.json();
+    })
+    .then((data)=>{
+     console.log(data);
+     productsum.innerHTML = `₹${parseInt(productsum.innerHTML.replace("₹", "")) - parseInt(data.result)}`;
+    })
   }
   })
 }

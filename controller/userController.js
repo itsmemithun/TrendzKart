@@ -196,7 +196,7 @@ export default  {
             cart_products.push(result);
          }
          const productpriceData = cart_products.map(function(product){
-          return product.price;
+            return product.price;
          });
          let productSum = 0;
          for(let i=0; i<productpriceData.length; i++){
@@ -208,7 +208,7 @@ export default  {
       }
    },
 
-   addtocart : async (req,res) => {
+   addtocart : async(req,res) => {
     try{
       const id = req.session.account;
       const productid = req.body;
@@ -219,12 +219,13 @@ export default  {
    }catch(e){
       console.log(e)
    }
-   
    },
 
    getPriceofProduct : async(req,res)=>{
       try{
-         
+         const id = req.body.productid;
+         const product = await productModel.findById(id);
+         res.json({ result : product.price });
       }catch(e){
          console.log(e.message);
       }
