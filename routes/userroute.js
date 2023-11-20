@@ -30,11 +30,14 @@ router.post('/user/wishlist/remove/:id', fetchisLoggedIn, usercontroller.removef
 // Show wishlist Route 
 router.get('/user/wishlist', isLoggedIn, usercontroller.showwishlist);
 // Show cart 
-router.get('/user/cart', usercontroller.showcart);
+router.get('/user/cart', isLoggedIn, usercontroller.showcart);
 // Add to Cart 
 router.post('/user/cart/add/:id', usercontroller.addtocart);
 // route to get product price from the Server Side
 router.post('/user/getproductprice', usercontroller.getPriceofProduct);
+// delete products from cart button 
+router.get('/user/cart/delete/:id', usercontroller.deleteFromCart);
+
 
 
 export default router;

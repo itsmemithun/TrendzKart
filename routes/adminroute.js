@@ -20,5 +20,10 @@ router.get('/panel/products/add_product', isAdmin, admincontroller.addproduct);
 router.post('/panel/products/add_product', uploadProductimage.single("image"), admincontroller.addproductdata);
 // edit product route 
 router.get('/panel/products/edit_product/:id', admincontroller.editproduct);
+// edit product post route 
+router.post('/panel/products/edit_product/:id', uploadProductimage.single("image"), admincontroller.updateproduct);
+// delete route for deleting products
+router.get('/panel/products/delete_product/:id', admincontroller.deleteProduct);
+// category management route
 
 export default router;

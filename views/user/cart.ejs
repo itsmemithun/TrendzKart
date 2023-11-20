@@ -9,7 +9,7 @@
         <div class="col-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
           <img class="img-thumbnail object-fit-contain m-1" style="height : 200px; width : 200px" src="https://images.unsplash.com/photo-1682686580950-960d1d513532?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"  alt="...">
         </div>
-        <div class="col card-body-grp d-flex flex-column justify-content-center">
+        <div class="col-5 col-md-5 col-lg-4 col-xl-5 col-xxl-5 card-body-grp d-flex flex-column justify-content-center">
           <p class="fs-4 text-capitalize product-name fw-medium" data-product-id="<%= product._id %>"><%= product.productName %></p>
           <p class="fw-medium cart-product-price">Price : <%= product.price %></p>
           <div>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="col position-relative mx-3">
-          <i class="bi bi-trash3-fill position-absolute top-0 end-0" style="font-size : 25px"></i>
+          <a href="/user/cart/delete/<%= product._id %>"><i class="bi bi-trash3-fill position-absolute top-0 end-0" style="font-size : 25px"></i></a>
         </div>
       </div>
     </div>
@@ -53,8 +53,8 @@
           </tr>
         </tbody>
       </table>
-      <button type="button" class="btn btn-warning">Proceed to Pay</button>
-      <button type="button" class="btn btn-danger">Remove All</button>
+      <button type="button" class="btn me-3 btn-warning">Proceed to Pay</button>
+      <button type="button" class="btn removeall-btn btn-danger">Remove All</button>
     </div>
 
    </div>

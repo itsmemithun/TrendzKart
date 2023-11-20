@@ -21,13 +21,16 @@
     <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
       Collections
     </a>
+    <a href="/admin/panel/category" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      Category
+    </a>
   </div>
 
   <div class="add-product-container d-flex flex-column align-items-center mt-5 ms-2 w-75">
 
     <h2 class="text-decoration-underline">Edit Products</h2>
     <div class="w-50">
-    <form action="/admin/panel/products/add_product" method="POST" enctype="multipart/form-data">
+    <form action="/admin/panel/products/edit_product/<%= product._id %>" method="POST" enctype="multipart/form-data">
 
       <div class="mb-3">
         <label for="addProductName" class="form-label">Product Name</label>
@@ -50,7 +53,7 @@
       </div>
 
       <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" value="<%= product.description %>" id="productDescription" name="description" style="height: 100px"></textarea>
+        <textarea class="form-control" placeholder="Leave a comment here" id="productDescription" name="description" style="height: 100px"><%= product.description %></textarea>
         <label for="productDescription">Description</label>
       </div>
 
@@ -64,7 +67,7 @@
         <input type="number" class="form-control" value="<%= product.stock %>" id="productquantity" name="stock" placeholder="Enter Your Product Quantity">
       </div>
 
-      <button class="add-product-btn btn btn-primary">Add Product+</button>
+      <button class="add-product-btn btn btn-primary">Save Changes+</button>
 
     </form>
     </div>

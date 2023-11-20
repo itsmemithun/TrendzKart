@@ -23,3 +23,9 @@
   vertical-align: middle;
   text-align: center;
 }
+
+@media only screen and (max-width : 768px) {
+.removeall-btn {
+   margin-top : 10px;
+}
+}

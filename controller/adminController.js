@@ -85,16 +85,46 @@ export default {
     const product = new productModel(productData);
     await product.image.push(productImg);
     await product.save();
+    res.redirect('/admin/panel/products');
   },
   
   editproduct : async(req,res) => {
     try{
       const id = req.params.id;
       const product = await productModel.findById(id);
-      console.log(product);
       res.render('admin/productedit.ejs', { product });
     }
     catch(e){
+      console.log(e.message);
+    }
+  },
+
+  updateproduct : async (req,res) => {
+    try{
+      const id = req.params.id;
+      const productData = req.body;
+      const imgData = req.file.path;
+      const updateData = {
+        $set :{
+           ...productData,
+          image : imgData
+        }
+      }
+      console.log(updateData);
+      const product = await productModel.findByIdAndUpdate(id, updateData, {new : true});
+      console.log(product);
+      res.redirect('/admin/panel/products');
+      }catch(e){
+       console.log(e);
+    }
+  },
+
+  deleteProduct : async (req,res)=>{
+    try{
+      const id = req.params.id;
+      const product = await productModel.findByIdAndDelete(id);
+      res.redirect('/admin/panel/products');
+    }catch(e){
       console.log(e.message);
     }
   }

@@ -171,7 +171,7 @@ export default  {
          console.log(e);
       }
    },
-
+   
    showwishlist : async (req,res)=>{
       let products = [];
       const userid = req.session.account;
@@ -195,7 +195,7 @@ export default  {
             const result = await productModel.findById({ _id : data.productid })
             cart_products.push(result);
          }
-         const productpriceData = cart_products.map(function(product){
+         const productpriceData = cart_products.map(function(product){ 
             return product.price;
          });
          let productSum = 0;
@@ -204,17 +204,15 @@ export default  {
          }        
          res.render('user/cart.ejs', {cart_products,productSum});
       }catch(e){
-         console.log(e.message);
+         console.log(e);
       }
    },
 
    addtocart : async(req,res) => {
     try{
       const id = req.session.account;
-      const productid = req.body;
-      console.log('productId:'+productid);
+      const productid = req.body;     
       const userdata = await User.findByIdAndUpdate(id, { $push : { cart : productid } });
-      console.log(userdata);
       res.json({ result : 'Added'});
    }catch(e){
       console.log(e)
@@ -228,6 +226,19 @@ export default  {
          res.json({ result : product.price });
       }catch(e){
          console.log(e.message);
+      }
+   },
+
+   deleteFromCart : async(req,res)=>{
+      console.log('req reached here');
+         try{
+         const userid = req.session.account;
+         console.log(userid);   
+         const productid = req.params.id;
+         const product = await User.findOneAndUpdate( { _id : userid},{ $pull : { cart : { productid : productid }}} );
+         res.redirect('/user/cart'); 
+      }catch(e){
+         console.log(e);
       }
    }
 
