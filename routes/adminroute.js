@@ -25,5 +25,6 @@ router.post('/panel/products/edit_product/:id', uploadProductimage.single("image
 // delete route for deleting products
 router.get('/panel/products/delete_product/:id', admincontroller.deleteProduct);
 // category management route
+router.get('/panel/category', admincontroller.category);
 
 export default router;

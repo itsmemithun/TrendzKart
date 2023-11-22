@@ -127,5 +127,13 @@ export default {
     }catch(e){
       console.log(e.message);
     }
+  },
+
+  category : (req,res)=>{
+    try{
+      res.render('admin/category.ejs');
+    }catch(e){
+      console.log(e);
+    }
   }
 }
