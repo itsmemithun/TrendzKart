@@ -52,7 +52,7 @@
       <div class="row">
         <% for(product of products){ %>
           <% product.image[0] = product.image[0].replace('public', '') %>
-        <div class="col col-12 col-md-6 col-lg-4 col-xl-3 g-3">
+        <div class="col col-12 col-md-6 col-lg-4 col-xl-3 g-3 product-details">
           <div class="card" style="width: 18rem;">
             <div class="product-image">
               <img src="<%= product.image[0] %>" class="card-img-top card-img object-fit-contain" alt="...">
@@ -62,7 +62,7 @@
               <p class="card-text"><b>Price:</b> <%= product.price  %></p>
               <p class="card-text text-success"><b>Stock:</b> <%= product.stock %></p>
               <a href="/admin/panel/products/edit_product/<%= product._id %>" class="btn btn-primary">Edit</a>
-              <a href="/admin/panel/products/delete_product/<%= product._id %>" class="btn btn-danger">Delete</a>
+              <a href="/admin/panel/products/delete_product/<%= product._id %>" data-productid="<%= product._id %>" class="btn product-dlt-btn btn-danger">Delete</a>
             </div>
           </div>
         </div>

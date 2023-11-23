@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import passportLocalMongoose from 'passport-local-mongoose';
 const Schema = mongoose.Schema;
+import product from './product/product.js';
 
 const userSchema = new Schema({
      email : {
@@ -20,11 +21,10 @@ const userSchema = new Schema({
         type  : Boolean,
         default : false
      },
-     cart : {
-       type : [{
-         productid : {type : String}
-       }]
-     },
+     cart : [{
+           type : Schema.Types.ObjectId,
+           ref : 'product'
+     }],
      wishlist : {
         type  : [{ 
          productid : {type : String} 

@@ -192,7 +192,7 @@ export default  {
          const userdata = await User.findById({ _id : userid });
          const cartlist = userdata.cart;
          for(let data of cartlist){
-            const result = await productModel.findById({ _id : data.productid })
+            const result = await productModel.findById({ _id : data })
             cart_products.push(result);
          }
          const productpriceData = cart_products.map(function(product){ 
@@ -211,7 +211,7 @@ export default  {
    addtocart : async(req,res) => {
     try{
       const id = req.session.account;
-      const productid = req.body;     
+      const productid = req.body.productid;     
       const userdata = await User.findByIdAndUpdate(id, { $push : { cart : productid } });
       res.json({ result : 'Added'});
    }catch(e){

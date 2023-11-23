@@ -121,9 +121,18 @@ export default {
 
   deleteProduct : async (req,res)=>{
     try{
-      const id = req.params.id;
+      const id = req.body.productid;
+      console.log(id);
       const product = await productModel.findByIdAndDelete(id);
-      res.redirect('/admin/panel/products');
+      const userswithdeletedproduct = await userModel.find({ cart : id });
+      userswithdeletedproduct.forEach( async(user)=>{
+      user.cart = user.cart.filter((item) => {
+          return item != id;   
+        });
+        console.log(user.cart);
+        await user.save();
+      })
+      res.json({result : 'Product Deleted Succefully'});
     }catch(e){
       console.log(e.message);
     }
