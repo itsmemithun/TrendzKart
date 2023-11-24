@@ -121,26 +121,34 @@ export default {
 
   deleteProduct : async (req,res)=>{
     try{
-      const id = req.body.productid;
-      console.log(id);
-      const product = await productModel.findByIdAndDelete(id);
-      const userswithdeletedproduct = await userModel.find({ cart : id });
-      userswithdeletedproduct.forEach( async(user)=>{
-      user.cart = user.cart.filter((item) => {
-          return item != id;   
+      const productid = req.body.productid;
+      console.log(productid);
+      const product = await productModel.findByIdAndDelete(productid);
+      const usersWithDeletedProductInCart = await userModel.find({ cart : productid });
+      // Deleting product from the cartList
+      for(let user of usersWithDeletedProductInCart){
+        user.cart = user.cart.filter((item) => {
+          return item != productid;   
         });
-        console.log(user.cart);
         await user.save();
-      })
+      }
+      // Deleting product from the wishList
+      const userWithDeletedProductInWishList = await userModel.find({ wishlist : productid });
+      for(let user of userWithDeletedProductInWishList){
+        user.wishlist = user.wishlist.filter((item) => {
+          return item != productid;
+        });  
+        await user.save();
+      }
       res.json({result : 'Product Deleted Succefully'});
     }catch(e){
-      console.log(e.message);
+      console.log("Error>>>"+e.message);
     }
   },
 
   category : (req,res)=>{
     try{
-      res.render('admin/category.ejs');
+      res.render('admin/category.ejs');                                       
     }catch(e){
       console.log(e);
     }

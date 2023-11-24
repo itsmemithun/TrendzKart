@@ -35,8 +35,10 @@ router.get('/user/cart', isLoggedIn, usercontroller.showcart);
 router.post('/user/cart/add/:id', usercontroller.addtocart);
 // route to get product price from the Server Side
 router.post('/user/getproductprice', usercontroller.getPriceofProduct);
-// delete products from cart button 
+// delete products from cart 
 router.get('/user/cart/delete/:id', usercontroller.deleteFromCart);
+// delete procucts from wishlist 
+router.get('/user/wishlist/delete/:id', usercontroller.deleteFromWishList);
 
 
 

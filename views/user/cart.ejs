@@ -1,8 +1,18 @@
 <% layout('layouts/boilerplate') %>
 
 <main class="min-vh-100 min-vw-100">
-  <div class="container mt-4 mb-4">
+  <div class="container mt-4 mb-4 d-flex flex-column">
     <h4>My Cart</h4>
+     <% if(cart_products.length == 0){ %>
+      <div class="align-self-center d-flex flex-column align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="currentColor" class="bi bi-cart text-danger-emphasis" viewBox="0 0 16 16">
+          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+        </svg>
+        <p class="pt-4 fs-4 fw-semibold">Your cart is empty</p>
+        <p class="pt-1 fw-medium">Add something to make me happy:)</p>
+      </div>
+     <% } %>
+
     <% for(let product of cart_products){ %>
     <div class="card my-1">
       <div class="row">
@@ -31,7 +41,6 @@
    <div class="row">
 
     <div class="col">
-
     </div>
 
     <div class="col">

@@ -146,7 +146,7 @@ export default  {
    // Adding product to Wishlist
    addtowishlist : async (req,res) => {
       try{
-         const productid = req.body;
+         const productid = req.body.productid;
          let wishlistcheck = req.body.productid;
          const id = req.session.account;
          const user = await User.findByIdAndUpdate(id, { $push : { wishlist : productid } });
@@ -178,7 +178,7 @@ export default  {
       const userdata = await User.findById({ _id : userid });
       const wishlist = userdata.wishlist;
       for(let data of wishlist){
-         const result = await productModel.findById({_id:data.productid});
+         const result = await productModel.findById({ _id:data });
          products.push(result);
       } 
       res.render('user/wishlist.ejs', { products });
@@ -235,11 +235,23 @@ export default  {
          const userid = req.session.account;
          console.log(userid);   
          const productid = req.params.id;
-         const product = await User.findOneAndUpdate( { _id : userid},{ $pull : { cart : { productid : productid }}} );
+         const product = await User.findOneAndUpdate( { _id : userid},{ $pull : { cart : productid }} );
          res.redirect('/user/cart'); 
       }catch(e){
          console.log(e);
       }
+   },
+
+   deleteFromWishList : async(req,res)=>{
+    try{
+      const userid = req.session.account;
+      const productid = req.params.id;
+      const product = await User.findOneAndUpdate({ _id : userid }, { $pull : { wishlist : productid }});
+      res.redirect('/user/wishlist');
+    }catch(e){
+      console.log(e.message);
+    }
    }
+   
 
 }

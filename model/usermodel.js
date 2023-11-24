@@ -25,11 +25,10 @@ const userSchema = new Schema({
            type : Schema.Types.ObjectId,
            ref : 'product'
      }],
-     wishlist : {
-        type  : [{ 
-         productid : {type : String} 
-      }],
-     }
+     wishlist : [{
+          type : Schema.Types.ObjectId,
+          ref : 'product'
+     }]
 });
 
 userSchema.plugin(passportLocalMongoose);
