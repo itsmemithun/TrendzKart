@@ -1,6 +1,7 @@
 import User from '../model/usermodel.js';
 import userRegistration from '../model/userRegistrationModel.js';
 import productModel from '../model/product/product.js';
+import categoryModel from '../model/admin/category.js';
 import nodemailer from 'nodemailer'
 import otpGenerator from 'otp-generator';
 import dotenv from 'dotenv';
@@ -33,7 +34,8 @@ const transporter = nodemailer.createTransport({
 export default  {
 
 //  <<< Home Route >>> //
-   home : async(req,res) => { 
+   home : async(req,res) => {
+      cosn 
       const products = await productModel.find({});
       // console.log(products);
       if(!req.user){

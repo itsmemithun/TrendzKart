@@ -28,17 +28,48 @@
     </a>
   </div> 
 
-  <div class="w-100 d-flex flex-column align-items-center">
-    
-    <div class="category-card rounded-4 mt-5 d-flex justify-content-between">
-      <p class="">Fashion</p>
-      <button class="btn flex-shrink-0 btn-sm btn-danger">Delete</button>
-    </div>
-    
-  
+  <div class="w-100 d-flex flex-column align-items-center container">
+    <% for(let category of categories){ %>
+      <div class="category-card container rounded-4 mt-5 d-flex justify-content-between align-items-center">
+        <p class="mb-0 ms-2"><%= category.category  %></p>
+        <a href="/admin/panel/category/delete/<%= category._id %>"><button class="btn btn-sm btn-danger me-2" style="height : 30px; width : 70px;">Delete</button></a>
+      </div>
+    <% } %>
 
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add Category+
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category+</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/admin/panel/category/add" method="POST">
+        <div class="modal-body">
+          <div class="input-group flex-nowrap">
+            <input type="text" class="form-control" name="category" placeholder="Enter a Category name" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+    
+   
   </div>
 
-
+   
 </div>
+
+
 

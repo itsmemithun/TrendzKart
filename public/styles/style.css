@@ -126,7 +126,6 @@ body{
    top : 100px;
 }
 
-
 .add-product-container{
   height : 90vh;
   background-color : rgb(217, 217, 217)!important;
@@ -145,8 +144,7 @@ body{
 .category-card{
   background-color : rgb(217, 217, 217);
   height : 57px;
-  min-width: 716px;
-  max-width : 716px;
+  max-width : 716px!important;
 }
 
 

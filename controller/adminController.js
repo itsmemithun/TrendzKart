@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import adminModel from '../model/admin/adminmodel.js';
 import userModel from '../model/usermodel.js';
 import productModel from '../model/product/product.js';
+import categoryModel from '../model/admin/category.js';
 
 
 function countUser(users){
@@ -146,11 +147,34 @@ export default {
     }
   },
 
-  category : (req,res)=>{
+  category : async (req,res)=>{
     try{
-      res.render('admin/category.ejs');                                       
+      const categories = await categoryModel.find({});
+      res.render('admin/category.ejs', { categories });                                       
     }catch(e){
       console.log(e);
     }
+  },
+
+  addCategory : async(req,res)=>{
+    try{
+      const category =  new categoryModel(req.body);
+      category.save();
+      res.redirect('/admin/panel/category');
+    }catch(e){
+       console.log(e.message);
+    }
+  },
+
+  deleteCategory : async (req,res)=>{
+   try{
+    const categoryid = req.params.id;
+    const category = await categoryModel.findByIdAndDelete(categoryid);
+    res.redirect('/admin/panel/category');
+   }catch(e){
+    console.log(e.message);
+   }
   }
+
+
 }

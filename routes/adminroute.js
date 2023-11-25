@@ -5,7 +5,7 @@ import { isAdmin } from '../middleware/admin_middleware.js';
 import { uploadProductimage } from '../middleware/admin_middleware.js';
 import nocache from 'nocache';
 
-router.use(nocache());
+router.use(nocache());  
 router.get('/', admincontroller.login);
 router.post('/login', admincontroller.home);
 router.get('/panel', isAdmin, nocache(), admincontroller.dashboard);
@@ -27,5 +27,9 @@ router.post('/panel/products/edit_product/:id', uploadProductimage.single("image
 router.delete('/panel/products/delete_product/:id', admincontroller.deleteProduct);
 // category management route
 router.get('/panel/category', admincontroller.category);
+// Add category route
+router.post('/panel/category/add', admincontroller.addCategory);
+// Category Delete route 
+router.get('/panel/category/delete/:id', admincontroller.deleteCategory);
 
 export default router;
