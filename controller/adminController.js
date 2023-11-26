@@ -26,15 +26,23 @@ export default {
 
   // <<< Controller for handling the post req from the Admin Login page >>> //
   home : async (req,res) => {
+    try{
        const { username, password } = req.body;
+       console.log(password);
        const admin = await adminModel.findOne({ username : username });
-       const check = bcrypt.compareSync(password, admin.password);
-       if(check){
-        req.session.isAdmin = true;
-        res.redirect('/admin/panel');
+       if(admin){
+         const check = bcrypt.compareSync(password, admin.password);
+         if(check){
+          req.session.isAdmin = true;
+          res.redirect('/admin/panel');
+         }
        }else{
-        res.send('try again...');
+        console.log('req reached else case');
+        res.redirect('/admin');
        }
+    }catch(e){
+      console.log(e.message);
+    }
    },
 
   dashboard : (req,res)=>{
@@ -174,7 +182,16 @@ export default {
    }catch(e){
     console.log(e.message);
    }
-  }
+  },
 
+  editCategory : async(req,res)=>{
+     try{
+      const categoryid = req.body.productid;
+      const category = await categoryModel.findById(categoryid);
+      await res.json({ result : category });
+     }catch(e){
+      console.log(e.message);
+     }
+  }
 
 }

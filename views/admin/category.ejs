@@ -31,19 +31,45 @@
   <div class="w-100 d-flex flex-column align-items-center container">
     <% for(let category of categories){ %>
       <div class="category-card container rounded-4 mt-5 d-flex justify-content-between align-items-center">
-        <p class="mb-0 ms-2"><%= category.category  %></p>
-        <a href="/admin/panel/category/delete/<%= category._id %>"><button class="btn btn-sm btn-danger me-2" style="height : 30px; width : 70px;">Delete</button></a>
+        <p class="mb-0 ms-2"><%= category.category %></p>
+        <div>
+          <button type="button" class="category-edit-btn btn btn-sm btn-primary me-2" style="height : 30px; width : 70px;" data-category-path="/admin/panel/category/edit/<%= category._id %>" data-bs-toggle="modal" data-bs-target="#editCategoryModal">Edit</button></a>
+          <a href="/admin/panel/category/delete/<%= category._id %>"><button class="btn btn-sm btn-danger me-2" style="height : 30px; width : 70px;">Delete</button></a>
+        </div>
       </div>
     <% } %>
 
+      <!-- Category Modal -->
+        <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="modal-body">
+                  <div class="input-group flex-nowrap">
+                    <input type="text" class="form-control modal-input" value="" name="category" placeholder="Enter a Category name" aria-label="Username" aria-describedby="addon-wrapping">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
   Add Category+
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -71,5 +97,4 @@
    
 </div>
 
-
-
+<script src="/script/category.js"></script>

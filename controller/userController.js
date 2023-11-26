@@ -35,7 +35,6 @@ export default  {
 
 //  <<< Home Route >>> //
    home : async(req,res) => {
-      cosn 
       const products = await productModel.find({});
       // console.log(products);
       if(!req.user){
