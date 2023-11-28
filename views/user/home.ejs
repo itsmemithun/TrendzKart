@@ -7,8 +7,8 @@
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-    <div class="carousel-inner custom-carousel">
-      <div class="carousel-item active">
+    <div class="carousel-inner">
+      <div class="carousel-item active custom-carousel">
         <img src="https://plus.unsplash.com/premium_photo-1673429738942-5cb00ddc06fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item custom-carousel">
@@ -40,8 +40,8 @@
           <div class="text-decoration-none" href="">
            <div class="card me-3" style="width: 186px;">
              <img class="product-img rounded object-fit-contain" src="<%= product.image[0] %>" class="card-img-top" alt="...">
-             <div class="card-body">
-               <h5 class="card-title text-dark"><%= product.productName %></h5>
+             <div class="card-body ps-1 pt-1">
+               <h5 class="card-title text-dark text-capitalize font-monospace"><%= product.productName %></h5>
                <p class="card-text text-dark">₹: <%= product.price %></p>
                <a class="text-decoration-none addtowish-btn bi bi-suit-heart" href="user/wishlist/add/<%= product._id %>" style="font-size: 1.5rem;"></a>
              </div>

@@ -17,8 +17,12 @@ body{
 /*<<<🔥 User Side >>> 🔥*/
 
 .custom-carousel{
-  height : 470px!important;
-  width : auto;
+  height : 65vh!important;
+}
+
+.custom-carousel img{
+  height : 100%;
+  object-fit: cover;
 }
 
 .product-img{
