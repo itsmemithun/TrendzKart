@@ -36,12 +36,12 @@ export default  {
 //  <<< Home Route >>> //
    home : async(req,res) => {
       const products = await productModel.find({});
-      // console.log(products);
+      const categories = await categoryModel.find({});
       if(!req.user){
          res.locals.userPurpose = "login"
-         return res.render('user/home.ejs',{ products });
+         return res.render('user/home.ejs',{ products,categories });
       }else{
-         res.render('user/home.ejs', { products }); 
+         res.render('user/home.ejs', { products,categories }); 
       }    
    },
  

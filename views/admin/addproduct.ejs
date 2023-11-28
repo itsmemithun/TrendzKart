@@ -46,9 +46,9 @@
         <label for="addProductCategory" class="form-label">Category</label>
         <select class="form-select" name="category" aria-label="Default select example">
           <option selected>None</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <% for(let category of categories){ %>
+            <option value="<%= category.category %>"><%= category.category  %></option>
+          <% } %>
         </select>
       </div>
 

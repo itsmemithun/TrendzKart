@@ -84,8 +84,9 @@ export default {
     res.render('admin/products.ejs', { products });
   },
 
-  addproduct : (req,res) => {
-    res.render('admin/addproduct.ejs');
+  addproduct : async (req,res) => {
+    const categories = await categoryModel.find({});
+    res.render('admin/addproduct.ejs', { categories });
   },
 
   addproductdata : async(req,res) =>{
@@ -192,6 +193,20 @@ export default {
      }catch(e){
       console.log(e.message);
      }
+  },
+
+  updateCategory : async (req,res)=>{
+    try{
+      const id = req.params.id;
+      const data = req.body;
+      console.log(id);
+      console.log(data);
+      const category = await categoryModel.findByIdAndUpdate(id, data, {new : true});
+      console.log(category);
+      res.redirect('/admin/panel/category');
+    }catch(e){
+      console.log(e);
+    }
   }
 
 }

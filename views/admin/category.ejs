@@ -1,5 +1,4 @@
 <!-- custom css for this html page is written on style.css -->
-
 <% layout('layouts/adminboilerplate.ejs') %>
 
 <div class="d-flex">
@@ -39,29 +38,30 @@
       </div>
     <% } %>
 
-      <!-- Category Modal -->
+      <!--Edit Category Modal -->
         <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
+            <form class="categoryForm" action="" method="POST">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Category</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
-                  <div class="input-group flex-nowrap">
-                    <input type="text" class="form-control modal-input" value="" name="category" placeholder="Enter a Category name" aria-label="Username" aria-describedby="addon-wrapping">
+                  <div class="modal-body">
+                    <div class="input-group flex-nowrap">
+                      <input type="text" class="form-control modal-input" value="" name="category" placeholder="Enter a Category name" aria-label="Username" aria-describedby="addon-wrapping">
+                    </div>
                   </div>
                 </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
-
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#addCategoryModal">

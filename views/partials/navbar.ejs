@@ -17,8 +17,11 @@
         </div>
         <span class="d-flex">
           <% if(typeof userPurpose !== 'undefined'){ %>
-          <% if(userPurpose == "login"){ %>
-            <a href="/user_signup"><button type="button" class="btn btn-light mx-2">SignUp</button></a>
+          <% if(userPurpose == "login"){ %> 
+            <a href="/user_login"><button type="button" class="btn btn-light mx-2">Login</button></a>
+            <a href="/user_signup"><button type="button" class="btn btn-outline-light">SignUp</button></a>           
+            <% }else{ %>
+              <a href="/user_login"><button type="button" class="btn btn-light mx-2">Login</button></a>
           <% } %>
           <% if(userPurpose && !userPurpose == 'signup'){ %>
           <form class="d-flex" role="search">

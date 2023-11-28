@@ -1,4 +1,3 @@
-console.log('hello');
 const passwordinput = document.getElementById('password-input');
 const passworderror = document.getElementById('password-d');
 const registerForm = document.getElementById('form');

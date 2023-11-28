@@ -33,6 +33,7 @@ router.post('/panel/category/add', admincontroller.addCategory);
 router.get('/panel/category/delete/:id', admincontroller.deleteCategory);
 // Category Edit route
 router.post('/panel/category/edit/:id', admincontroller.editCategory);
-// Route for getting category details
+// Category Update route 
+router.post('/panel/category/update/:id', admincontroller.updateCategory);
 
 export default router;

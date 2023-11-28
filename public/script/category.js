@@ -1,5 +1,7 @@
 const categoryButtons = document.getElementsByClassName('category-edit-btn');
 const modalInput = document.querySelector('.modal-input');
+const categoryForm = document.querySelector('.categoryForm');
+
 
 for(let categoryBtn of categoryButtons){
   categoryBtn.addEventListener('click', function(e){
@@ -20,7 +22,9 @@ for(let categoryBtn of categoryButtons){
     })
     .then((data)=>{
       console.log(data);
+      console.log(categoryForm);
       modalInput.value = data.result.category;
+      categoryForm.setAttribute("action", `/admin/panel/category/update/${productId}`);
     })
   })
 }
