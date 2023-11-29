@@ -35,5 +35,7 @@ router.get('/panel/category/delete/:id', admincontroller.deleteCategory);
 router.post('/panel/category/edit/:id', admincontroller.editCategory);
 // Category Update route 
 router.post('/panel/category/update/:id', admincontroller.updateCategory);
+// Route for user Search 
+router.post('/panel/user_search', admincontroller.userSearch);
 
 export default router;

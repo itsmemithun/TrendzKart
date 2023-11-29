@@ -2,9 +2,11 @@ const emailinput = document.getElementById('emailInput');
 const validationmsg = document.getElementById('emailvalidationmsg');
 const usereditForm = document.getElementById('userEditForm');
 const productDltButtons = document.getElementsByClassName('product-dlt-btn');
+const userNameInput = document.querySelector('.userNameInput');
+const userSearchForm = document.querySelector('.userSearchForm');
+const usernavs = document.getElementsByClassName('user-nav');
 
 const emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
-
 
 if(emailinput){
   emailinput.addEventListener("input", function(event){
@@ -53,4 +55,32 @@ if(productDltButtons){
     })
    })
   }
+}
+
+
+if(userSearchForm){
+  userSearchForm.addEventListener('submit', async function(e){
+   e.preventDefault();
+   for(let i=0; i<usernavs.length; i++){
+       console.log(usernavs[i]);
+       usernavs[i].remove();
+   }
+  //  const inputValue = userNameInput.value;
+  //  const res = fetch('/admin/panel/user_search',{
+  //    method : 'POST',
+  //    headers : {
+  //     "Content-type" : "application/json"
+  //    },
+  //    body : JSON.stringify({
+  //      searchValue : inputValue
+  //    })
+  //  })
+  //  res.then((response)=>{
+  //  return response.json();
+  //  })
+  //  .then((data)=>{
+
+  //   console.log(data);
+  //  })
+  })
 }

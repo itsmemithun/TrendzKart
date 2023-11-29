@@ -51,28 +51,30 @@
           <div class="container-fluid">
             <span class="text-light">Username</span>
             <span class="text-light ms-4">Gmail</span>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <!-- Scripts are written on script/adminscript.js -->
+            <form action="/admin/panel/user_search" class="d-flex userSearchForm" role="search">
+              <input class="form-control me-2 userNameInput" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+
           </div>
         </nav>
 
         <div data-bs-spy="scroll" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2 user-scrollable" tabindex="0">
              <% for(user of users){ %>
               
-              <nav class="navbar mt-1 user-nav rounded">
+              <nav class="navbar mt-1 user-nav  rounded">
                 <div class="container">
                   <div class="">
                     <img class="img-thumbnail" src="https://cdn-icons-png.flaticon.com/512/5511/5511365.png" alt="Bootstrap" width="30" height="24">
-                    <span><%=  user.username %></span>
+                    <span class="user_name"><%=  user.username %></span>
                   </div>
                   <div>
-                    <p class="pe-5"><%= user.email %></p>
+                    <p class="pe-5 user_email"><%= user.email %></p>
                   </div>
                   <div>
-                    <a href="/admin/panel/user_management/delete_user/<%= user._id %>"><button type="button" class="btn btn-danger">Delete</button></a>
-                    <a href="/admin/panel/user_management/edit_user/<%= user._id %>"><button type="button" class="btn btn-primary">Edit</button></a>
+                    <a href="/admin/panel/user_management/delete_user/<%= user._id %>"><button type="button" class="btn btn-danger user_delete_btn">Delete</button></a>
+                    <a href="/admin/panel/user_management/edit_user/<%= user._id %>"><button type="button" class="btn btn-primary user_edit_btn">Edit</button></a>
                   </div>
                 </div>
               </nav>

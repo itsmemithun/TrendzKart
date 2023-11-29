@@ -35,6 +35,8 @@ export default {
          if(check){
           req.session.isAdmin = true;
           res.redirect('/admin/panel');
+         }else{
+           res.redirect('/admin');
          }
        }else{
         console.log('req reached else case');
@@ -204,6 +206,16 @@ export default {
       const category = await categoryModel.findByIdAndUpdate(id, data, {new : true});
       console.log(category);
       res.redirect('/admin/panel/category');
+    }catch(e){
+      console.log(e);
+    }
+  },
+
+  userSearch : async (req,res)=>{
+    try{
+      const searchTerm = req.body.searchValue;
+      const matchedData = await userModel.find({username : { $regex : `^${searchTerm}`, $options : 'i' }});
+      res.json({ result : matchedData });
     }catch(e){
       console.log(e);
     }

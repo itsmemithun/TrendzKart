@@ -90,19 +90,19 @@ export default  {
       req.session.Otp = otp; 
       req.session._userid = tempUser._id;
       / <<< Sending The Email >>> ///
-      transporter.sendMail({                                
-         from : process.env._EMAIL,
-         to   : emailaddress,
-         subject : 'OTP Verification',
-         text   : 'Verify Your Email Using the OTP',
-         html   : `<h3>Verify Your Email Using this OTP:${otp}</h3>`
-      },(err,info)=>{
-         if(err){
-            console.log('we got an error'+err);
-         }else{
-            console.log(info.messageId);
-         }
-      });   
+      // transporter.sendMail({                                
+      //    from : process.env._EMAIL,
+      //    to   : emailaddress,
+      //    subject : 'OTP Verification',
+      //    text   : 'Verify Your Email Using the OTP',
+      //    html   : `<h3>Verify Your Email Using this OTP:${otp}</h3>`
+      // },(err,info)=>{
+      //    if(err){
+      //       console.log('we got an error'+err);
+      //    }else{
+      //       console.log(info.messageId);
+      //    }
+      // });   
       res.render('user/otp.ejs');
       }else{
          req.flash('error','Invalid Email Address!');
