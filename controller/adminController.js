@@ -104,7 +104,8 @@ export default {
     try{
       const id = req.params.id;
       const product = await productModel.findById(id);
-      res.render('admin/productedit.ejs', { product });
+      const categories = await categoryModel.find({})
+      res.render('admin/productedit.ejs', { product, categories });
     }
     catch(e){
       console.log(e.message);
@@ -115,6 +116,7 @@ export default {
     try{
       const id = req.params.id;
       const productData = req.body;
+      console.log(productData);
       const imgData = req.file.path;
       const updateData = {
         $set :{

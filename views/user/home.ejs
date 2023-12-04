@@ -37,7 +37,7 @@
         <% for(let product of products){ %>
           <% if(product.category == category.category){ %>
           <% product.image[0] = product.image[0].replace('public', '') %>
-          <div class="text-decoration-none" href="">
+          <a class="text-decoration-none" href="">
            <div class="card me-3" style="width: 186px;">
              <img class="product-img rounded object-fit-contain" src="<%= product.image[0] %>" class="card-img-top" alt="...">
              <div class="card-body ps-1 pt-1">
@@ -46,7 +46,7 @@
                <a class="text-decoration-none addtowish-btn bi bi-suit-heart" href="user/wishlist/add/<%= product._id %>" style="font-size: 1.5rem;"></a>
              </div>
            </div>
-          </div>
+          </a>
           <% } %>
           <% } %>
       </div>  

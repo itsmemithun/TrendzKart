@@ -39,6 +39,8 @@ router.post('/user/getproductprice', usercontroller.getPriceofProduct);
 router.get('/user/cart/delete/:id', usercontroller.deleteFromCart);
 // delete procucts from wishlist 
 router.get('/user/wishlist/delete/:id', usercontroller.deleteFromWishList);
+// category page render route 
+router.get('/user/category', usercontroller.category);
 
 
 

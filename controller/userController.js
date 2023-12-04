@@ -252,7 +252,14 @@ export default  {
     }catch(e){
       console.log(e.message);
     }
+   },
+
+   category : (req,res)=>{
+      try{
+       res.render('user/category.ejs');
+      }catch(e){
+         
+      }
    }
    
-
 }

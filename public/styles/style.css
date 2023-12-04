@@ -4,6 +4,9 @@ body{
    overflow-x: hidden;
 }
 
+/* <<< common styles >>> */
+
+
 /*<<< Login Page >>>
  ___________________*/
 
@@ -95,7 +98,17 @@ body{
 
 .display-none{
   display : none;
-}  
+}
+
+.category-card{
+  height : 120px!important;
+  width  : 100%!important;
+}
+
+.category-card img{
+   height : 100%;
+   width  : 100%
+}
 
 @media only screen and (max-width : 768px) {
   .signup-pge-lft{
