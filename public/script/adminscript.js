@@ -6,6 +6,12 @@ const userNameInput = document.querySelector('.userNameInput');
 const userSearchForm = document.querySelector('.userSearchForm');
 const usernavs = document.getElementsByClassName('user-nav');
 
+const fileInput = document.getElementById("productimage");
+const imageContainer = document.getElementById("images");
+const numOfFiles = document.getElementById("num-of-files");
+
+console.log(fileInput);
+
 const emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
 
 if(emailinput){
@@ -102,4 +108,29 @@ if(userSearchForm){
     })
    })
   })
+}
+
+
+function preview(){
+   imageContainer.innerHTML = "";
+   numOfFiles.textContent = `${fileInput.files.length}
+   Files Selected`;
+
+   for(i of fileInput.files){
+    const reader = new FileReader();
+    console.log(reader); 
+    const figure = document.createElement("figure");
+    const figCap = document.createElement("figcaption");
+    figCap.innerText = i.name;
+    figure.appendChild(figCap);
+    reader.onload = ()=>{
+      let img = document.createElement("img");
+      img.setAttribute("src", reader.result);
+      img.classList.add("preview-img");
+      figure.insertBefore(img,figCap);
+    }
+    imageContainer.appendChild(figure);
+    reader.readAsDataURL(i);
+   }
+
 }

@@ -26,7 +26,7 @@
     </a>
   </div>
 
-  <div class="add-product-container d-flex flex-column align-items-center mt-5 ms-2 w-75">
+  <div class="add-product-container d-flex flex-column rounded mb-5 align-items-center mt-5 ms-2 w-75">
 
     <h2 class="text-decoration-underline">Add Products</h2>
     <div class="w-50">
@@ -34,12 +34,12 @@
 
       <div class="mb-3">
         <label for="addProductName" class="form-label">Product Name</label>
-        <input type="text" class="form-control" id="addProductName" name="productName" placeholder="Enter Your Product Name">
+        <input type="text" class="form-control" id="addProductName" name="productName" placeholder="Enter Your Product Name" required>
       </div>
 
       <div class="mb-3">
         <label for="addProductPrice" class="form-label">Price</label>
-        <input type="number" class="form-control" id="addProductPrice" name="price" placeholder="Enter Your Price">
+        <input type="number" class="form-control" id="addProductPrice" name="price" placeholder="Enter Your Price" required>
       </div>
 
       <div class="mb-3">
@@ -53,18 +53,26 @@
       </div>
 
       <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="productDescription" name="description" style="height: 100px"></textarea>
+        <textarea class="form-control" placeholder="Leave a comment here" id="productDescription" name="description" style="height: 100px" required></textarea>
         <label for="productDescription">Description</label>
       </div>
 
-      <div class="mb-3">
-        <label for="productimage" class="form-label">Upload Your Images</label>
-        <input type="file" class="form-control" name="image" id="productimage">
+      <div class="image-container">
+        <div class="mb-3 mt-3">
+          <div class="image-inner-container">
+            <i class="bi bi-cloud-upload"></i>
+            <label for="productimage" class="form-label">Choose A Photo</label>
+          </div>
+          <input type="file" accept="image/png, image/jpeg" onchange="preview()" class="form-control" name="image" id="productimage" multiple>
+          <p id="num-of-files">No Files Chosen</p>
+        </div>
+        <div id="images"></div>
       </div>
+
 
       <div class="mb-3">
         <label for="productquantity" class="form-label">Quantity</label>
-        <input type="number" class="form-control" id="productquantity" name="stock" placeholder="Enter Your Product Quantity">
+        <input type="number" class="form-control" id="productquantity" name="stock" placeholder="Enter Your Product Quantity" required>
       </div>
 
       <button class="add-product-btn btn btn-primary">Add Product+</button>

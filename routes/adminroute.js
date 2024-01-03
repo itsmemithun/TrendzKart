@@ -16,8 +16,8 @@ router.post('/panel/user_management/edit_user/:id',isAdmin, admincontroller.user
 // products render route //
 router.get('/panel/products',isAdmin, nocache(), admincontroller.products);
 // Add product Route
-router.get('/panel/products/add_product', isAdmin, admincontroller.addproduct);
-// Add product post req Route
+router.get('/panel/products/add_product', admincontroller.addproduct);
+// Add Product Post Request Route
 router.post('/panel/products/add_product', uploadProductimage.single("image"), admincontroller.addproductdata);
 // edit product route 
 router.get('/panel/products/edit_product/:id',isAdmin, admincontroller.editproduct);

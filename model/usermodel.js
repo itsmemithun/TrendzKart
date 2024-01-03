@@ -13,6 +13,10 @@ const userSchema = new Schema({
         type : String,
         default : ''
      },
+     isBlocked : {
+      type : Boolean,
+      default : false
+     },
      phone : {
        type : Number,
        default : ''

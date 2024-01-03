@@ -17,5 +17,19 @@ export const fetchisLoggedIn = (req,res,next)=>{
   }
 }
 
+export const isBlocked = (req,res,next) => {
+  if(req.user){
+    const user = req.user;
+  if(user.isBlocked === true){
+    res.send('you are blocked');
+  }else{
+    next();
+  }
+  }else{
+    next();
+  }
+  
+}
+
 
 

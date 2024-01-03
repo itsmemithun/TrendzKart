@@ -3,8 +3,9 @@ const router = express.Router();
 import usercontroller from '../controller/userController.js';
 import nocache from 'nocache';
 import passport from 'passport';
-import  { isLoggedIn,fetchisLoggedIn }  from '../middleware/user_middleware.js';
+import  { isLoggedIn,fetchisLoggedIn,isBlocked }  from '../middleware/user_middleware.js';
 
+router.use(isBlocked);
 //home route
 router.get('/',nocache(), usercontroller.home);
 // Login page render route
@@ -41,6 +42,8 @@ router.get('/user/cart/delete/:id', usercontroller.deleteFromCart);
 router.get('/user/wishlist/delete/:id', usercontroller.deleteFromWishList);
 // category page render route 
 router.get('/user/category', usercontroller.category);
+// category post req route
+router.post('/user/category', usercontroller.categoryFilter);
 
 
 

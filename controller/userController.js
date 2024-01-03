@@ -254,11 +254,37 @@ export default  {
     }
    },
 
-   category : (req,res)=>{
+   category : async(req,res)=>{
       try{
-       res.render('user/category.ejs');
+       const categories = await categoryModel.find({});
+       res.render('user/category.ejs', {categories, });
       }catch(e){
-         
+         console.log(e);
+      }
+   },
+
+   categoryFilter : async (req,res)=>{
+      try{
+        const data = req.body;
+        console.log(data);
+        const priceLimits = data.price.split("-");
+        const limit = priceLimits.map((e)=>{
+          return parseInt(e);
+        }) 
+        console.log(limit);
+        const filteredResult = await productModel.aggregate(
+         [
+            {
+               $match: { category : data.category},
+            },
+            {
+               $match: { price : { $gt : limit[0], $lt : limit[1] } }
+            }
+         ]
+         )
+        res.send(filteredResult);
+      }catch(e){
+         console.log(e);
       }
    }
    
