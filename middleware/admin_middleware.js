@@ -9,7 +9,7 @@ export const isAdmin = (req,res,next) => {
 }
 
 export const uploadProductimage = multer({
-      storage : multer.diskStorage({
+    storage : multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, './public/asset/product_images')
       },
@@ -17,5 +17,5 @@ export const uploadProductimage = multer({
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
         cb(null, uniqueSuffix + '-' + file.originalname)
       }
-    }) 
+    })      
 })

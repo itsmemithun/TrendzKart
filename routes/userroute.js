@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import usercontroller from '../controller/userController.js';
+import productcontroller from '../controller/productController.js';
 import nocache from 'nocache';
 import passport from 'passport';
 import  { isLoggedIn,fetchisLoggedIn,isBlocked }  from '../middleware/user_middleware.js';
@@ -41,9 +42,13 @@ router.get('/user/cart/delete/:id', usercontroller.deleteFromCart);
 // delete procucts from wishlist 
 router.get('/user/wishlist/delete/:id', usercontroller.deleteFromWishList);
 // category page render route 
-router.get('/user/category', usercontroller.category);
+router.get('/user/category', nocache(), usercontroller.category);
 // category post req route
 router.post('/user/category', usercontroller.categoryFilter);
+
+
+//🔥 Product Routes 🔥//
+router.get('/view/:id', productcontroller.view);
 
 
 

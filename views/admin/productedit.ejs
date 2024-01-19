@@ -47,7 +47,7 @@
         <select class="form-select" name="category" aria-label="Default select example">
           <option selected><%= product.category %></option>
           <% for(let category of categories){ %>
-            <option value="<%= category.category %>"><%= category.category  %></option>
+            <option value="<%= category.category %>"><%= category.category %></option>
           <% } %>
         </select>
       </div>
@@ -57,9 +57,28 @@
         <label for="productDescription">Description</label>
       </div>
 
-      <div class="mb-3">
-        <label for="productimage" class="form-label">Upload Your Images</label>
-        <input type="file" class="form-control" name="image" id="productimage" value="<%= product.image[0] %>" required>
+      <div class="image-container">
+        <div class="mb-3 mt-3">
+          <div class="image-inner-container">
+            <i class="bi bi-cloud-upload"></i>
+            <label for="productimage" class="form-label">Choose A Photo</label>
+          </div>
+
+          <input type="file" accept="image/png, image/jpeg" onchange="preview()" class="form-control productEditImgInputTag" 
+          data="<%= product.image %>" 
+          name="images" id="productimage" multiple>
+
+          <p id="num-of-files">No Files Choosen</p>
+        </div>
+        <div id="images">
+          <% for(let data of product.image){ %>
+          <% data = data.replace('public', '') %>
+          <figure>
+            <img class="preview-img" src="<%= data %>" alt="">
+            <figcaption></figcaption>
+          </figure>
+          <% } %>
+        </div>
       </div>
 
       <div class="mb-3">

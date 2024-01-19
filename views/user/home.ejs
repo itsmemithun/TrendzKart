@@ -33,11 +33,11 @@
   <div class="container">
     <h2><%= category.category %> -></h2>
     <div class="d-inline-flex w-100 product-scroll">
-      <div class="card-container"
+      <div class="card-container">
         <% for(let product of products){ %>
           <% if(product.category == category.category){ %>
           <% product.image[0] = product.image[0].replace('public', '') %>
-          <a class="text-decoration-none" href="">
+          <a class="text-decoration-none" href="/view/<%= product._id %>">
            <div class="card me-3" style="width: 186px;">
              <img class="product-img rounded object-fit-contain" src="<%= product.image[0] %>" class="card-img-top" alt="...">
              <div class="card-body ps-1 pt-1">
@@ -49,8 +49,8 @@
           </a>
           <% } %>
           <% } %>
+        </div>
       </div>  
-    </div>
   </div>
 <% } %>
 

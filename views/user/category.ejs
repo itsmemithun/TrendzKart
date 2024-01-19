@@ -229,15 +229,40 @@
 
   <div class="my-md-5 ms-md-3 d-flex container">
 
-    <div class="row d-flex flex-column flex-md-row category-product-container">
-      <% for(let i = 1; i < 10; i++){ %>
+    <div class="row d-flex flex-column flex-md-row w-100 category-product-container">
+      <% if(typeof filteredResult === 'undefined' ){ %>
+        <% for(let data of products){ %>
+          <% data.image[0] = data.image[0].replace('public', '') %>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3 gy-3">
+            <div class="card cate-product-card w-auto" style="width : 208px">
+              <div class="category-card bg-light rounded">
+                <img class="object-fit-contain" src="<%= data.image[0] %>" alt="...">
+              </div>
+              <div class="card-body d-flex flex-column align-items-center">
+                <h5 class="card-title text-center text-capitalize text-secondary"><%= data.productName %></h5>
+                <span class="">
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star-fill text-warning"></i>
+                  <i class="bi bi-star text-warning"></i>
+                  <i class="bi bi-star text-warning"></i>
+                  <i class="bi bi-star text-warning"></i>
+                </span>
+                <p class="mb-0 fw-medium text-secondary"><%= data.price %></p>
+                <a href="#" class="btn btn-outline-secondary mt-2">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      <% }else{ %>
+      <% for(let data of filteredResult){ %>
+        <% data.image[0] = data.image[0].replace('public', '') %>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3 gy-3">
           <div class="card cate-product-card w-auto" style="width : 208px">
             <div class="category-card bg-light rounded">
-              <img class="object-fit-contain" src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FtZXJhfGVufDB8fDB8fHww" alt="...">
+              <img class="object-fit-contain" src="<%= data.image[0] %>" alt="...">
             </div>
             <div class="card-body d-flex flex-column align-items-center">
-              <h5 class="card-title text-center text-capitalize text-secondary">something</h5>
+              <h5 class="card-title text-center text-capitalize text-secondary"><%= data.productName %></h5>
               <span class="">
                 <i class="bi bi-star-fill text-warning"></i>
                 <i class="bi bi-star-fill text-warning"></i>
@@ -245,12 +270,13 @@
                 <i class="bi bi-star text-warning"></i>
                 <i class="bi bi-star text-warning"></i>
               </span>
-              <p class="mb-0 fw-medium text-secondary">₹369</p>
+              <p class="mb-0 fw-medium text-secondary"><%= data.price %></p>
               <a href="#" class="btn btn-outline-secondary mt-2">Add to Cart</a>
             </div>
           </div>
         </div>
       <% } %>
+     <% } %>
     </div>
 
   </div>

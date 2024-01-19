@@ -9,8 +9,8 @@ const usernavs = document.getElementsByClassName('user-nav');
 const fileInput = document.getElementById("productimage");
 const imageContainer = document.getElementById("images");
 const numOfFiles = document.getElementById("num-of-files");
+const productEditImgInputTag = document.querySelector('.productEditImgInputTag');
 
-console.log(fileInput);
 
 const emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
 
@@ -132,5 +132,25 @@ function preview(){
     imageContainer.appendChild(figure);
     reader.readAsDataURL(i);
    }
-
 }
+
+if(productEditImgInputTag){
+   const data = productEditImgInputTag.getAttribute("data");
+   console.log(data);
+   const res = fetch('/admin/panel/getFile',{
+    method : "POST",
+    headers : {
+      "Content-type" : "application/json"
+    },
+    body : JSON.stringify({
+       value : data
+    })
+   })
+   res.then((response)=>{
+   return response.json();
+   })
+   .then((data)=>{
+    console.log(data);
+   })
+   
+  }

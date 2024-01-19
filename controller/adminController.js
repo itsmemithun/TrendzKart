@@ -83,6 +83,7 @@ export default {
 
   products : async(req,res) => {
     const products = await productModel.find({});
+    console.log(products);
     res.render('admin/products.ejs', { products });
   },
 
@@ -93,9 +94,13 @@ export default {
 
   addproductdata : async(req,res) =>{
     const productData = req.body;
-    const productImg = req.file.path;
+    const productImg = req.files.map((e)=>{
+      return e.path;
+    })
     const product = new productModel(productData);
-    await product.image.push(productImg);
+    productImg.forEach( async(e)=>{
+       await product.image.push(e);
+    })
     await product.save();
     res.redirect('/admin/panel/products');
   },
@@ -116,11 +121,14 @@ export default {
     try{
       const id = req.params.id;
       const productData = req.body;
-      console.log(productData);
-      const imgData = req.file.path;
+      console.log(req.files);
+      const imgData = req.files.map(function(e){
+           return e.path;
+      });
+      console.log(imgData);
       const updateData = {
         $set :{
-           ...productData,
+          ...productData,
           image : imgData
         }
       }
@@ -131,6 +139,12 @@ export default {
       }catch(e){
        console.log(e);
     }
+  },
+
+
+  getProductFile : async(req,res)=>{
+      const data = req.body.value;
+      console.log(data);       
   },
 
   deleteProduct : async (req,res)=>{

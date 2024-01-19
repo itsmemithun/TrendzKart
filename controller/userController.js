@@ -256,8 +256,9 @@ export default  {
 
    category : async(req,res)=>{
       try{
+       const products = await productModel.find({});
        const categories = await categoryModel.find({});
-       res.render('user/category.ejs', {categories, });
+       res.render('user/category.ejs', { categories, products});
       }catch(e){
          console.log(e);
       }
@@ -266,6 +267,10 @@ export default  {
    categoryFilter : async (req,res)=>{
       try{
         const data = req.body;
+        if(!data.price){1
+
+         res.redirect("/user/category");
+        }
         console.log(data);
         const priceLimits = data.price.split("-");
         const limit = priceLimits.map((e)=>{
@@ -282,7 +287,9 @@ export default  {
             }
          ]
          )
-        res.send(filteredResult);
+        const categories = await categoryModel.find({});
+        console.log(filteredResult);
+        res.render('user/category.ejs', {filteredResult,categories});
       }catch(e){
          console.log(e);
       }
