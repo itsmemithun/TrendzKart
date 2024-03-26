@@ -1,14 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 .productImageContainer{
-height: 26rem;
-width: 21rem;
+ height: 24rem!important;
+ width: 24rem!important;
 }
+
+.orderDetailsImg{
+  height: 24rem!important;
+  width: 24rem!important;
+}
+
 .extraProductImagesContainer{
 
 }
 
-.extraProductImages{
+.font-sizing{
+  font-size : 1em;
+}
+
+.sizing{
+  box-sizing: border-box!important;
+}
+
+.extraProductImage{
   height : 5rem;
   width  : 5rem;
 }
@@ -35,6 +49,8 @@ width: 21rem;
 }
 
 .imgMagnifierContainer{
+  height : 100%;
+  width : 100%;
   position : relative;
 }
 
@@ -52,9 +68,30 @@ width: 21rem;
   position : absolute;
   left : calc(100% + 73px);
   background-repeat : no-repeat;
-  
   width : 21rem;
   height : 21rem;
+}
+
+.image{
+  height : 100%!important;
+  width  : 100%!important;
+}
+
+.description{
+  display : block;
+}
+
+@media only screen and (max-width: 1400px) {
+  .productImageContainer{
+    height : 20rem!important;
+    width : 20rem!important;
+  }
+
+  .orderDetailsImg{
+    height: 18rem!important;
+    width: auto!important;
+  }
+
 }
 
 @keyframes fadeIn {

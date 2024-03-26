@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="min-vh-100 min-vw-100 d-flex justify-content-center align-items-center">
+
+  <div class="container d-flex justify-content-center">
+    <div class="my-4 bg-color h-100 w-75 shadow row">
+      <div class="border-end py-4 ps-4 col-12 col-lg-6">
+        <div class="orderDetailsImg shadow rounded pb-2">
+          <% product.image[0] = product.image[0].replace('public','') %>
+          <img class="object-fit-cover rounded" style="width : 100%; height : 100%" src="<%= product.image[0] %>" alt="">
+        </div>
+        <div class="d-flex mt-2">
+          <input id="address" type="radio">
+          <label class="link-primary ms-2" for="address">
+            <div><%= address.personName %></div>
+            <div><%= address.address %></div>
+            <span><%= address.district %></span>
+            <span><%= address.pincode %></span>
+          </label>
+        </div>
+       <a class="text-decoration-none" href=""><div class="text-end">Select another Address</div></a>
+      </div>
+      <div class="col-12 col-lg-6 d-flex justify-content-center flex-column align-items-center">
+        <div class="w-75">
+          <table class="table table-borderless">
+            <thead>
+              <tr>
+                <th class="bg-color h5 border-dark border-end" scope="col"><%= product.productName %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bg-color border-dark border-end">Price</td>
+                <td class="bg-color"><%= product.price %>
+                </td>
+              </tr>
+              <tr>
+                <td class="bg-color border-dark border-end">Quantity</td>
+                <td class="bg-color">0</td>
+              </tr>
+              <tr>
+                <td class="bg-color border-dark border-end">Discount</td>
+                <td class="bg-color">00</td>
+              </tr>
+              <tr>
+                <td class="bg-color border-dark border-end border-bottom">Delivery</td>
+                <td class="bg-color border-dark border-bottom">Free</td>
+              </tr>
+              <tr>
+                <td class="text-end border-dark bg-color border-end">Total</td>
+                <td class="bg-color fw-medium">₹<span class="endPrice"><%= product.price %></span>/-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mb-4">
+          <button class="btn proceedToPaymentBtn shadow btn-warning text-light">Proceed to payments</button>
+          <button class="btn btn-dark shadow">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script type="module" src="/script/paymentScript.js"></script>

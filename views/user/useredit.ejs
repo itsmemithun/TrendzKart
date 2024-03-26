@@ -1,0 +1,82 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+<div class="vw-100 vh-100">
+  <form class="d-inline" action="/user/user_account/updateAddress" method="POST">
+    <h2 class="text-center mt-2">Edit Your Profile</h2>
+    <div class="container h-75 border bg-color d-flex flex-column justify-content-center align-items-center">
+        <div class="w-75">
+          <label>First Name</label>
+          <input type="text" class="form-control shadow-sm" value="<%= user.username %>" placeholder="First Name" name="username" aria-label="First name">
+
+          <label>Phone</label>
+          <input type="number" class="form-control shadow-sm" value="<%= user.phone %>" placeholder="Phone" name="accountPhone" aria-label="Phone number">
+
+          <label>Email</label>
+          <input type="text" class="form-control shadow-sm" value="<%= user.email %>" placeholder="Email" name="email" aria-label="Email">
+          
+          <label for="">Address</label>
+            <div class="rounded shadow-sm bg-light d-flex justify-content-between">
+                  <div class="ms-2">
+                    <% for(let e of user.address){ %>
+                      <% if(e.selected == true){ %>
+                        <div class="showName">
+                          <%= e.personName %>
+                        </div>
+                        <div class="text-wrap showAddress">
+                          <%= e.address %>
+                        </div>
+                        <div class="showDistrict">
+                          <%= e.district %>
+                        </div>
+                        <div class="showPhone">
+                          <%= e.phone %>
+                        </div>
+                        <div class="showPincode">
+                          <%= e.pincode %>
+                        </div>
+                      <% } %>
+                    <% } %>  
+                  </div>
+              
+                  <div class="dropdown mt-2">
+                    <!-- dropdown-toggle -->
+                    <i class="bi bi-three-dots-vertical m-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">Edit</a></li>
+                    </ul>
+                  </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit your Address</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <% for(let e of user.address){ %>
+              <% if(e.selected == true){ %>
+            <input class="form-control form-control-sm mt-3 formAddressName" name="addressname" value="<%= e.personName %>" type="text" placeholder="Username" aria-label=".form-control-sm example">
+            <input class="form-control form-control-sm mt-3 formAddressPhone" name="addressPhone" type="text" value="<%= e.phone %>" placeholder="Phone" aria-label=".form-control-sm example">
+              <textarea class="form-control mt-3 formAddress" id="exampleFormControlTextarea1" name="addressData" placeholder="Address" rows="3"><%= e.address  %></textarea>
+            <input class="form-control form-control-sm mt-3 formAddressDistrict" type="text" name="district" value="<%= e.district %>" placeholder="District" aria-label=".form-control-sm example">
+            <input class="form-control form-control-sm mt-3 formAddressPincode" type="text" name="pincode" value="<%= e.pincode %>" placeholder="Pincode" aria-label=".form-control-sm example">
+              <% } %>
+            <% } %>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn save-btn btn-primary" data-bs-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="/script/addressscript.js"></script>

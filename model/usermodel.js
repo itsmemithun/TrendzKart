@@ -9,10 +9,32 @@ const userSchema = new Schema({
          required : true,
          unique  : true
      },
-     address: {
-        type : String,
-        default : ''
-     },
+     address: [{
+        personName : {
+          type : String,
+          required : true
+        },
+        address : {
+         type : String,
+         required : true
+        },
+        district : {
+         type : String,
+         required : true
+        },
+        pincode : {
+         type : String,
+         required : true
+        },
+        phone : {
+         type : String,
+         required : true
+        },
+        selected : {
+          type : Boolean,
+          default : false
+        }
+     }],
      isBlocked : {
       type : Boolean,
       default : false

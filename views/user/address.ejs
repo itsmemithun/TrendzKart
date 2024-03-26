@@ -1,0 +1,72 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+<div class="vw-100 vh-100">
+
+  <div class="container d-flex flex-column align-items-center">
+      <div class="mb-4 d-flex address-box-container flex-column align-items-center">
+        <!-- Addresses -->
+        <% for(let e of addresses){ %>
+         <div class="form-check address-box w-75 mt-3">    
+           <input class="form-check-input addressRadioInput" type="radio" addressId="<%= e._id %>" name="addressRadio" id="flexRadioDefault1" <%= (e.selected === true) ? 'checked' : '' %>>
+           <label class="form-check-label w-100">
+             <div class="bg-color w-auto p-2 d-flex justify-content-between">
+                <span>
+                  <div addressId="<%= e._id %>" ><%= e.personName %></div>
+                  <div class="text-wrap w-100"><%= e.address %></div>
+                  <div><%= e.district %></div>
+                  <div><%= e.phone %></div>
+                  <div><%= e.pincode %></div>
+                </span>
+                <span>
+                  <i class="bi bi-trash3-fill addressDltBtn" addressId="<%= e._id %>" style="font-size : 25px"></i>
+                </span>
+             </div>
+           </label>
+         </div>
+        <% } %>
+      </div>
+       <!-- Button trigger modal -->
+       <button type="button" class="btn btn-primary btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+         Add Address+
+       </button>
+       <div>
+         <button type="button" class="btn btn-danger btn-sm">
+           Cancel
+         </button>
+         <button type="button" class="btn addressDoneBtn btn-secondary btn-sm">
+           Done
+         </button>
+       </div>
+  </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Address</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+          <form action="/user/user_account/add_address" method="POST">
+              <div class="modal-body">
+                <input class="form-control form-control-sm mt-3" type="text" name="personName" placeholder="Username" aria-label=".form-control-sm example"  required>
+                <input class="form-control form-control-sm mt-3" type="number" name="phone" placeholder="Phone" aria-label=".form-control-sm example" required>
+                <textarea class="form-control mt-3" id="exampleFormControlTextarea1" name="address" placeholder="Address" rows="3" required></textarea>
+                <input class="form-control form-control-sm mt-3" type="text" name="district" placeholder="District" aria-label=".form-control-sm example" required>
+                <input class="form-control form-control-sm mt-3" type="number" name="pincode" placeholder="Pincode" aria-label=".form-control-sm example" required>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add+</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+<script src="/script/addressscript.js" onload="storeData()" defer></script>
+
+

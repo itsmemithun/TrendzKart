@@ -22,7 +22,17 @@ router.post('/register/otp', nocache(), usercontroller.emailVerificationRegister
 // User dashboard render route
 router.get('/user/user_account', nocache(), isLoggedIn, usercontroller.userdashboard);
 // User dashboard edit post route
-router.post('/user/user_account', isLoggedIn, usercontroller.userdashboardedit);
+router.get('/user/user_account/useredit', isLoggedIn, usercontroller.useredit);
+// address management
+router.get('/user/user_account/address_management/:id', usercontroller.manageAddress);
+// Add Address Route
+router.post("/user/user_account/add_address", usercontroller.addAddress);
+// Address Update Route
+router.post("/user/user_account/updateAddress", usercontroller.updateAddress);
+// Address Selection
+router.post("/user/user_account/selectAddress", usercontroller.selectAddress);
+// Address Delete Route
+router.post('/user/user_account/delete_address', usercontroller.deleteAddress);
 // user Logout route
 router.get('/user/user_logout', isLoggedIn, usercontroller.userLogout);
 // Add product to wish list
@@ -47,8 +57,13 @@ router.get('/user/category', nocache(), usercontroller.category);
 router.post('/user/category', usercontroller.categoryFilter);
 
 
+
 //🔥 Product Routes 🔥//
 router.get('/view/:id', productcontroller.view);
+router.get('/view/buy/:id', productcontroller.orderDetails);
+router.post('/view/buy/:id/proceedToPayment', productcontroller.payment);
+router.get('/orderSuccess/:id', productcontroller.orderSuccess);
+
 
 
 

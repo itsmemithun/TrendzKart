@@ -2,33 +2,47 @@ const container = document.querySelector(".imgMagnifierContainer");
 const lens = document.querySelector(".lens");
 const result = document.querySelector(".result");
 const image = document.querySelector(".image");
-
+const additionalImages = document.querySelectorAll(".extraProductImage");
+const addToCartBtn = document.querySelector('.addToCartBtn');
+const alertData = document.querySelector('.alert-data');
+const cartAlert = document.querySelector('.cart-alert');
 const containerRect = container.getBoundingClientRect();
 const imageRect = image.getBoundingClientRect();
 const lensRect = lens.getBoundingClientRect();
 const resultRect = result.getBoundingClientRect();
 
 
+// imports 
+// import uniqid from 'uniqid';
+// const uniqid = require('uniqid');
+ 
+
+// EventListeners 
+
 container.addEventListener('mouseenter', showLens);
 container.addEventListener('mouseleave', hideLens);
 container.addEventListener('mousemove', zoomImage);
+
+for(let e of additionalImages){
+    e.addEventListener('click', (event) => {addImage(event)});
+}
+
+addToCartBtn.addEventListener('click', addToCart);
+
 
 lens.style.display =  'none';
 result.style.display = 'none';
 
 function showLens(){
-  console.log('mouse entered')
   lens.style.display = `block`;
   result.style.display = 'inline';
-  console.log(lens.style.display);
-
 } 
 
 function hideLens(){
-  console.log('mouse left the container')
+
   lens.style.display = `none`
   result.style.display = 'none';
-  console.log(lens.style.display);
+  
 }
 
 function zoomImage(e){
@@ -72,3 +86,36 @@ function getMousePos(e){
 
 return {x,y}
 }
+
+function addImage(event){
+   image.src = event.target.src;
+}
+
+
+function addToCart(){
+   const productid = addToCartBtn.getAttribute('productId');
+   console.log(productid);
+   const res = fetch(`/user/cart/add/${productid}`, {
+     method : "POST",
+     headers : {
+      "Content-type" : "application/json"
+     },
+     body : JSON.stringify({
+      productid : productid
+    })
+   })
+   res.then((response)=>{
+    return response.json();
+   })
+   .then((data)=>{
+    console.log(data);
+    alertData.innerHTML = data.result;
+    cartAlert.classList.remove('display-none');
+    cartAlert.classList.add('alert-on-active');
+    setTimeout(()=>{
+    cartAlert.classList.remove('alert-on-active');
+    cartAlert.classList.add('display-none');
+    },1500) 
+  })
+}
+

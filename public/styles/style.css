@@ -110,6 +110,22 @@ body{
    width  : 100%
 }
 
+.dropdown-menu{
+  min-width: 5rem!important;
+}
+
+.address-box{
+  min-width : 75%!important;
+}
+
+.address-box-container{
+  width : 100%;
+}
+
+th, td {
+  padding: 8px; /* Adjust the padding as needed */
+}
+
 
 /*🔥 <<< Admin Page >>> 🔥*/
 
@@ -246,6 +262,12 @@ figcaption{
   }
   .category-product-container{
     width : 100vw!important;
+  }
+  .address-box{
+    width : 100%!important;
+  }
+  .address-box-container{
+    width : 100%!important;
   }
   
 }

@@ -35,6 +35,7 @@ export default  {
 
 //  <<< Home Route >>> //
    home : async(req,res) => {
+      console.log("Clients Ip Address :"+req.ip)
       const products = await productModel.find({});
       const categories = await categoryModel.find({});
       if(!req.user){
@@ -48,7 +49,6 @@ export default  {
 // <<< Login Page Render Route >>> //
    userLogin : (req,res) => {
     const result = loginCheck(req);
-    console.log(result);
     if(result == true){
       return res.redirect('/');
     }
@@ -132,12 +132,73 @@ export default  {
          res.render('user/userdashboard.ejs', {user});
    }, 
 
-   userdashboardedit : async(req,res) => {
+   useredit : async(req,res) => {
       const id = req.session.account;
-      const data = req.body;
-      const user = await User.findByIdAndUpdate(id,data,{ new : true });
-      req.flash('success','Profile Edited Succefully');
-      res.redirect('/user/user_account');
+      let user = await User.findById(id);
+      res.render('user/useredit.ejs', { user });
+   },
+
+   updateAddress : async(req,res)=>{
+      try{
+         let useraddress = {};
+         const id = req.session.account;
+         const { username,accountPhone,email,addressname,addressPhone,addressData,district,pincode } = req.body;
+         useraddress = {
+            personName : addressname,
+            address    : addressData,
+            district   : district,
+            pincode    : pincode,
+            phone      : addressPhone
+         }
+         let data = {
+            username : username,
+            email    : email,
+            phone    : accountPhone,
+            address  : useraddress
+         }
+         const user = await User.findByIdAndUpdate(id,data,{new : true});
+         res.send(user);
+      }catch(e){
+        console.log(e);
+      }
+   },
+
+   selectAddress : async(req,res)=>{
+      try{
+         let { initialSelectedData,currentData } =  req.body;
+         const id = req.session.account;
+         const user = await User.findById(id);
+         if(currentData){
+           for(let e of user.address){
+            console.log(typeof e._id,currentData);
+              if(e._id == currentData){
+                 e.selected = true;
+              }  
+           }
+           for(let e of user.address){
+            console.log(typeof e._id,initialSelectedData);
+              if(e._id == initialSelectedData){
+                  e.selected = false;
+              }
+           }
+        }
+        user.save();
+        res.json({result : user});
+      }catch(e){
+         console.log(e);
+         console.log(e.message);
+      }
+   },
+
+   deleteAddress : async(req,res)=>{
+      try{
+       const { addressId } = req.body;
+       const userId = req.session.account;
+       const data =  await User.updateOne({_id : userId},{ $pull : { address : { _id : addressId } } })
+       res.json({ result : data })
+     }catch(e){
+      console.log(e.message);
+     }
    },
 
    userLogout : (req,res) => {
@@ -174,15 +235,19 @@ export default  {
    },
    
    showwishlist : async (req,res)=>{
+      try{
       let products = [];
       const userid = req.session.account;
       const userdata = await User.findById({ _id : userid });
       const wishlist = userdata.wishlist;
       for(let data of wishlist){
-         const result = await productModel.findById({ _id:data });
-         products.push(result);
+      const result = await productModel.findById({ _id:data });
+      products.push(result);
       } 
       res.render('user/wishlist.ejs', { products });
+      }catch(e){
+       console.log(e);
+      }
    },
 
    showcart : async (req,res) => {
@@ -233,8 +298,7 @@ export default  {
    deleteFromCart : async(req,res)=>{
       console.log('req reached here');
          try{
-         const userid = req.session.account;
-         console.log(userid);   
+         const userid = req.session.account;  
          const productid = req.params.id;
          const product = await User.findOneAndUpdate( { _id : userid},{ $pull : { cart : productid }} );
          res.redirect('/user/cart'); 
@@ -271,12 +335,10 @@ export default  {
 
          res.redirect("/user/category");
         }
-        console.log(data);
         const priceLimits = data.price.split("-");
         const limit = priceLimits.map((e)=>{
           return parseInt(e);
         }) 
-        console.log(limit);
         const filteredResult = await productModel.aggregate(
          [
             {
@@ -288,11 +350,37 @@ export default  {
          ]
          )
         const categories = await categoryModel.find({});
-        console.log(filteredResult);
         res.render('user/category.ejs', {filteredResult,categories});
       }catch(e){
          console.log(e);
       }
+   },
+
+   addAddress : async(req,res)=>{
+      try{
+      const id = req.session.account;
+      const data = req.body;
+      const user = await User.findById(id);
+      console.log(user.address.length);
+      if(user.address.length == 0){
+         user.address.push(data);
+         console.log(user.address[0].selected);
+         user.address[0].selected  = true;
+      }else{
+         user.address.push(data);
+      }
+      user.save();
+      res.send(data);
+      }catch(e){
+         console.log(e);
+      }
+   },
+
+   manageAddress : async(req,res)=>{
+     const { id } = req.params;
+     const user = await User.findById(id);
+     const addresses = user.address;
+     res.render('user/address.ejs', {addresses});
    }
    
 }
