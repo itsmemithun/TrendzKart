@@ -1,0 +1,92 @@
+.point1{
+  background-color: green;
+  border-radius : 50%;
+  width : 12px;
+  height : 12px;
+}
+
+.sidenav{
+  
+}
+
+.point1Updater{
+  background-color: green;
+  height : 5px;
+  width : 100%;
+  margin-left : -3px;
+}
+
+.floatleft{
+  float : left;
+}
+
+.orderStatusUpdater{
+  margin-top : 20px;
+  width : 100%;
+}
+
+.ordered{
+  position : relative;
+  width : 25%;
+}
+
+.shipped{
+  margin-left : -5px;
+  position : relative;
+  width : 25%;
+}
+
+.outForDelivery{
+  margin-left : -5px;
+  position : relative;
+  width : 25%;
+}
+
+.delivered{
+  margin-left : -5px;
+  position : relative;
+  width : 25%;
+}
+
+.statusText1{
+  font-size : 12px;
+  position : absolute;
+  top : -18px;
+}
+
+.statusText2{
+  font-size : 12px;
+  position : absolute;
+  top : -18px;
+}
+
+.statusText3{
+  font-size : 12px;
+  position : absolute;
+  top : -18px;
+}
+
+.statusText4{
+  font-size : 12px;
+  position : absolute;
+  top : -18px;
+}
+
+.statusText{
+  font-size: 12px;
+}
+
+@media only screen and (max-width : 768px){
+   .orderStatusUpdater{
+     margin-top: 35px!important;
+   }
+}
+@media only screen and (max-width  : 450px){
+  .statusText3{
+    top : -36px;
+   }
+}
+
+@media only screen and (min-width : 768px){
+ 
+}

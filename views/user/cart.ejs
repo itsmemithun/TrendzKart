@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
 <main class="min-vh-100 min-vw-100">
-  <div class="container mt-4 mb-4 d-flex flex-column">
+   <!-- <div class="container mt-4 mb-4 d-flex flex-column">
     <h4>My Cart</h4>
      <% if(cart_products.length == 0){ %>
       <div class="align-self-center d-flex flex-column align-items-center">
@@ -69,7 +69,92 @@
 
    </div>
 
+  </div>  -->
+
+  <!-- new -->
+
+  <div class="cartContainer pt-5">
+    <div class="leftContainer rounded shadow">
+      <div class="py-4 rounded border">
+        <div class="cartNavBar p-3 d-flex justify-content-between">
+          <div class="d-flex">
+            <h5 class="font ms-4">Product</h5>
+          </div>
+          <div class="d-flex navContent2 justify-content-between">
+            <h5 class="font quantityNavHeadline">Quantity</h5>
+            <h5 class="font">Price</h5>
+          </div>
+        </div>
+        <span class="seperator"></span>
+        <% for(let product of cart_products){ %>
+        <% product.image[0] = product.image[0].replace('public', '') %>
+        <div class="products px-3 d-flex justify-content-between">
+          <div class="d-flex align-items-center">
+            <img class="productImg object-fit-contain" src="<%= product.image[0] %>" alt="">
+            <div class="ms-3">
+               <h4 class="font product-name" data-product-id="<%= product._id %>"><%= product.productName  %></h4>
+               <p class="font">small</p>
+            </div>
+          </div>
+
+          <div class="d-flex productPricing align-items-center justify-content-between">
+            <div class="productName" data-product-id="<%= product._id %>">
+              <div class="prdQuantityWraper">
+                <button type="button" class="productcountdecrementbtn">-</button>
+                <input type="text" class="productcount" value="1" readonly>
+                <button type="button" class="productcountincrementbtn">+</button>
+              </div>
+              <a href="/user/cart/delete/<%= product._id %>"><button class="removeBtn"><i class="bi bi-trash"></i>Remove</button></a>
+            </div>
+            <h5 class="font"> <%= product.price %></h5>
+          </div>
+        </div>
+        <span class="seperator"></span>
+        <% } %>
+      </div>
+    </div>
+  
+  <div class="rightContainer shadow border ms-3 rounded ">
+    <div class="addressSection border m-3 rounded p-2">
+       <h4 class="text-decoration-underline">Delivery Address</h4>
+       <div class="ms-2">
+        <p class="m-0">Name</p>
+       <p class="m-0">Address ddojfjadsf sdfjlasj fdjklfkasdj </p>
+       <p class="m-0">pincode</p>
+       <p class="m-0">0000000000</p>
+       </div>
+    </div>
+    <div class="couponSection  ms-3">
+       <h3>Apply Coupon</h3>
+       <input class="couponInput" type="text">
+       <button class="btn btn-dark px-3">Apply</button>
+    </div>
+    <div class="totalAmount m-3">
+      <div class="subtotal d-flex justify-content-between">
+         <span class="font mb-3">Subtotal</span>
+         <span>₹ <%= productSum  %> </span>
+      </div>
+      
+      <div class="discount d-flex justify-content-between">
+        <span class="font mb-3">Discount(Coupon)</span>
+        <span>₹9999</span>
+      </div>
+      
+      <div class="delivey d-flex justify-content-between">
+         <span class="font mb-3">Delivery</span>
+         <span>₹ 000</span>
+      </div>
+      <span class="seperator mb-3"></span>
+      <div class="grandTotal d-flex justify-content-between">
+         <span class="font mb-3">Grand Total</span>
+         <span class="product-sum">₹<%= productSum %></span>
+      </div>
+      <button class="btn shadow btn-dark font checkOutBtn">Checkout</button>
+    </div>
   </div>
+
+  </div>
+
 </main>
 
 <script src="/script/cartScript.js"></script>

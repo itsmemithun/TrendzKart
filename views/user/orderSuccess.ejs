@@ -1,12 +1,14 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="min-vh-100 min-vw-100 d-flex justify-content-center align-items-center">
-   <div class="bg-color w-50 h-50">
-    <div>
-      <h3>Order Confirmed</h3>
-      <p>Thankyou For Shopping</p>
-      <a href="">Go to order details</a>
-      <a href="">Continue Shopping</a>
+<div class="vh-100 vw-100 d-flex justify-content-center align-items-center">
+  <!-- styles for orderSuccess class is written on /public/styles/styles.css -->
+  <div class="orderSuccessContainer bg-color h-50 rounded shadow d-flex flex-column justify-content-center">
+    <div class="d-flex flex-column align-items-center justify-content-center">
+        <h3 class="text-success">Order Confirmed <i class="bi bi-check-circle-fill text-success"></i></h3>
+        <p class="fw-medium">Thankyou For Shopping</p>
+        <span>
+          <a class="text-decoration-none me-3" href="">Home <i class="bi bi-house-door-fill"></i></a>
+        </span>
     </div>
    </div>
-</div>
+</div> 

@@ -1,0 +1,297 @@
+<% layout('layouts/adminboilerplate.ejs') %>
+<div class="vw-100 vh-100">
+  <div class="ms-3 mt-5 h-75 d-flex flex-row">
+    <div class="card border-0 h-75 side-bar" style="width: 18rem;">
+  
+      <a href="/admin/panel" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Dash Board
+      </a>
+      <a href="/admin/panel/products" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Products
+      </a>
+      <a href="/admin/panel/user_management" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        User's
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Order's
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Coupons
+      </a>
+      <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Collections
+      </a>
+      <a href="/admin/panel/banner_Management" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Banner
+      </a>
+      <a href="/admin/panel/category" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+        Category
+      </a>
+      
+    </div>
+    <div class="w-100">
+      <div>
+        <h3>Banner Section 1</h3>
+        <div class="d-flex flex-row">
+          <!-- Banner 1 of Section 1 -->
+            <div class="bannerContainer">
+             <% if(banners.length == 0){ %>
+                <img class="object-fit-contain w-100 h-100" src="" alt="banner">
+                <button class="bannerDeleteBtn">Delete</button>
+              <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                <label for="banner_input1" class="bannerUploadBtn">Choose</label>
+                <input id="banner_input1" name="banner" type="file" class="bannerInput"/>
+                <button class="bannerSubmitButton1" type="submit">Save</button>
+                <input type="hidden" name="current_banner_id" value="">
+                <input type="hidden" name="banner_id" value="bnrIdS101">
+              </form>
+             <% }else{ %>
+             <% let bannerFound = false; %>
+             <% for(let banner of banners){ %>
+             <% if( banner.bannerId == 'bnrIdS101'){  %>
+             <% banner.path = banner.path.replace('\public','') %>
+              <img class="object-fit-contain w-100 h-100" src="<%= banner.path %>" alt="banner">
+              <button type="button" class="bannerDeleteBtn" data-bs-toggle="modal" data-bs-target="#section1Bnr1DltModal">Delete</button>
+              <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                <label for="banner_input1" class="bannerUploadBtn">Choose</label>
+                <input id="banner_input1" name="banner" type="file" class="bannerInput"/>
+                <button class="bannerSubmitButton1" type="submit">Save</button>
+                <input type="hidden" name="current_banner_id" value="<%= banner.bannerId %>">
+                <input type="hidden" name="banner_id" value="bnrIdS101">
+              </form>
+              <% bannerFound = true; %>
+              <% break; %>
+              <% } %>
+              <% } %>
+              <% if(!bannerFound){ %>
+                <img class="object-fit-contain w-100 h-100" src="" alt="banner">
+                <button type="button" class="bannerDeleteBtn">Delete</button>
+              <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                <label for="banner_input1" class="bannerUploadBtn">Choose</label>
+                <input id="banner_input1" name="banner" type="file" class="bannerInput"/>
+                <button class="bannerSubmitButton1" type="submit">Save</button>
+                <input type="hidden" name="current_banner_id" value="">
+                <input type="hidden" name="banner_id" value="bnrIdS101">
+              </form>
+              <% } %>
+              <% } %>
+            </div>
+            
+            <!-- Banner Delete Modal for Section 1 Banner 1 -->
+            <div class="modal fade" id="section1Bnr1DltModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Deletion</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to delete this Banner?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="/admin/panel/banner_delete/bnrIdS101"><button type="button" class="btn btn-primary">Yes</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Banner 2 of Section 1 -->
+            <div class="bannerContainer">
+              <% if(banners.length == 0){ %>
+                 <img class="object-fit-contain w-100 h-100" src="" alt="banner">
+                 <button class="bannerDeleteBtn">Delete</button>
+               <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                 <label for="banner_input2" class="bannerUploadBtn">Choose</label>
+                 <input id="banner_input2" name="banner" type="file" class="bannerInput"/>
+                 <button class="bannerSubmitButton1" type="submit">Save</button>
+                 <input type="hidden" name="current_banner_id" value="">
+                 <input type="hidden" name="banner_id" value="bnrIdS102">
+               </form>
+              <% }else{ %>
+              <% let bannerFound = false; %>
+              <% for(let banner of banners){ %>
+              <% if( banner.bannerId == 'bnrIdS102'){  %>
+              <% banner.path = banner.path.replace('\public','') %>
+               <img class="object-fit-contain w-100 h-100" src="<%= banner.path %>" alt="banner">
+               <button class="bannerDeleteBtn" data-bs-toggle="modal" data-bs-target="#section1Bnr2DltModal">Delete</button>
+               <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                 <label for="banner_input2" class="bannerUploadBtn">Choose</label>
+                 <input id="banner_input2" name="banner" type="file" class="bannerInput"/>
+                 <button class="bannerSubmitButton2" type="submit">Save</button>
+                 <input type="hidden" name="current_banner_id" value="<%= banner.bannerId %>">
+                 <input type="hidden" name="banner_id" value="bnrIdS102">
+               </form>
+               <% bannerFound = true; %>
+               <% break;  %>
+               <% } %>
+               <% } %>
+               <% if(!bannerFound){ %>
+                 <img class="object-fit-contain w-100 h-100" src="" alt="banner">
+                 <button class="bannerDeleteBtn">Delete</button>
+               <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                 <label for="banner_input2" class="bannerUploadBtn">Choose</label>
+                 <input id="banner_input2" name="banner" type="file" class="bannerInput"/>
+                 <button class="bannerSubmitButton2" type="submit">Save</button>
+                 <input type="hidden" name="current_banner_id" value="">
+                 <input type="hidden" name="banner_id" value="bnrIdS102">
+               </form>
+               <% } %>
+               <% } %>
+            </div>
+
+              <!-- Banner Delete Modal for Section 1 Banner 2 -->
+            <div class="modal fade" id="section1Bnr2DltModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Deletion</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to delete this Banner?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="/admin/panel/banner_delete/bnrIdS102"><button type="button" class="btn btn-primary">Yes</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Banner 3 of Section 1 -->
+            <div class="bannerContainer">
+              <% if(banners.length == 0){ %>
+                 <img class="object-fit-contain w-100 h-100" src="" alt="banner">
+                 <button class="bannerDeleteBtn">Delete</button>
+               <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                 <label for="banner_input3" class="bannerUploadBtn">Choose</label>
+                 <input id="banner_input3" name="banner" type="file" class="bannerInput"/>
+                 <button class="bannerSubmitButton3" type="submit">Save</button>
+                 <input type="hidden" name="current_banner_id" value="">
+                 <input type="hidden" name="banner_id" value="bnrIdS103">
+               </form>
+              <% }else{ %>
+              <% let bannerFound = false; %>
+              <% for(let banner of banners){ %>
+              <% if( banner.bannerId == 'bnrIdS103'){  %>
+              <% banner.path = banner.path.replace('\public','') %>
+               <img class="object-fit-contain w-100 h-100" src="<%= banner.path %>" alt="banner">
+               <button class="bannerDeleteBtn" data-bs-toggle="modal" data-bs-target="#section1Bnr3DltModal">Delete</button>
+               <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                 <label for="banner_input3" class="bannerUploadBtn">Choose</label>
+                 <input id="banner_input3" name="banner" type="file" class="bannerInput"/>
+                 <button class="bannerSubmitButton1" type="submit">Save</button>
+                 <input type="hidden" name="current_banner_id" value="<%= banner.bannerId %>">
+                 <input type="hidden" name="banner_id" value="bnrIdS103">
+               </form>
+               <% bannerFound = true; %>
+               <% break; %>
+               <% } %>
+               <% } %>
+               <% if(!bannerFound){ %>
+                 <img class="object-fit-contain w-100 h-100" src="" alt="banner">
+                 <button class="bannerDeleteBtn">Delete</button>
+               <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                 <label for="banner_input3" class="bannerUploadBtn">Choose</label>
+                 <input id="banner_input3" name="banner" type="file" class="bannerInput"/>
+                 <button class="bannerSubmitButton3" type="submit">Save</button>
+                 <input type="hidden" name="current_banner_id" value="">
+                 <input type="hidden" name="banner_id" value="bnrIdS103">
+               </form>
+               <% } %>
+               <% } %>
+            </div> 
+
+              <!-- Banner Delete Modal for Section 1 Banner 3 -->
+              <div class="modal fade" id="section1Bnr3DltModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Deletion</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Do you want to delete this Banner?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <a href="/admin/panel/banner_delete/bnrIdS103"><button type="button" class="btn btn-primary">Yes</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <h3>Banner Section 2</h3>
+        <div class="d-flex flex-row">
+          <div class="bannerContainer">
+            <% if(banners.length == 0){ %>
+            <img class="object-fit-contain w-100 h-100" src="" alt="">
+            <button class="bannerDeleteBtn">Delete</button>
+            <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+              <label for="banner_input4" class="bannerUploadBtn">Choose</label>
+              <input id="banner_input4" type="file" name="banner" class="bannerInput">
+              <button class="bannerSubmitButton4" type="submit">Save</button>
+              <input type="hidden" name="current_banner_id" value="">
+              <input type="hidden" name="banner_id" value="bnrIdS201">
+            </form>
+            <% }else{ %>
+            <% let bannerFound = false; %>
+            <% for(let banner of banners){ %>
+            <% if(banner.bannerId == 'bnrIdS201'){ %>
+            <% banner.path = banner.path.replace('\public','') %>
+               <img class="object-fit-contain w-100 h-100" src="<%= banner.path %>" alt="banner">
+               <button class="bannerDeleteBtn" data-bs-toggle="modal" data-bs-target="#section2Bnr1DltModal">Delete</button>
+               <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                 <label for="banner_input4" class="bannerUploadBtn">Choose</label>
+                 <input id="banner_input4" name="banner" type="file" class="bannerInput"/>
+                 <button class="bannerSubmitButton4" type="submit">Save</button>
+                 <input type="hidden" name="current_banner_id" value="<%= banner.bannerId %>">
+                 <input type="hidden" name="banner_id" value="bnrIdS201">
+               </form>
+            <% bannerFound = true; %>
+            <% break; %>
+            <% } %>
+            <% } %>
+            <% if(!bannerFound){ %>
+              <img class="object-fit-contain w-100 h-100" src="" alt="">
+              <button class="bannerDeleteBtn">Delete</button>
+              <form action="/admin/panel/banner_upload" method="post" enctype="multipart/form-data">
+                <label for="banner_input4" class="bannerUploadBtn">Choose</label>
+                <input id="banner_input4" type="file" name="banner" class="bannerInput">
+                <button class="bannerSubmitButton4" type="submit">Save</button>
+                <input type="hidden" name="current_banner_id" value="">
+                <input type="hidden" name="banner_id" value="bnrIdS201">
+              </form>
+            <% } %>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Banner Delete Modal for Section 2 Banner 1 -->
+      <div class="modal fade" id="section2Bnr1DltModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Deletion</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Do you want to delete this Banner?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <a href="/admin/panel/banner_delete/bnrIdS201"><button type="button" class="btn btn-primary">Yes</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

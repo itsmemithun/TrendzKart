@@ -3,6 +3,8 @@ import adminModel from '../model/admin/adminmodel.js';
 import userModel from '../model/usermodel.js';
 import productModel from '../model/product/product.js';
 import categoryModel from '../model/admin/category.js';
+import bannerModel from '../model/banner/banner.js';
+import { unlink } from 'node:fs/promises';
 
 
 function countUser(users){
@@ -83,7 +85,6 @@ export default {
 
   products : async(req,res) => {
     const products = await productModel.find({});
-    console.log(products);
     res.render('admin/products.ejs', { products });
   },
 
@@ -235,6 +236,57 @@ export default {
     }catch(e){
       console.log(e);
     }
+  },
+
+  // Get all Banners
+  banner : async (req,res)=>{
+    try{
+      let banners = await bannerModel.find({});
+      if(banners.length === 0){
+        banners = '';
+        console.log('no banners uploaded');
+      }
+      res.render('admin/bannerManagement.ejs',{ banners });
+    }catch(e){
+      console.log('error');
+      console.log(e);
+    }
+  },
+
+  // Uploads banners
+  bannerUpload : async(req,res) => {
+    try{
+      console.log('!Banner Upload')
+      const dataToDltBnr = req.body.current_banner_id;
+      const newBannerId = req.body.banner_id;
+      console.log(newBannerId);
+      if(dataToDltBnr){
+        const deletedBanner = await bannerModel.deleteOne({ bannerId : dataToDltBnr });
+      }
+      const banner = new bannerModel({
+        bannerName : req.file.originalname,
+        path : req.file.path,
+        bannerId : newBannerId
+      })
+      banner.save();
+      res.redirect('/admin/panel/banner_management');
+    }catch(e){
+     console.log(e);
+    }
+  },
+
+  bannerDelete : async (req,res)=>{
+    try{
+      const bannerId = req.params;
+      const bannerData = await bannerModel.findOne({bannerId : bannerId.id});
+      await unlink(bannerData.path)
+     const bannerDlt = await bannerModel.findOneAndDelete({bannerId : bannerId.id});
+     res.redirect('/admin/panel/banner_management');
+    }catch(e){
+      console.log(e.message);
+    }
   }
+
+
 
 }

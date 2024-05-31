@@ -1,28 +1,97 @@
-.productcountdecrementbtn{
-   height : 28px;
-   width : 28px;
-   padding-top : 0px;
-   border : 1px solid #c2c2c2;
-   border-radius : 50%;  
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
+
+
+
+/* new Styles */
+
+.cartContainer{
+  display : flex;
+  margin-inline : 50px;
 }
-.productcountincrementbtn{
-   height : 28px;
-   width : 28px;
-   padding-top : 0px;
-   border : 1px solid #c2c2c2;
-   border-radius : 50%;
+.leftContainer{
+   width : 65%;
 }
+.rightContainer{
+   width : 35%
+}
+
+.font{
+   font-family  : "Syne", sans-serif!important;
+}
+.checkOutBtn{
+   display : block!important;
+   width : 100%
+}
+
 .productcount{
-  width : 32px;
-  height : 20px;
-  padding-inline : 3px;
-  padding-block : 12.5px;
-  margin-inline : 5px;
-  font-size : 14px;
-  font-weight : 500;
-  vertical-align: middle;
-  text-align: center;
+   width : 32px;
+   border : none;
+   font-size : 14px;
+   font-weight : 500;
+   vertical-align: middle;
+   text-align: center;
+ }
+
+ .productcountdecrementbtn{
+   height : 38px;
+   width : 33.33%;
+   padding-top : 0px;
+   border : none;
+   background-color: transparent;
 }
+
+.productcountincrementbtn{
+   height : 37px;
+   width : 33.33%;
+   padding-top : 0px;
+   border : none;
+   background-color: transparent;
+}
+.prdQuantityWraper{
+   border : 1px solid gray;
+   border-radius: 5px;
+   margin-right : 75px;
+   height : 38px;
+   width : 100px;
+   box-sizing: border-box;
+   display : flex;
+   align-items: center;
+}
+.productImg{
+   width : 137px;
+   height : 137px;
+}
+.seperator{
+   display: block;
+   height: 1px;
+   background-color: #dee2e6;
+   margin-inline: 10px;
+}
+.navContent2{
+    width : 300px;
+}
+.productPricing{
+   width : 300px;
+}
+.removeBtn{
+   width : 100px;
+   height : 38px;
+   border : 1px solid grey;
+   border-radius: 5px;
+   margin-top : 10px;
+   background-color: transparent;
+}
+.couponInput{
+   border-inline : none;
+   border-top : none;
+   outline : none;
+}
+.couponInput:active{
+   border-inline : none;
+   border-top : none;
+   outline : none;
+}
+
 
 @media only screen and (max-width : 768px) {
 .removeall-btn {

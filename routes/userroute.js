@@ -6,6 +6,11 @@ import nocache from 'nocache';
 import passport from 'passport';
 import  { isLoggedIn,fetchisLoggedIn,isBlocked }  from '../middleware/user_middleware.js';
 
+// router.use((req,res,next)=>{
+//   console.log('req:' + req.user);
+//   next();
+// });
+
 router.use(isBlocked);
 //home route
 router.get('/',nocache(), usercontroller.home);
@@ -55,16 +60,16 @@ router.get('/user/wishlist/delete/:id', usercontroller.deleteFromWishList);
 router.get('/user/category', nocache(), usercontroller.category);
 // category post req route
 router.post('/user/category', usercontroller.categoryFilter);
-
+// my order route 
+router.get('/user/myorders', usercontroller.myorders);
 
 
 //🔥 Product Routes 🔥//
 router.get('/view/:id', productcontroller.view);
 router.get('/view/buy/:id', productcontroller.orderDetails);
 router.post('/view/buy/:id/proceedToPayment', productcontroller.payment);
-router.get('/orderSuccess/:id', productcontroller.orderSuccess);
-
-
+router.post('/view/buy/:id/proceedToCodPayment', productcontroller.codPayment);
+router.get('/orderSuccess/:paymentType/:id', productcontroller.orderSuccess);
 
 
 export default router;

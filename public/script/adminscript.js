@@ -1,18 +1,51 @@
 const emailinput = document.getElementById('emailInput');
 const validationmsg = document.getElementById('emailvalidationmsg');
 const usereditForm = document.getElementById('userEditForm');
-const productDltButtons = document.getElementsByClassName('product-dlt-btn');
+const productDltButtons = document.getElementsByClassName('product-dltbtn');
 const userNameInput = document.querySelector('.userNameInput');
 const userSearchForm = document.querySelector('.userSearchForm');
 const usernavs = document.getElementsByClassName('user-nav');
-
 const fileInput = document.getElementById("productimage");
 const imageContainer = document.getElementById("images");
 const numOfFiles = document.getElementById("num-of-files");
 const productEditImgInputTag = document.querySelector('.productEditImgInputTag');
+const bannerInput1 = document.querySelector('#banner_input1');
+const bannerInput2 = document.querySelector('#banner_input2');
+const bannerInput3 = document.querySelector('#banner_input3');
+const bannerInput4 = document.querySelector('#banner_input4');
+const bannerSubmitButton1 = document.querySelector('.bannerSubmitButton1');
+const bannerSubmitButton2 = document.querySelector('.bannerSubmitButton2');
+const bannerSubmitButton3 = document.querySelector('.bannerSubmitButton3');
+const bannerSubmitButton4 = document.querySelector('.bannerSubmitButton4');
+
 
 
 const emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
+
+if(bannerInput1){
+  bannerInput1.addEventListener('change', function(){
+  bannerSubmitButton1.style.display = 'block';
+});
+}
+
+if(bannerInput2){
+  bannerInput2.addEventListener('change', function(){
+  bannerSubmitButton2.style.display = 'block';
+  });
+}
+
+if(bannerInput3){
+  bannerInput3.addEventListener('change', function(){
+  bannerSubmitButton3.style.display = 'block';
+  });
+}
+
+
+if(bannerInput4){
+  bannerInput4.addEventListener('change', function(){
+  bannerSubmitButton4.style.display  = 'block';
+  })
+}
 
 if(emailinput){
   emailinput.addEventListener("input", function(event){
@@ -35,12 +68,15 @@ if(usereditForm){
   })
 }
 
+
 if(productDltButtons){
   for(let deleteBtn of productDltButtons){
-   deleteBtn.addEventListener("click", function(e){
+    console.log(deleteBtn);
+    deleteBtn.addEventListener("click", function(e){
     e.preventDefault();
     const productid = deleteBtn.getAttribute('data-productid');
     const reqpath = deleteBtn.getAttribute('href');
+    console.log(reqpath);
     const res = fetch(reqpath, {
       method : "DELETE",
       headers : {
@@ -154,3 +190,13 @@ if(productEditImgInputTag){
    })
    
   }
+
+
+
+
+
+
+
+
+
+

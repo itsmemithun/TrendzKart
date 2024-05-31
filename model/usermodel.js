@@ -54,6 +54,9 @@ const userSchema = new Schema({
      wishlist : [{
           type : Schema.Types.ObjectId,
           ref : 'product'
+     }],
+     orders : [{
+        type : String,
      }]
 });
 

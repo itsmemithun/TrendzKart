@@ -14,8 +14,21 @@ export const uploadProductimage = multer({
         cb(null, './public/asset/product_images')
       },
       filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        console.log(uniqueSuffix);
         cb(null, uniqueSuffix + '-' + file.originalname)
       }
     })      
+})
+
+export const uploadBannerImage = multer({
+  storage : multer.diskStorage({
+    destination : function(req,file,cb){
+      cb(null, './public/asset/banners')
+    },
+    filename : function (req,file,cb){
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      cb(null, uniqueSuffix + '-' + file.originalname);
+    }
+  })
 })

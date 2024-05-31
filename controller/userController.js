@@ -118,9 +118,14 @@ export default  {
          const {username , email , password} = tempuser;
          const user = new User({ username : username, email : email, verified : true });
          const registeredUser = await User.register(user, password);
+         console.log("djfndsfnas"+registeredUser);
+         req.session.account = registeredUser._id;
          req.session.isLoggedIn = true;
          req.flash('success', 'Successfully Created a Account!');
-         res.redirect('/');
+         res.locals.userPurpose = undefined;
+         const products = await productModel.find({});
+         const categories = await categoryModel.find({});
+         res.render('user/home.ejs',{products,categories});
       }else{
          res.send('somethings wrong try again');
       }
@@ -157,7 +162,7 @@ export default  {
             address  : useraddress
          }
          const user = await User.findByIdAndUpdate(id,data,{new : true});
-         res.send(user);
+         res.redirect(`/user/user_account/address_management/${id}`);
       }catch(e){
         console.log(e);
       }
@@ -331,8 +336,7 @@ export default  {
    categoryFilter : async (req,res)=>{
       try{
         const data = req.body;
-        if(!data.price){1
-
+        if(!data.price){
          res.redirect("/user/category");
         }
         const priceLimits = data.price.split("-");
@@ -360,6 +364,8 @@ export default  {
       try{
       const id = req.session.account;
       const data = req.body;
+      const productId = req.session.tempProductId;
+      req.session.temProductId = undefined;
       const user = await User.findById(id);
       console.log(user.address.length);
       if(user.address.length == 0){
@@ -370,17 +376,30 @@ export default  {
          user.address.push(data);
       }
       user.save();
-      res.send(data);
+      res.redirect(`/user/user_account/address_management/${id}?productIdRedirect=${productId}`);
       }catch(e){
          console.log(e);
       }
    },
 
    manageAddress : async(req,res)=>{
+     let redirectProductId;
      const { id } = req.params;
+     const productId  = req.query.productId;
+     if(req.query.productIdRedirect){
+        redirectProductId = req.query.productIdRedirect;
+     }
+     req.session.tempProductId = productId;
      const user = await User.findById(id);
      const addresses = user.address;
-     res.render('user/address.ejs', {addresses});
+     res.render('user/address.ejs', {addresses,redirectProductId});
+   },
+
+   myorders : async(req,res) => {
+      const id = req.session.account;
+      const user = await User.findById(id);
+      console.log(user);
+      res.render('user/myorders.ejs',{user});
    }
    
 }

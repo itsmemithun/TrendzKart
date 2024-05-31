@@ -7,13 +7,14 @@ const productsum = document.querySelector(".product-sum");
 // Product Quantity Increase Button //
 for(let productincrementbtn of productincrementbtns ){
     productincrementbtn.addEventListener('click', function(){
-     const btnGrp = this.closest(".btn-group");
+     const btnGrp = this.closest(".prdQuantityWraper");
      const productcount = btnGrp.querySelector(".productcount");
      let count = parseInt(productcount.value) || 1;
      count++;
      productcount.value = count;
-     const productbodygrp = this.closest(".card-body-grp");
-     const productid = productbodygrp.querySelector(".product-name").getAttribute("data-product-id");
+     console.log(productcount.value);
+     const productId = this.closest(".productName");
+     const productid = productId.getAttribute("data-product-id");
      const result = fetch('/user/getproductprice' ,{
        method : "POST",
        headers : {
@@ -28,7 +29,7 @@ for(let productincrementbtn of productincrementbtns ){
      })
      .then((data)=>{
       console.log(data);
-      productsum.innerHTML = `₹${parseInt(productsum.innerHTML.replace("₹", "")) + parseInt(data.result)}`;
+      productsum.innerHTML = `₹${parseInt(data.result) * productcount.value}`;
      })
     })
 }
@@ -36,14 +37,14 @@ for(let productincrementbtn of productincrementbtns ){
 // Product Quantity Decrease Button //
 for(let productdecrementbtn of productdecrementbtns){
   productdecrementbtn.addEventListener('click', function(){
-    const btnGrp = this.closest(".btn-group");
+    const btnGrp = this.closest(".prdQuantityWraper");
     const productcount = btnGrp.querySelector(".productcount");
     let count = productcount.value;  
   if(count>1){
     count--;
     productcount.value = count;
-    const productbodygrp = this.closest(".card-body-grp");
-    const productid = productbodygrp.querySelector(".product-name").getAttribute("data-product-id");
+    const productId = this.closest(".productName");
+    const productid = productId.getAttribute("data-product-id");
     const result = fetch('/user/getproductprice' ,{
       method : "POST",
       headers : {

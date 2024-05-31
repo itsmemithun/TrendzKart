@@ -37,6 +37,9 @@
            Done
          </button>
        </div>
+       <% if(redirectProductId !== undefined){ %>
+       <a href="/view/<%= redirectProductId %>" type="button" class="btn btn-primary btn-sm mt-2"><i class="bi bi-caret-left-fill"></i>Back to order</a>
+       <% } %>
   </div>
 
     <!-- Modal -->

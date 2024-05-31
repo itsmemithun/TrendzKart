@@ -3,6 +3,7 @@ const router = express.Router();
 import admincontroller from '../controller/adminController.js';
 import { isAdmin } from '../middleware/admin_middleware.js';
 import { uploadProductimage } from '../middleware/admin_middleware.js';
+import { uploadBannerImage } from '../middleware/admin_middleware.js';
 import nocache from 'nocache';
 
 router.use(nocache());
@@ -14,7 +15,7 @@ router.get('/panel/user_management/delete_user/:id',isAdmin, nocache(), admincon
 router.get('/panel/user_management/edit_user/:id',isAdmin, nocache(), admincontroller.useredit);
 router.post('/panel/user_management/edit_user/:id',isAdmin, admincontroller.usereditpost);
 // products render route //
-router.get('/panel/products', nocache(), admincontroller.products);
+router.get('/panel/products', isAdmin, nocache(), admincontroller.products);
 // Add product Route
 router.get('/panel/products/add_product', admincontroller.addproduct);
 // Add Product Post Request Route
@@ -39,5 +40,11 @@ router.post('/panel/category/update/:id',isAdmin, admincontroller.updateCategory
 router.post('/panel/user_search',isAdmin, admincontroller.userSearch);
 // Route for fetching image files
 router.post('/panel/getFile', admincontroller.getProductFile);
+// Route for user management
+router.get('/panel/banner_management', admincontroller.banner);
+// Route for Banner Image Upload
+router.post('/panel/banner_upload', uploadBannerImage.single('banner'), admincontroller.bannerUpload);
+// Route for banner Deletion 
+router.get('/panel/banner_delete/:id', admincontroller.bannerDelete);
 
 export default router;

@@ -1,22 +1,48 @@
 <% layout('layouts/boilerplate') %>
 
+<div class="d-md-flex">
+  
+  <div class="sidenavToggler d-md-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNav">
+    <div>
+      <i class="bi bi-three-dots-vertical"></i>
+    </div>
+  </div>
 
-<div class="d-flex">
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideNav" aria-labelledby="offcanvasSideNavLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="side-nav-smdevice d-flex flex-column align-items-center rounded">
+        <i class="bi bi-person-circle text-light" style="font-size: 5rem"></i>
+        <h2 class="text-light">Username</h2>
+          <div class="m-2 px-2 w-100 d-flex flex-column">
+            <a href="/user/user_account"><button class="btn btn-light w-100 mb-3">Profile</button></a>
+            <a href="/user/myorders"><button class="btn btn-light w-100 mb-3 ">My Orders</button></a>
+            <a href=""><button class="btn btn-light w-100 mb-3 ">Cart</button></a>
+            <a href=""><button class="btn btn-light w-100 mb-3 ">My Coupons</button></a>
+            <a href="/user/user_account/address_management/<%= user._id %>"><button class="btn btn-light w-100 mb-3 ">Manage Address</button></a>
+          </div>
+      </div>
+    </div>
+  </div>
 
-  <div class="side-nav d-flex flex-column align-items-center rounded">
+
+  <div class="side-nav d-md-flex flex-column align-items-center rounded">
     <i class="bi bi-person-circle text-light" style="font-size: 5rem"></i>
     <h2 class="text-light">Username</h2>
       <div class="m-2 px-2 w-100 d-flex flex-column">
         <a href="/user/user_account"><button class="btn btn-light w-100 mb-3">Profile</button></a>
-        <a href=""><button class="btn btn-light w-100 mb-3 ">My Orders</button></a>
+        <a href="/user/myorders"><button class="btn btn-light w-100 mb-3 ">My Orders</button></a>
         <a href=""><button class="btn btn-light w-100 mb-3 ">Cart</button></a>
         <a href=""><button class="btn btn-light w-100 mb-3 ">My Coupons</button></a>
         <a href="/user/user_account/address_management/<%= user._id %>"><button class="btn btn-light w-100 mb-3 ">Manage Address</button></a>
       </div>
   </div>
-  
-  <div class="profile-container w-100 mt-2 me-2">
-      <div class="w-75 mt-5 ms-2">
+
+  <div class="profile-container mt-md-2 w-100 ">
+      <div class="mx-2 pt-2">
 
         <div class="row mb-2">
 
@@ -29,12 +55,12 @@
   
         <div class="col mb-2">
           <label for="">Phone Number</label>
-          <input type="number" class="form-control w-50 bg-color shadow-sm" value="<%= user.phone %>" placeholder="Phone Number" name="phone" aria-label="Last name" disabled> 
+          <input type="number" class="form-control  bg-color shadow-sm" value="<%= user.phone %>" placeholder="Phone Number" name="phone" aria-label="Last name" disabled> 
         </div>
   
         <div class="col mb-2">
           <label for="">Email</label>
-          <input type="email" id="useremailinput" class="form-control bg-color w-50 shadow-sm" value="<%= user.email %>" placeholder="Enter Your EmailAddress" name="email" disabled> 
+          <input type="email" id="useremailinput" class="form-control bg-color shadow-sm" value="<%= user.email %>" placeholder="Enter Your EmailAddress" name="email" disabled> 
           <p class="m-0 text-danger" id="useremailmsg"></p>
         </div>
 
@@ -57,4 +83,6 @@
   </div>
 
 </div>
+
+<script src="/public/script/script.js"></script>
 

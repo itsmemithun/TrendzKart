@@ -12,6 +12,7 @@ const alertdata = document.querySelector('.alert-data');
 const addtocart = document.querySelectorAll('.addtocart');
 const cartalert = document.querySelector('.cart-alert');
 const cartbtn = document.querySelector('.cart-btn');
+const sideNavToggler = document.querySelector('.sidenavToggler');
 
 
 passwordPattern = /^[a-zA-Z1-9@-]{8,}$/i;
@@ -182,6 +183,7 @@ if(addtocart){
     })
   }
 }
+
 
 
 // if(cartbtn){

@@ -3,7 +3,7 @@
 <div class="d-flex">
 
   <div class="side-bar d-flex flex-column rounded border-0 ms-3 mt-5" style="width: 18rem;">
-    <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+    <a href="/admin/panel" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
       Dash Board
     </a>
     <a href="/admin/panel/products" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
@@ -20,6 +20,9 @@
     </a>
     <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
       Collections
+    </a>
+    <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      Banner
     </a>
     <a href="/admin/panel/category" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
       Category
@@ -62,7 +65,7 @@
               <p class="card-text"><b>Price:</b> <%= product.price  %></p>
               <p class="card-text text-success"><b>Stock:</b> <%= product.stock %></p>
               <a href="/admin/panel/products/edit_product/<%= product._id %>" class="btn btn-primary">Edit</a>
-              <a href="/admin/panel/products/delete_product/<%= product._id %>" data-productid="<%= product._id %>" class="btn product-dlt-btn btn-danger">Delete</a>
+              <a href="/admin/panel/products/delete_product/<%= product._id %>" data-productid="<%= product._id %>" class="btn product-dltbtn btn-danger">Delete</a>
             </div>
           </div>
         </div>
@@ -72,6 +75,9 @@
 
   </div>
 
+
+  <a class="testbtn" href="/askjjf/asdfjlkasj/dflkas">hjbb</a>
+ 
 
 </div>
 
