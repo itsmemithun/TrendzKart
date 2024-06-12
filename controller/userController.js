@@ -35,7 +35,6 @@ export default  {
 
 //  <<< Home Route >>> //
    home : async(req,res) => {
-      console.log("Clients Ip Address :"+req.ip)
       const products = await productModel.find({});
       const categories = await categoryModel.find({});
       if(!req.user){

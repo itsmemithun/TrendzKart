@@ -4,8 +4,11 @@ const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
 
-    productId : {
-       type : Schema.Types.ObjectId,
+    productId : [{
+      type : Schema.Types.ObjectId,
+   }],
+    orderAmount : {
+       type : String
     },
     orderId : {
        type : String

@@ -149,11 +149,46 @@
          <span class="font mb-3">Grand Total</span>
          <span class="product-sum">₹<%= productSum %></span>
       </div>
-      <button class="btn shadow btn-dark font checkOutBtn">Checkout</button>
+      <button class="btn shadow btn-dark font checkOutBtn" data-bs-toggle="modal" data-bs-target="#checkoutPaymentModal">Checkout</button>
     </div>
   </div>
 
   </div>
+
+
+  <div class="modal fade" id="checkoutPaymentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form id="paymentForm">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Choose Payment Method</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div>
+            <input class="disabled" id="upi" value="UPI" name="paymentSelect" type="radio" >
+            <label for="upi">UPI</label>
+          </div>
+          <div>
+            <input id="Cod" name="paymentSelect" value="COD" type="radio">
+            <label  for="Cod">Cash On Delivery</label>
+          </div>
+          <div>
+            <input id="debitCard" name="paymentSelect" value="Debit Card" type="radio" >
+            <label for="debitCard">Debit Card</label>
+          </div>
+    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn border-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" productIdData="" class="btn btn-primary  cartProceedToPayment">Proceed</button>
+        </div>
+       </form>
+      </div>
+    </div>
+  </div>
+  
 
 </main>
 
