@@ -73,7 +73,7 @@
 
   <!-- new -->
 
-  <div class="cartContainer pt-5">
+  <div class="cartContainer pt-5 navmargin">
     <div class="leftContainer rounded shadow">
       <div class="py-4 rounded border">
         <div class="cartNavBar p-3 d-flex justify-content-between">
@@ -106,7 +106,7 @@
               </div>
               <a href="/user/cart/delete/<%= product._id %>"><button class="removeBtn"><i class="bi bi-trash"></i>Remove</button></a>
             </div>
-            <h5 class="font"> <%= product.price %></h5>
+            <h5 class=""> <%= product.price %></h5>
           </div>
         </div>
         <span class="seperator"></span>
@@ -127,22 +127,22 @@
     <div class="couponSection  ms-3">
        <h3>Apply Coupon</h3>
        <input class="couponInput" type="text">
-       <button class="btn btn-dark px-3">Apply</button>
+       <button class="btn couponApplyBtn btn-dark px-3">Apply</button>
     </div>
     <div class="totalAmount m-3">
       <div class="subtotal d-flex justify-content-between">
          <span class="font mb-3">Subtotal</span>
-         <span>₹ <%= productSum  %> </span>
+         <span class="subtotalValue">₹<%= productSum  %> </span>
       </div>
       
       <div class="discount d-flex justify-content-between">
         <span class="font mb-3">Discount(Coupon)</span>
-        <span>₹9999</span>
+        <span class="coupon">₹</span>
       </div>
       
       <div class="delivey d-flex justify-content-between">
          <span class="font mb-3">Delivery</span>
-         <span>₹ 000</span>
+         <span>₹000</span>
       </div>
       <span class="seperator mb-3"></span>
       <div class="grandTotal d-flex justify-content-between">

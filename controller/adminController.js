@@ -5,6 +5,7 @@ import productModel from '../model/product/product.js';
 import categoryModel from '../model/admin/category.js';
 import bannerModel from '../model/banner/banner.js';
 import { unlink } from 'node:fs/promises';
+import couponModel from '../model/admin/couponmodel.js'
 
 
 function countUser(users){
@@ -285,8 +286,38 @@ export default {
     }catch(e){
       console.log(e.message);
     }
+  },
+
+  coupon : async (req,res)=>{
+    try{
+      const coupons = await couponModel.find({});
+      console.log(coupons);
+      res.render('admin/coupon.ejs',{coupons});
+    }catch(e){
+       console.log(e.message);
+    }
+  },
+
+  addCoupon : async (req,res)=>{
+    try{    
+      const couponData = req.body;
+      console.log(couponData);
+      const data = new couponModel(couponData);
+      console.log(data);
+      data.save();
+      res.redirect('/admin/panel/coupon_management');
+    }catch(e){
+      console.log(e.message);
+    }
+  },
+
+  deleteCoupon : async (req,res)=>{
+    try{
+      const id = req.params.id;
+      const coupon = await couponModel.findByIdAndDelete({_id : id})
+      res.redirect('/admin/panel/coupon_management');
+    }catch(e){
+      console.log(e);
+    }
   }
-
-
-
 }

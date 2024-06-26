@@ -4,8 +4,16 @@ const productcounts = document.querySelectorAll(".productcount");
 const productsum = document.querySelector(".product-sum");
 const cartPaymentBtn = document.querySelector(".cartProceedToPayment");
 const productIds = document.getElementsByClassName('product-name');
+const couponApplyBtn = document.querySelector('.couponApplyBtn');
+const couponInput = document.querySelector('.couponInput');
+const subtotal = document.querySelector('.subtotalValue');
+const couponValue = document.querySelector('.coupon');
 
 let cartProductIds = [];
+
+for(let product of productIds){
+  cartProductIds.push(product.getAttribute('data-product-id'));
+}
 
 async function getPrice(productId){
   const response = await fetch(`/user/getproductprice`,{
@@ -40,9 +48,7 @@ async function getPrice(productId){
     })
 }  
 
-for(let product of productIds){
-  cartProductIds.push(product.getAttribute('data-product-id'));
-}
+
 
 
 cartPaymentBtn.addEventListener('click', submitForm);
@@ -74,7 +80,6 @@ for(let productincrementbtn of productincrementbtns ){
      let count = parseInt(productcount.value) || 1;
      count++;
      productcount.value = count;
-     console.log(productcount.value);
      const productId = this.closest(".productName");
      const productid = productId.getAttribute("data-product-id");
      const result = fetch('/user/getproductprice' ,{
@@ -91,7 +96,7 @@ for(let productincrementbtn of productincrementbtns ){
      })
      .then((data)=>{
       console.log(data);
-      productsum.innerHTML = `₹${parseInt(data.result) * productcount.value}`;
+      productsum.innerHTML = `₹${parseInt(data.result) * productcount.value - couponValue.innerHTML.replace('₹','')}`;
      })
     })
 }
@@ -121,10 +126,33 @@ for(let productdecrementbtn of productdecrementbtns){
     })
     .then((data)=>{
      console.log(data);
-     productsum.innerHTML = `₹${parseInt(productsum.innerHTML.replace("₹", "")) - parseInt(data.result)}`;
+     productsum.innerHTML = `₹${parseInt(productsum.innerHTML.replace("₹", "")) - parseInt(data.result) - couponValue.innerHTML.replace('₹','')}`;
     })
   }
   })
+}
+
+if(couponApplyBtn){
+    couponApplyBtn.addEventListener('click', function(){
+      const validateCode = fetch('/user/validateCoupon',{
+        method : "POST",
+        headers : {
+          "Content-type" : "application/json"
+        },
+        body : JSON.stringify({
+          data : couponInput.value
+        })
+      })
+      validateCode.then((response)=>{
+        return response.json();
+      }).then((data)=>{
+         if(data.result.validateStatus === true){
+           var amount = subtotal.innerHTML.replace('₹','') - subtotal.innerHTML.replace('₹','') * data.result.value/100;
+           couponValue.innerHTML = "₹"+subtotal.innerHTML.replace('₹','') * 30/100
+           productsum.innerHTML = subtotal.innerHTML.replace('₹','') - subtotal.innerHTML.replace('₹','') * data.result.value/100;
+         }
+      })
+    })
 }
 
 

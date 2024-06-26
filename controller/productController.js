@@ -114,7 +114,7 @@ export default {
       });
 
   },
-
+  // coupon price should be decreased from the actual price here
   codPayment : async(req,res) => {
     try{
       const {price}  = req.body;
@@ -135,14 +135,14 @@ export default {
   },
 
   orderSuccess : async(req,res) => {
-    let productIds = [];
+    let productIds;
     if(typeof req.session.productId == Array){
        for(let data of req.session.productId){
         productIds.push(data);
        }
     }else{
-      console.log(req.session);
       productIds = req.session.productId;
+      console.log(req.session);
     }
     const paymentMethod = req.params.paymentType;
     const amount = req.session.amount;

@@ -20,6 +20,7 @@ const bannerSubmitButton4 = document.querySelector('.bannerSubmitButton4');
 
 
 
+
 const emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
 
 if(bannerInput1){

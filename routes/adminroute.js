@@ -46,5 +46,11 @@ router.get('/panel/banner_management', admincontroller.banner);
 router.post('/panel/banner_upload', uploadBannerImage.single('banner'), admincontroller.bannerUpload);
 // Route for banner Deletion 
 router.get('/panel/banner_delete/:id', admincontroller.bannerDelete);
+// Route for getting coupon management page
+router.get('/panel/coupon_management', admincontroller.coupon);
+// Route for adding coupon
+router.post('/panel/coupon_management', admincontroller.addCoupon);
+// Route to delete coupon
+router.get('/panel/coupon_management/delete/:id', admincontroller.deleteCoupon);
 
 export default router;

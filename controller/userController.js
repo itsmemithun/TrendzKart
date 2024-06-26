@@ -5,6 +5,7 @@ import categoryModel from '../model/admin/category.js';
 import nodemailer from 'nodemailer'
 import otpGenerator from 'otp-generator';
 import dotenv from 'dotenv';
+import couponModel from '../model/admin/couponmodel.js'
 
 dotenv.config();
 
@@ -26,8 +27,8 @@ function loginCheck(req){
 const transporter = nodemailer.createTransport({
    service : 'Gmail',
    auth: {
-       user : process.env._EMAIL,
-       pass : process.env._PASSWORD
+       user : process.env._EMAIL, 
+       pass : process.env._PASSWORD   
    },
 });
 
@@ -127,6 +128,57 @@ export default  {
          res.render('user/home.ejs',{products,categories});
       }else{
          res.send('somethings wrong try again');
+      }
+   },
+
+   passwordRecovery : (req,res)=> {
+    res.render('user/passwordRecovery.ejs');
+   },
+
+   passwordRecoveryAcquiringUserInfo: async (req,res)=>{
+     const {email} = req.body;
+     const otp = OTP();                                       console.log(otp);
+     const user = await User.findOne({email : email});
+     console.log(otp);
+     if(user){
+      req.session.userId = user._id;
+      //  transporter.sendMail({                                
+      //    from : process.env._EMAIL,
+      //    to   : user.email,
+      //    subject : 'Password Recovery',
+      //    text   : 'Verify Your Email Using the OTP',
+      //    html   : `<h3>Verify Your Email Using this OTP:${otp}</h3>`
+      // },(err,info)=>{
+      //    if(err){
+      //       console.log('we got an error'+err);
+      //    }else{
+      //       console.log(info.messageId);
+      //    }
+      // }); 
+      req.session.credentialsRecoveryOtp = otp;
+      res.render('user/passwordRecoveryOtpPage.ejs');
+     }else{
+      res.send('user not found');
+     }
+   },
+   
+   passwordRecoveryVerifyOtp : (req,res)=>{
+    const {otp} = req.body;
+    if(otp === req.session.credentialsRecoveryOtp){
+       console.log('otp matching');
+       res.render('user/changePassword.ejs');
+    }
+   },
+
+   changeUserCredentials : async(req,res)=>{
+      try{
+         const password = req.body.newPassword;
+         const user = await User.findById({_id : req.session.userId});
+         await user.setPassword(password,)   
+         user.save();
+         res.redirect('/user_login');
+      }catch(e){
+         console.log(e);
       }
    },
  
@@ -399,6 +451,27 @@ export default  {
       const user = await User.findById(id);
       console.log(user);
       res.render('user/myorders.ejs',{user});
-   }
+   },
+
+   validateCoupon : async (req,res)=>{
+      const coupon = req.body.data;
+      let data;
+      const result = await couponModel.findOne({couponCode : coupon});
+      if(result){
+          data = {
+            data : result.couponCode,
+            used : result.used,
+            validateStatus : true,
+            couponId : result._id,
+            value : result.value,
+         }
+      }else{
+         data = {
+            data : coupon,
+            validateStatus : false
+         }
+      }
+      res.json({result : data});
+   },
    
 }

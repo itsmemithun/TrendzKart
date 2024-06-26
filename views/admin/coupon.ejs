@@ -29,9 +29,33 @@
     </a>
     
   </div>
-  <div class="">
-    xcljkcjZ
+  <div class="container">
+    <div class="d-flex">
+      <div class="couponList">
+         <% for(let coupon of coupons){ %>
+           <div class="d-flex py-2 px-2 bg-light justify-content-between">
+            <h5><%= coupon.couponCode %></h5>
+            <span>
+              <a href="/admin/panel/coupon_management/delete/<%= coupon._id  %>"><button class="btn btn-danger">Delete</button></a>
+              <button class="btn btn-primary">Edit</button>
+            </span>
+           </div>
+         <% } %>
+      </div>
+      <div class="d-flex flex-column ms-5">
+        <form action="/admin/panel/coupon_management" method="post">
+          <div>
+            <label for="">Enter the coupon code which you want to create coupon with</label>
+            <input class="form-control mb-3 couponInput" type="text" name="couponCode" placeholder="" aria-label="default input example" required>
+          </div>
+          <div>
+            <label for="couponValue">Enter the coupon value in percentage%</label>
+            <input class="form-control mb-3" name="value" id="couponValue" type="number" required>
+          </div> 
+          <button type="submit" class="btn btn-primary">Add coupon+</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 </div>
-

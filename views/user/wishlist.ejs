@@ -14,7 +14,7 @@
         <p class="fs-4 text-capitalize fw-medium"><%= product.productName %></p>
         <p class="fw-medium">Price : <%= product.price %></p>
         <a class="addtocart" href="/user/cart/add/<%= product._id %>"><button type="button" class="btn btn-dark mt-1" style="width : 150px;">Add to Cart</button></a>
-        <button type="button" class="btn btn-warning mt-1" style="width : 150px;">Buy Now</button>
+        <a href="/view/<%= product._id %>"><button type="button" class="btn btn-warning mt-1" style="width : 150px;">Buy Now</button></a>
       </div>
       <div class="col position-relative mx-3">
         <a href="/user/wishlist/delete/<%= product._id %>"><i class="bi bi-trash3-fill position-absolute top-0 end-0" style="font-size : 25px"></i></a>

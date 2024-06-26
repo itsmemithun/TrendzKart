@@ -24,6 +24,14 @@ router.get('/user_signup', nocache(), usercontroller.userSignup);
 router.post('/register', usercontroller.userRegister);
 // Otp verification route
 router.post('/register/otp', nocache(), usercontroller.emailVerificationRegister);
+// Forgot password
+router.get('/passwordRecovery', usercontroller.passwordRecovery)
+// Forgot Password Post route 
+router.post('/passwordRecovery', usercontroller.passwordRecoveryAcquiringUserInfo);
+// Otp verification page for credentials recovery
+router.post('/passwordRecovery/verifyOtp', usercontroller.passwordRecoveryVerifyOtp);
+// New credentials route 
+router.post('/passwordRecovery/newCredentials', usercontroller.changeUserCredentials);
 // User dashboard render route
 router.get('/user/user_account', nocache(), isLoggedIn, usercontroller.userdashboard);
 // User dashboard edit post route
@@ -62,6 +70,8 @@ router.get('/user/category', nocache(), usercontroller.category);
 router.post('/user/category', usercontroller.categoryFilter);
 // my order route 
 router.get('/user/myorders', usercontroller.myorders);
+// validate Coupon 
+router.post('/user/validateCoupon', usercontroller.validateCoupon);
 
 
 
