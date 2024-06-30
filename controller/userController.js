@@ -59,6 +59,7 @@ export default  {
    },
 
    returnAndRefund : (req,res)=>{
+      console.log('req reached');
       res.render('user/returnAndRefund.ejs');
    },
 
