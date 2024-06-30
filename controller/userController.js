@@ -49,6 +49,22 @@ export default  {
    policy : (req,res)=>{
      res.render('user/policy.ejs');
    },
+
+   termsandconditions : (req,res)=>{
+      res.render('user/termsAndConditions.ejs');
+   },
+
+   aboutUs : (req,res)=>{
+      res.render('user/aboutus.ejs');
+   },
+
+   returnAndRefund : (req,res)=>{
+      res.render('user/returnAndRefund.ejs');
+   },
+
+   contactUs : (req,res)=>{
+      res.render('user/contactus.ejs');
+   },
  
 // <<< Login Page Render Route >>> //
    userLogin : (req,res) => {

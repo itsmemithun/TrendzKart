@@ -13,6 +13,10 @@ import  { isLoggedIn,fetchisLoggedIn,isBlocked }  from '../middleware/user_middl
 
 router.use(isBlocked);
 router.get('/privacy_policy', usercontroller.policy);
+router.get('/terms_and_conditions', usercontroller.termsandconditions)
+router.get('/about_us', usercontroller.aboutUs);
+router.get('/return_and_refund_policy', usercontroller.returnAndRefund);
+router.get('/contact_us', usercontroller.contactUs);
 //home route
 router.get('/',nocache(), usercontroller.home);
 // Login page render route
