@@ -45,6 +45,10 @@ export default  {
          res.render('user/home.ejs', { products,categories }); 
       }    
    },
+   
+   policy : (req,res)=>{
+     res.render('user/policy.ejs');
+   },
  
 // <<< Login Page Render Route >>> //
    userLogin : (req,res) => {

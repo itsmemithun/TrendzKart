@@ -123,23 +123,39 @@ export default {
     try{
       const id = req.params.id;
       const productData = req.body;
-      console.log(req.files);
-      const imgData = req.files.map(function(e){
+      const existingImages = req.body.existingImage;
+      delete req.body.existingImage;
+      let newImg = req.files.map(function(e){
            return e.path;
       });
-      console.log(imgData);
+      const imgData = newImg.concat(existingImages);
       const updateData = {
         $set :{
           ...productData,
           image : imgData
         }
       }
-      console.log(updateData);
       const product = await productModel.findByIdAndUpdate(id, updateData, {new : true});
-      console.log(product);
       res.redirect('/admin/panel/products');
       }catch(e){
        console.log(e);
+    }
+  },
+
+  deleteImage : async(req,res)=>{
+    try{
+      const {path} = req.body;
+      console.log(path);
+      const result = await unlink(path,(err)=>{
+        if(err){
+          return res.status(500).json({ result : "failed" });       
+        }else{
+          res.json({ result : "success" });
+        }
+      });
+       console.log(result);
+    }catch(e){
+      console.log(e);
     }
   },
 
@@ -152,9 +168,10 @@ export default {
   deleteProduct : async (req,res)=>{
     try{
       const productid = req.body.productid;
-      console.log(productid);
       const product = await productModel.findByIdAndDelete(productid);
+      console.log(product);
       const usersWithDeletedProductInCart = await userModel.find({ cart : productid });
+
       // Deleting product from the cartList
       for(let user of usersWithDeletedProductInCart){
         user.cart = user.cart.filter((item) => {
@@ -162,6 +179,7 @@ export default {
         });
         await user.save();
       }
+
       // Deleting product from the wishList
       const userWithDeletedProductInWishList = await userModel.find({ wishlist : productid });
       for(let user of userWithDeletedProductInWishList){
@@ -169,6 +187,15 @@ export default {
           return item != productid;
         });  
         await user.save();
+      }
+
+      // delete product image from the server
+      for(let path of product.image){
+      const result = await unlink(path,(err)=>{
+        if(err){
+          return res.status(500).return(err);       
+        }
+      });
       }
       res.json({result : 'Product Deleted Succefully'});
     }catch(e){
@@ -281,7 +308,7 @@ export default {
       const bannerId = req.params;
       const bannerData = await bannerModel.findOne({bannerId : bannerId.id});
       await unlink(bannerData.path)
-     const bannerDlt = await bannerModel.findOneAndDelete({bannerId : bannerId.id});
+      const bannerDlt = await bannerModel.findOneAndDelete({bannerId : bannerId.id});
      res.redirect('/admin/panel/banner_management');
     }catch(e){
       console.log(e.message);

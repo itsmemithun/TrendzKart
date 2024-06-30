@@ -96,7 +96,7 @@ for(let productincrementbtn of productincrementbtns ){
      })
      .then((data)=>{
       console.log(data);
-      productsum.innerHTML = `₹${parseInt(data.result) * productcount.value - couponValue.innerHTML.replace('₹','')}`;
+      productsum.innerHTML = `₹${parseInt(data.result) * productcount.value}`;
      })
     })
 }
@@ -126,7 +126,7 @@ for(let productdecrementbtn of productdecrementbtns){
     })
     .then((data)=>{
      console.log(data);
-     productsum.innerHTML = `₹${parseInt(productsum.innerHTML.replace("₹", "")) - parseInt(data.result) - couponValue.innerHTML.replace('₹','')}`;
+     productsum.innerHTML = `₹${parseInt(productsum.innerHTML.replace("₹", "")) - parseInt(data.result)}`;
     })
   }
   })

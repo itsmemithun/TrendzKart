@@ -24,6 +24,8 @@ router.post('/panel/products/add_product', uploadProductimage.array("images", 6)
 router.get('/panel/products/edit_product/:id', admincontroller.editproduct);
 // edit product post route 
 router.post('/panel/products/edit_product/:id', uploadProductimage.array("images"), admincontroller.updateproduct);
+// Delete product images 
+router.delete('/panel/products/delete_image', admincontroller.deleteImage);
 // delete route for deleting products
 router.delete('/panel/products/delete_product/:id',isAdmin, admincontroller.deleteProduct);
 // category management route

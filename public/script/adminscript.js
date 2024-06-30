@@ -17,7 +17,7 @@ const bannerSubmitButton1 = document.querySelector('.bannerSubmitButton1');
 const bannerSubmitButton2 = document.querySelector('.bannerSubmitButton2');
 const bannerSubmitButton3 = document.querySelector('.bannerSubmitButton3');
 const bannerSubmitButton4 = document.querySelector('.bannerSubmitButton4');
-
+const productImgDltBtn = document.querySelectorAll('.productImgDltBtn');
 
 
 
@@ -149,10 +149,7 @@ if(userSearchForm){
 
 
 function preview(){
-   imageContainer.innerHTML = "";
-   numOfFiles.textContent = `${fileInput.files.length}
-   Files Selected`;
-
+   numOfFiles.textContent = `${fileInput.files.length} New Files Selected`;
    for(i of fileInput.files){
     const reader = new FileReader();
     console.log(reader); 
@@ -173,7 +170,6 @@ function preview(){
 
 if(productEditImgInputTag){
    const data = productEditImgInputTag.getAttribute("data");
-   console.log(data);
    const res = fetch('/admin/panel/getFile',{
     method : "POST",
     headers : {
@@ -189,7 +185,33 @@ if(productEditImgInputTag){
    .then((data)=>{
     console.log(data);
    })
-   
+  }
+
+
+  if(productImgDltBtn){
+     for(let dltBtn of productImgDltBtn){
+        dltBtn.addEventListener("click",function(){
+          const path = dltBtn.getAttribute('data-product');
+          const res = fetch('/admin/panel/products/delete_image',{
+            method : "DELETE",
+            headers : {
+              "Content-type" : 'application/json'
+            },
+            body : JSON.stringify({
+              path : path
+            })
+          })
+          res.then((response)=>{
+            return response.json();
+          })
+          .then((data)=>{
+            console.log(data);
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
+        })
+     }
   }
 
 

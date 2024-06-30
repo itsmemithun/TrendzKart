@@ -1,78 +1,7 @@
 <% layout('layouts/boilerplate') %>
 
 <main class="min-vh-100 min-vw-100">
-   <!-- <div class="container mt-4 mb-4 d-flex flex-column">
-    <h4>My Cart</h4>
-     <% if(cart_products.length == 0){ %>
-      <div class="align-self-center d-flex flex-column align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" fill="currentColor" class="bi bi-cart text-danger" viewBox="0 0 16 16">
-          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-        </svg>
-        <p class="pt-4 fs-4 fw-semibold">Your cart is empty</p>
-        <p class="pt-1 fw-medium">Add something to make me happy:)</p>
-      </div>
-     <% } %>
-
-    <% for(let product of cart_products){ %>
-    <% product.image[0] = product.image[0].replace('public', '') %>
-    <div class="card my-1">
-      <div class="row">
-        <div class="col-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-          <img class="img-thumbnail object-fit-contain m-1" style="height : 200px; width : 200px" src="<%= product.image[0] %>"  alt="...">
-        </div>
-        <div class="col-5 col-md-5 col-lg-4 col-xl-5 col-xxl-5 card-body-grp d-flex flex-column justify-content-center">
-          <p class="fs-4 text-capitalize product-name fw-medium" data-product-id="<%= product._id %>"><%= product.productName %></p>
-          <p class="fw-medium cart-product-price">Price : <%= product.price %></p>
-          <div>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="productcountdecrementbtn">-</button>
-              <input type="text" class="productcount" value="1" readonly>
-              <button type="button" class="productcountincrementbtn">+</button>
-            </div>
-            <button type="button" class="btn btn-warning mt-1" style="width : 150px;">Buy Now</button>
-          </div>
-        </div>
-        <div class="col position-relative mx-3">
-          <a href="/user/cart/delete/<%= product._id %>"><i class="bi bi-trash3-fill position-absolute top-0 end-0" style="font-size : 25px"></i></a>
-        </div>
-      </div>
-    </div>
-   <% } %>
-
-   <div class="row">
-
-    <div class="col">
-    </div>
-
-    <div class="col">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>Total Items(0)</td>
-            <td>Price:</td>
-            <td>₹:<%= productSum %></td>
-          </tr>
-          <tr>
-            <td>Delivery Charges</td>
-            <td>(00)</td>
-          </tr>
-          <tr>
-            <td colspan="2" class="text-end">To Pay:</td>
-            <td class="product-sum">₹<%= productSum %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" class="btn me-3 btn-warning">Proceed to Pay</button>
-      <button type="button" class="btn removeall-btn btn-danger">Remove All</button>
-    </div>
-
-   </div>
-
-  </div>  -->
-
-  <!-- new -->
-
+   
   <div class="cartContainer pt-5 navmargin">
     <div class="leftContainer rounded shadow">
       <div class="py-4 rounded border">
@@ -146,8 +75,8 @@
       </div>
       <span class="seperator mb-3"></span>
       <div class="grandTotal d-flex justify-content-between">
-         <span class="font mb-3">Grand Total</span>
-         <span class="product-sum">₹<%= productSum %></span>
+         <span class="font fs-3 mb-3">Grand Total</span>
+         <span class="product-sum fs-3">₹<%= productSum %></span>
       </div>
       <button class="btn shadow btn-dark font checkOutBtn" data-bs-toggle="modal" data-bs-target="#checkoutPaymentModal">Checkout</button>
     </div>

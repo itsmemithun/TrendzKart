@@ -255,9 +255,9 @@ th, td {
   align-items: center;
   justify-content: center;
   color : white;
-  background-color: blue;
+  background-color: #2e76c8;
   padding : 10px;
-  border-radius : 5px;
+  border-radius : 3px;
 }
 
 .image-inner-container:hover{
@@ -383,15 +383,33 @@ th, td {
   justify-content: space-evenly;
   gap : 20px;
   flex-wrap: wrap;
+  padding-block : 20px
+}
+
+.productImgDltBtn{
+  background-color: #2e76c8;
+  color : white;
+  border : none;
+  padding-block : 5px;
+}
+
+.add-product-btn{
+  background-color: #2e76c8;
+  color : white;
+  border : none;
+  border-radius: 2px;
+  padding-block : 5px;
+  padding-inline : 10px;
 }
 
 figure{
-  width : 14.625rem;
-  height : 14.625rem;
+  width : 9.625rem;
+  height : 9.625rem;
 }
 .preview-img{
   width : 100%;
-  height : 100%;
+  min-height : 100%;
+  max-height : 100%
 }
 
 figcaption{
