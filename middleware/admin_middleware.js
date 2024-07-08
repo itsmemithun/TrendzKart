@@ -1,4 +1,5 @@
 import multer from 'multer';
+import {unlink} from 'fs/promises';
 
 export const isAdmin = (req,res,next) => {
   if(req.session.isAdmin === true){
@@ -15,7 +16,6 @@ export const uploadProductimage = multer({
       },
       filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        console.log(uniqueSuffix);
         cb(null, uniqueSuffix + '-' + file.originalname)
       }
     })      
@@ -32,3 +32,15 @@ export const uploadBannerImage = multer({
     }
   })
 })
+
+
+export const deleteImage = async function delteImage(path){
+  try{
+    await unlink(path)
+    return { success : true}
+  }catch(err){
+    console.log('failed to delete the file');
+    return {error : err.message};
+  }
+}
+

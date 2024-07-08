@@ -37,7 +37,7 @@
 
       <div class="mb-3">
         <label for="addProductName" class="form-label">Product Name</label>
-        <input type="text" class="form-control" value="<%= product.productName %>" id="addProductName" name="productName" placeholder="Enter Your Product Name" required>
+        <input type="text" class="form-control productName" value="<%= product.productName %>" data-product-id="<%= product._id %>" id="addProductName" name="productName" placeholder="Enter Your Product Name" required>
       </div>
 
       <div class="mb-3">
@@ -73,7 +73,7 @@
           <p id="num-of-files">No Files Choosen</p>
         </div>
 
-        <div id="images">
+        <div id="images" class="images">
           <% for(let data of product.image){ %>
           <% let path = data.replace('public', '') %>
           <figure class="d-flex mt-2 flex-column">

@@ -4,8 +4,9 @@ import userModel from '../model/usermodel.js';
 import productModel from '../model/product/product.js';
 import categoryModel from '../model/admin/category.js';
 import bannerModel from '../model/banner/banner.js';
-import { unlink } from 'node:fs/promises';
+import { unlink } from 'fs';
 import couponModel from '../model/admin/couponmodel.js'
+import { deleteImage } from '../middleware/admin_middleware.js'
 
 
 function countUser(users){
@@ -144,16 +145,16 @@ export default {
 
   deleteImage : async(req,res)=>{
     try{
-      const {path} = req.body;
-      console.log(path);
-      const result = await unlink(path,(err)=>{
-        if(err){
-          return res.status(500).json({ result : "failed" });       
-        }else{
-          res.json({ result : "success" });
-        }
-      });
-       console.log(result);
+       const { path } = req.body;
+       const { productId } = req.body;
+       const data = await deleteImage(path);
+       const product = await productModel.findByIdAndUpdate({_id : productId},{$pull : {image : path}});
+       console.log(product);
+       if(data.success){
+        res.json({result : 'success'});
+       }else{
+        res.json({result : 'failed', error : data.error});
+       }
     }catch(e){
       console.log(e);
     }
@@ -161,8 +162,7 @@ export default {
 
 
   getProductFile : async(req,res)=>{
-      const data = req.body.value;
-      console.log(data);       
+      const data = req.body.value;           
   },
 
   deleteProduct : async (req,res)=>{

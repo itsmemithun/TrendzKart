@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-
-    productId : [{
+    productId : {
       type : Schema.Types.ObjectId,
-   }],
+   },
     orderAmount : {
+       type : Number
+    },
+    paymentStatus : {
        type : String
     },
     orderId : {
@@ -15,6 +17,7 @@ const orderSchema = new Schema({
     },
     userId : {
       type : Schema.Types.ObjectId,
+      required : true
     },
     orderTransactionId :{
       type : String,

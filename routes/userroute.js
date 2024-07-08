@@ -79,14 +79,13 @@ router.get('/user/myorders', usercontroller.myorders);
 router.post('/user/validateCoupon', usercontroller.validateCoupon);
 
 
-
 //🔥 Product Routes 🔥//
 router.get('/view/:id', productcontroller.view);
 router.get('/view/buy/:id', productcontroller.orderDetails);
 router.post('/view/buy/:id/proceedToPayment', productcontroller.payment);
 router.post('/view/buy/proceedToCodPayment', productcontroller.codPayment);
-router.get('/orderSuccess/:paymentType/:id', productcontroller.orderSuccess);
-// Cart Checkout
-router.get('/user/cartCheckout', productcontroller.cartcheckout);
+router.post('/orderCompletion/:paymentType', productcontroller.creatingOrder);
+router.get('/user/orderSuccess',productcontroller.orderSuccess);
+
 
 export default router;

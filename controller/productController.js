@@ -4,8 +4,47 @@ import ordersModel from "../model/orders/ordersModel.js";
 import axios from "axios";
 import uniqid from "uniqid";
 import sha256 from "sha256";
-import User from "../model/usermodel.js"
 
+
+
+async function cartOrder(paymentMethod,paymentStatus,orderId,userId,productId){
+  try{
+    for(let data of productId){
+      const product = await productModel.findById({_id : data});
+      const orderData = {
+        userId : userId,
+        productId : data,
+        orderId : orderId,
+        orderAmount : product.price,
+        paymentStatus : paymentStatus,
+        paymentMethod : paymentMethod
+      }
+      const user = await userModel.findByIdAndUpdate(userId,{ $push: { orders : orderId }});
+      const order = new ordersModel({...orderData});
+      await order.save();
+     }
+  }catch(err){
+     throw err;
+  }
+}
+
+async function singleOrder(paymentMethod,orderId,userId,productId){
+  try{
+    const orderData = {
+      userId : userId,
+      productId : productId,
+      orderTransactionId : req.params.id,
+      orderId : orderId,
+      orderAmount : amount,
+      paymentMethod : paymentMethod
+    }
+    const user = await User.findByIdAndUpdate(userId,{ $push: { orders: orderId }});
+    const order = new ordersModel({...orderData});
+    await order.save();
+  }catch(err){
+     throw err
+  }
+}
 
 export default {
 
@@ -70,7 +109,7 @@ export default {
         "merchantTransactionId": merchantTransactionId,
         "merchantUserId": userId,
         "amount": amount * 100,
-        "redirectUrl": `http://localhost:3000/orderSuccess/onlineTransaction/${merchantTransactionId}`,
+        "redirectUrl": `http://localhost:3000/orderSuccess/onlineTransaction`,
         "redirectMode": "REDIRECT",
         "callbackUrl": "https://webhook.site/callback-url",
         "mobileNumber": "9999999999",
@@ -117,10 +156,7 @@ export default {
   // coupon price should be decreased from the actual price here
   codPayment : async(req,res) => {
     try{
-      const {price}  = req.body;
       const {productId} = req.body;
-      req.session.productId = productId;
-      req.session.amount = price;
       res.json({
         'result' : productId,
         'paymentMethod' : 'CashOnDelivery'
@@ -130,37 +166,29 @@ export default {
     }
   },
 
-  cartcheckout : (req,res)=>{
-    
+  creatingOrder : async(req,res) => {     
+    try{
+      const paymentMethod = req.params.paymentType;
+      const paymentStatus = (paymentMethod == "CashOnDelivery") ? "notPaid" : null ;
+      const orderId = uniqid();
+      const userId = req.session.account;  
+      if(req.body.productId.length > 0){
+         await cartOrder(paymentMethod,paymentStatus,orderId,userId,req.body.productId);
+      }else{
+         await singleOrder(paymentMethod,paymentMethod,orderId,userId,req.body.productId)
+      }
+      res.json({result : 'success'})
+    }catch(err){
+      res.json({result : 'error', error : err.message});
+    }
   },
 
-  orderSuccess : async(req,res) => {
-    let productIds;
-    if(typeof req.session.productId == Array){
-       for(let data of req.session.productId){
-        productIds.push(data);
-       }
-    }else{
-      productIds = req.session.productId;
-      console.log(req.session);
-    }
-    const paymentMethod = req.params.paymentType;
-    const amount = req.session.amount;
-    const orderId = uniqid();
-    const userId = req.session.account;
-    const orderData = {
-      userId : userId,
-      productId : productIds,
-      orderTransactionId : req.params.id,
-      orderId : orderId,
-      orderAmount : amount,
-      paymentMethod : paymentMethod
-    }
-    const user = await User.findByIdAndUpdate(userId,{ $push: { orders: orderId }});
-    const order = new ordersModel({...orderData});
-    order.save();
-    req.session.productId = undefined;
-    req.session.amount = undefined;
-    res.render('user/orderSuccess.ejs');
+  orderSuccess : (req,res)=>{
+   try{
+     res.render('user/orderSuccess.ejs');
+   }catch(e){
+    console.log(e.message)
+   }
   }
+
 }

@@ -72,12 +72,10 @@ if(usereditForm){
 
 if(productDltButtons){
   for(let deleteBtn of productDltButtons){
-    console.log(deleteBtn);
     deleteBtn.addEventListener("click", function(e){
     e.preventDefault();
     const productid = deleteBtn.getAttribute('data-productid');
     const reqpath = deleteBtn.getAttribute('href');
-    console.log(reqpath);
     const res = fetch(reqpath, {
       method : "DELETE",
       headers : {
@@ -92,7 +90,6 @@ if(productDltButtons){
     })
     .then((data)=>{
       const product = this.closest(".product-details");
-      console.log(product);
       product.remove();
       alert(data.result);
     })
@@ -151,8 +148,7 @@ if(userSearchForm){
 function preview(){
    numOfFiles.textContent = `${fileInput.files.length} New Files Selected`;
    for(i of fileInput.files){
-    const reader = new FileReader();
-    console.log(reader); 
+    const reader = new FileReader(); 
     const figure = document.createElement("figure");
     const figCap = document.createElement("figcaption");
     figCap.innerText = i.name;
@@ -189,6 +185,7 @@ if(productEditImgInputTag){
 
 
   if(productImgDltBtn){
+    const productId = document.querySelector('.productName').getAttribute('data-product-id');
      for(let dltBtn of productImgDltBtn){
         dltBtn.addEventListener("click",function(){
           const path = dltBtn.getAttribute('data-product');
@@ -198,14 +195,21 @@ if(productEditImgInputTag){
               "Content-type" : 'application/json'
             },
             body : JSON.stringify({
-              path : path
+              path : path,
+              productId : productId
             })
           })
           res.then((response)=>{
             return response.json();
           })
           .then((data)=>{
-            console.log(data);
+            if(data.result === "success"){
+              let imgData = this.closest('figure');
+              imgData.remove();
+            }else{
+              console.log(data.result);
+              console.log(data.error);
+            }
           })
           .catch((err)=>{
             console.log(err);

@@ -9,10 +9,26 @@ const couponInput = document.querySelector('.couponInput');
 const subtotal = document.querySelector('.subtotalValue');
 const couponValue = document.querySelector('.coupon');
 
-let cartProductIds = [];
 
-for(let product of productIds){
-  cartProductIds.push(product.getAttribute('data-product-id'));
+
+function createOrder(paymentMethod,productId){
+  const res = fetch(`/orderCompletion/${paymentMethod}`,{
+    method : "POST",
+    headers : {
+      "Content-type" : "application/json"
+    },
+    body : JSON.stringify({
+      productId : productId
+    })
+  })
+  res.then((response)=>{
+    return response.json();
+  })
+  .then((data)=>{
+     if(data.result == "success"){
+      window.location.href = "/user/orderSuccess";
+     }
+  })
 }
 
 async function getPrice(productId){
@@ -29,42 +45,38 @@ async function getPrice(productId){
     return data.result;  
   }
 
-  function initiateCodPayment(price){
+  function initiateCodPayment(){
+
+    let cartProductIds = [];
+    for(let product of productIds){
+      cartProductIds.push(product.getAttribute('data-product-id'));
+    }
+
     const res = fetch(`/view/buy/proceedToCodPayment`,{
       method : "POST",
       headers : {
         "Content-type" : "application/json"
       },
       body : JSON.stringify({
-          price : price,
           productId : cartProductIds
       })
     })
     res.then((response)=>{
       return response.json(); 
     }).then((data)=>{
-      console.log(data.result.id);
-      window.location.href = `/orderSuccess/${data.paymentMethod}/${data.result.id}`;
+       createOrder(data.paymentMethod,data.result);
     })
 }  
-
-
-
 
 cartPaymentBtn.addEventListener('click', submitForm);
 
 async function submitForm(event){
-  let endPrice = 0;
   event.preventDefault();
   let form = document.getElementById('paymentForm');
   let formData = new FormData(form);
   let paymentMethod = formData.get("paymentSelect");
-  for(let i=0; i<cartProductIds.length; i++){
-  endPrice += await getPrice(cartProductIds[i]);
-  }
-  console.log(endPrice);
   if(paymentMethod == 'COD'){
-   initiateCodPayment(endPrice);
+   initiateCodPayment();
   }else if(paymentMethod == 'UPI'){
    initiateUpiPayment();
   }else if(paymentMethod == 'Debit Card'){
