@@ -2,7 +2,7 @@
 
 <div class="vw-100 vh-100">
 
-  <div class="container d-flex flex-column align-items-center">
+  <div class="container d-flex navmargin flex-column align-items-center">
       <div class="mb-4 d-flex address-box-container flex-column align-items-center">
         <!-- Addresses -->
         <% for(let e of addresses){ %>
@@ -14,7 +14,9 @@
                   <div addressId="<%= e._id %>" ><%= e.personName %></div>
                   <div class="text-wrap w-100"><%= e.address %></div>
                   <div><%= e.district %></div>
+                  <div><%= e.state  %></div>
                   <div><%= e.phone %></div>
+                  <div><%= e.city  %></div>
                   <div><%= e.pincode %></div>
                 </span>
                 <span>
@@ -52,10 +54,12 @@
               </div>
           <form action="/user/user_account/add_address" method="POST">
               <div class="modal-body">
-                <input class="form-control form-control-sm mt-3" type="text" name="personName" placeholder="Username" aria-label=".form-control-sm example"  required>
+                <input class="form-control form-control-sm mt-3" type="text" name="personName" placeholder="Name" aria-label=".form-control-sm example"  required>
                 <input class="form-control form-control-sm mt-3" type="number" name="phone" placeholder="Phone" aria-label=".form-control-sm example" required>
                 <textarea class="form-control mt-3" id="exampleFormControlTextarea1" name="address" placeholder="Address" rows="3" required></textarea>
+                <input class="form-control form-control-sm mt-3" type="text" name="state" placeholder="State" aria-label=".form-control-sm example" required>
                 <input class="form-control form-control-sm mt-3" type="text" name="district" placeholder="District" aria-label=".form-control-sm example" required>
+                <input class="form-control form-control-sm mt-3" type="text" name="city" placeholder="City" aria-label=".form-control-sm example" required>
                 <input class="form-control form-control-sm mt-3" type="number" name="pincode" placeholder="Pincode" aria-label=".form-control-sm example" required>
               </div>
               <div class="modal-footer">

@@ -4,12 +4,19 @@ import ordersModel from "../model/orders/ordersModel.js";
 import axios from "axios";
 import uniqid from "uniqid";
 import sha256 from "sha256";
+import date from 'date-and-time';
 
 
-
-async function cartOrder(paymentMethod,paymentStatus,orderId,userId,productId){
+async function cartOrder(paymentMethod,paymentStatus,userId,productId){
   try{
+    let address;
+    const user = await userModel.findById({_id : userId});
+    for(let e of user.address){
+      address = e.selected == true ? e : '' 
+    }
     for(let data of productId){
+      console.log("Order data "+data);
+      const orderId = uniqid("#");
       const product = await productModel.findById({_id : data});
       const orderData = {
         userId : userId,
@@ -17,29 +24,39 @@ async function cartOrder(paymentMethod,paymentStatus,orderId,userId,productId){
         orderId : orderId,
         orderAmount : product.price,
         paymentStatus : paymentStatus,
-        paymentMethod : paymentMethod
+        paymentMethod : paymentMethod,
+        shippingAddress : address
       }
-      const user = await userModel.findByIdAndUpdate(userId,{ $push: { orders : orderId }});
       const order = new ordersModel({...orderData});
+      const user = await userModel.findByIdAndUpdate(userId,{ $push: { orders : order._id }});
       await order.save();
      }
   }catch(err){
+     console.log(err);
      throw err;
   }
 }
 
-async function singleOrder(paymentMethod,orderId,userId,productId){
+async function singleOrder(paymentMethod,address,paymentStatus,userId,productId){
   try{
+    console.log('singleOrder');
+    const orderId = uniqid('#');
+    const now = new Date();
+    let currentDateAndTime = date.format(now, 'YYYY/MM/DD HH:mm:ss');
+    const product = await productModel.findById({_id : productId});
     const orderData = {
       userId : userId,
       productId : productId,
-      orderTransactionId : req.params.id,
+      paymentStatus : paymentStatus,
       orderId : orderId,
-      orderAmount : amount,
-      paymentMethod : paymentMethod
+      orderAmount : product.price,
+      paymentMethod : paymentMethod,
+      shippingAddress : address,
+      dateOfOrderPlaced : currentDateAndTime
     }
-    const user = await User.findByIdAndUpdate(userId,{ $push: { orders: orderId }});
     const order = new ordersModel({...orderData});
+    console.log(order);
+    const user = await userModel.findByIdAndUpdate(userId,{ $push: { orders: order._id }});
     await order.save();
   }catch(err){
      throw err
@@ -73,11 +90,7 @@ export default {
           req.flash('error', 'Add address to continue');
           res.redirect(`/user/user_account/address_management/${account._id}?productId=${id}`);
          }
-         const selectedAddress = account.address.map(element => {
-             if(element.selected == true){
-              return element;
-             }
-         });
+         const selectedAddress = account.address.filter(e => e.selected == true);
          let address = selectedAddress[0];
          const product = await productModel.findById(id);
          res.render('user/orderdetails.ejs', { product, address });
@@ -169,13 +182,14 @@ export default {
   creatingOrder : async(req,res) => {     
     try{
       const paymentMethod = req.params.paymentType;
-      const paymentStatus = (paymentMethod == "CashOnDelivery") ? "notPaid" : null ;
-      const orderId = uniqid();
-      const userId = req.session.account;  
-      if(req.body.productId.length > 0){
-         await cartOrder(paymentMethod,paymentStatus,orderId,userId,req.body.productId);
+      const address = req.body.address;
+      const paymentStatus = (paymentMethod == "CashOnDelivery") ? "Pending" : null ;
+      const userId = req.session.account;
+      const result =  Array.isArray(req.body.productId);
+      if(result){
+         await cartOrder(paymentMethod,address,paymentStatus,userId,req.body.productId);
       }else{
-         await singleOrder(paymentMethod,paymentMethod,orderId,userId,req.body.productId)
+         await singleOrder(paymentMethod,address,paymentStatus,userId,req.body.productId)
       }
       res.json({result : 'success'})
     }catch(err){

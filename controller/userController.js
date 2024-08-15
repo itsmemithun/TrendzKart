@@ -5,7 +5,8 @@ import categoryModel from '../model/admin/category.js';
 import nodemailer from 'nodemailer'
 import otpGenerator from 'otp-generator';
 import dotenv from 'dotenv';
-import couponModel from '../model/admin/couponmodel.js'
+import couponModel from '../model/admin/couponmodel.js';
+import orderModel from '../model/orders/ordersModel.js'
 
 dotenv.config();
 
@@ -331,8 +332,14 @@ export default  {
       try{
          let cart_products = [];
          const product_total = [];
+         let userAddress;
          const userid = req.session.account;
          const userdata = await User.findById({ _id : userid });
+         for(let address of userdata.address){
+            if(address.selected == true){
+               userAddress = address;
+            }
+         }
          const cartlist = userdata.cart;
          for(let data of cartlist){
             const result = await productModel.findById({ _id : data })
@@ -345,7 +352,7 @@ export default  {
          for(let i=0; i<productpriceData.length; i++){
             productSum += productpriceData[i];
          }        
-         res.render('user/cart.ejs', {cart_products,productSum});
+         res.render('user/cart.ejs', {cart_products,productSum,userAddress});
       }catch(e){
          console.log(e);
       }
@@ -374,7 +381,7 @@ export default  {
 
    deleteFromCart : async(req,res)=>{
       console.log('req reached here');
-         try{
+      try{
          const userid = req.session.account;  
          const productid = req.params.id;
          const product = await User.findOneAndUpdate( { _id : userid},{ $pull : { cart : productid }} );
@@ -436,10 +443,10 @@ export default  {
       try{
       const id = req.session.account;
       const data = req.body;
+      console.log(data);
       const productId = req.session.tempProductId;
       req.session.temProductId = undefined;
       const user = await User.findById(id);
-      console.log(user.address.length);
       if(user.address.length == 0){
          user.address.push(data);
          console.log(user.address[0].selected);
@@ -470,8 +477,15 @@ export default  {
    myorders : async(req,res) => {
       const id = req.session.account;
       const user = await User.findById(id);
-      console.log(user);
-      res.render('user/myorders.ejs',{user});
+      const productId = user.orders;
+      let orders = await orderModel.find({_id : productId}).populate('productId');
+      res.render('user/myorders.ejs',{user,orders});
+   },
+
+   getOrderDetails : async (req,res)=>{
+      const {orderId} = req.body;
+      const order = await orderModel.find({orderId : orderId});
+      res.json({result : order});
    },
 
    validateCoupon : async (req,res)=>{

@@ -75,6 +75,8 @@ router.get('/user/category', nocache(), usercontroller.category);
 router.post('/user/category', usercontroller.categoryFilter);
 // my order route 
 router.get('/user/myorders', usercontroller.myorders);
+// orderDetails rotue
+router.post('/user/getorderdetails', usercontroller.getOrderDetails);
 // validate Coupon 
 router.post('/user/validateCoupon', usercontroller.validateCoupon);
 

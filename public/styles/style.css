@@ -197,6 +197,156 @@ th, td {
   background-color: white;
   border-radius: 5px;
 }
+.checkoutPgeProductDetails{
+  background-color: rgba(207, 207, 207, 0.4);
+}
+.inputElementStyles{
+   border : none;
+   height : 35px;
+   width : 300px;
+   margin-bottom: 10px;
+}
+.addressInput{
+  border : none;
+  margin-bottom : 10px;
+}
+.orText{
+  margin-left: 50%;
+  transform: translate(50%,0);
+}
+.defalutAddress{
+   background-color: white;
+}
+
+.prdQuantityWraper2{
+  border : 1px solid gray;
+  border-radius: 5px;
+  height : 38px;
+  width : 100px;
+  box-sizing: border-box;
+  display : inline-flex;
+  align-items: center;
+}
+
+.productcountdecrementbtn2{
+  height : 37px;
+  width : 33.33%;
+  padding-top : 0px;
+  border : none;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.productcountincrementbtn2{
+  height : 37px;
+  width : 33.33%;
+  padding-top : 0px;
+  border : none;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+.orderPlaced{
+   background-color: green;
+   height : 5px;
+   width  : 100px;
+   display: flex;
+   align-items: center;
+   position: relative;
+}
+
+.orderPlacedText{
+  position : absolute;
+  font-size: small;
+  top : -25px;
+}
+
+.orderPlaced::before{
+  content : "";
+  display: block;
+  height: 13px;
+  width : 13px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+
+.orderShipped{
+  background-color: green;
+  height : 5px;
+  width  : 100px;
+  display: flex;
+  align-items: center;
+  position : relative;
+}
+
+.orderShipped::before{
+  content : "";
+  display: block;
+  height: 13px;
+  width : 13px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.orderShippedText{
+  position : absolute;
+  top : -25px;
+  font-size: small;
+
+}
+
+.orderOutForDelivery{
+  background-color: green;
+  height : 5px;
+  width  : 100px;
+  display: flex;
+  align-items: center;
+  position : relative;
+}
+
+.orderOutForDelivery::before{
+  content : "";
+  display: block;
+  height: 13px;
+  width : 13px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.outForDeliveryText{
+  position : absolute;
+  font-size : small;
+  top : -25px;
+
+}
+
+.orderDelivered{
+  height: 13px;
+  width : 13px;
+  border-radius: 50%;
+  background-color: green;
+  position : relative;
+}
+
+.deliveredText{
+   position : absolute;
+   font-size : small;
+   top : -20.5px;
+}
+
+.shaker{
+   animation : 0.2s 5 tilt-shaking;
+}
+
+@keyframes tilt-shaking {
+  0% { transform: translateX(0) }
+  25% { transform: translateX(5px) }
+  50% { transform: translateX(-4px) }
+  75% { transform: translateX(4px) }
+  100% { transform: translateX(0) } 
+}
+
 
 
 /*🔥 <<< Admin Page >>> 🔥*/

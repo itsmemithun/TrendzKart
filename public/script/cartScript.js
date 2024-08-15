@@ -8,10 +8,17 @@ const couponApplyBtn = document.querySelector('.couponApplyBtn');
 const couponInput = document.querySelector('.couponInput');
 const subtotal = document.querySelector('.subtotalValue');
 const couponValue = document.querySelector('.coupon');
-
+const addressWarning = document.querySelector('.addressWarning');
+const address = document.getElementById('addressCheckBox');
+const modal = document.querySelector('.modal');
+const checkOutBtn = document.querySelector('.checkOutBtn');
+const modal2 = document.getElementById('checkoutPaymentModal');
+const addressWarningText = document.querySelector('.selectAddressWarning');
 
 
 function createOrder(paymentMethod,productId){
+  console.log(paymentMethod);
+  console.log(productId);
   const res = fetch(`/orderCompletion/${paymentMethod}`,{
     method : "POST",
     headers : {
@@ -46,7 +53,7 @@ async function getPrice(productId){
   }
 
   function initiateCodPayment(){
-
+   console.log('function called');
     let cartProductIds = [];
     for(let product of productIds){
       cartProductIds.push(product.getAttribute('data-product-id'));
@@ -68,19 +75,38 @@ async function getPrice(productId){
     })
 }  
 
+checkOutBtn.addEventListener('click', function(){
+  if(address.checked === false){
+    addressWarning.classList.remove('d-none');
+    addressWarningText.classList.remove('d-none');
+  }else{
+    addressWarningText.classList.add('d-none');
+  }
+})
+
 cartPaymentBtn.addEventListener('click', submitForm);
+address.addEventListener('click', function(){
+  addressWarning.classList.add('d-none');
+})
 
 async function submitForm(event){
   event.preventDefault();
-  let form = document.getElementById('paymentForm');
-  let formData = new FormData(form);
-  let paymentMethod = formData.get("paymentSelect");
-  if(paymentMethod == 'COD'){
-   initiateCodPayment();
-  }else if(paymentMethod == 'UPI'){
-   initiateUpiPayment();
-  }else if(paymentMethod == 'Debit Card'){
-   initiateDebitCard();
+  if(address.checked === true){
+    let form = document.getElementById('paymentForm');
+    let formData = new FormData(form);
+    let paymentMethod = formData.get("paymentSelect");
+    if(paymentMethod == 'COD'){
+     initiateCodPayment();
+    }else if(paymentMethod == 'UPI'){
+     initiateUpiPayment();
+    }else if(paymentMethod == 'Debit Card'){
+     initiateDebitCard();
+    }  
+  }else{
+    setTimeout(function(){
+    addressWarningText.classList.remove("shaker");
+    },300)
+    addressWarningText.classList.add("shaker");
   }
 }
 

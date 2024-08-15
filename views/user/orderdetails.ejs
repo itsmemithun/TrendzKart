@@ -1,68 +1,118 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="min-vh-100 navmargin min-vw-100 d-flex justify-content-center align-items-center">
+<div class="min-vh-100 navmargin min-vw-100 d-flex">
 
-  <div class="container d-flex justify-content-center">
-    <div class="my-4 bg-color h-100 w-75 shadow row">
-      <div class="border-end py-4 ps-4 col-12 col-lg-6">
-        <div class="orderDetailsImg shadow rounded">
-          <% product.image[0] = product.image[0].replace('public','') %>
-          <img class="object-fit-cover rounded" style="width : 100%; height : 100%" src="<%= product.image[0] %>" alt="">
-        </div>
-        <div class="d-flex mt-2">
-          <input id="address" type="radio">
-          <label class="link-primary ms-2" for="address">
-            <div><%= address.personName %></div>
-            <div><%= address.address %></div>
-            <span><%= address.district %></span>
-            <span><%= address.pincode %></span>
-          </label>
-        </div>
-       <a class="text-decoration-none" href=""><div class="text-end">Select another Address</div></a>
-      </div>
-      <div class="col-12 col-lg-6 d-flex justify-content-center flex-column align-items-center">
-        <div class="w-75">
-          <table class="table table-borderless">
-            <thead>
-              <tr>
-                <th class="bg-color h5 border-dark border-end" scope="col"><%= product.productName %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="bg-color border-dark border-end">Price</td>
-                <td class="bg-color"><%= product.price %>
-                </td>
-              </tr>
-              <tr>
-                <td class="bg-color border-dark border-end">Quantity</td>
-                <td class="bg-color">0</td>
-              </tr>
-              <tr>
-                <td class="bg-color border-dark border-end">Discount</td>
-                <td class="bg-color">00</td>
-              </tr>
-              <tr>
-                <td class="bg-color border-dark border-end border-bottom">Delivery</td>
-                <td class="bg-color border-dark border-bottom">Free</td>
-              </tr>
-              <tr>
-                <td class="text-end border-dark bg-color border-end">Total</td>
-                <td class="bg-color fw-medium">₹<span class="endPrice"><%= product.price %></span>/-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="mb-4">
-          <button productIdData="<%= product._id %>" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn proceedToPaymentBtn shadow btn-warning text-light">Proceed to payments</button>
-          <!-- Button trigger modal -->
-          <button class="btn btn-dark shadow">Cancel</button>
+  <div class="w-75 container">
+    <div class="checkoutPgeProductDetails m-3">
+
+      <div class="pt-4">
+        <div class="d-flex border-dark bg-light justify-content-between shadow mx-3 rounded">
+          <div class="d-flex">
+            <div class="m-3 flex-shrink-0" style="height : 130px; width : 130px">
+              <img class=" w-100 h-100" src="<%=  product.image[0].replace('public','') %>" alt="">
+            </div>
+            <div class="m-3 d-flex align-items-center">
+              <span class="fs-4 fw-medium"><%= product.productName %></span>
+              <span class="ms-3 text-secondary">₹<%= product.price %></span>
+                <div class="prdQuantityWraper2 ms-3">
+                  <button type="button" data_product_id="<%= product._id %>" class="productcountdecrementbtn2">-</button>
+                  <input type="text" class="productcount" value="1" readonly>
+                  <button type="button" data_product_id="<%= product._id %>" class="productcountincrementbtn2">+</button>
+                </div>
+            </div>
+          </div>
+          <div class="fs-4 fw-medium d-flex align-items-center me-4">₹<%= product.price %></div>
         </div>
       </div>
+     <hr>
+     <div>
+      <h3 class="ms-3">Shipping address</h3>
+      <form action="" class="addressForm">
+      <div class="d-flex ms-5 flex-column align-items-start">
+        <input class="inputElementStyles nameInputTag" type="text" name="name" placeholder="Name" required>
+        <textarea name="address" class="addressInput"  placeholder="Address" id="" rows="4" cols="50" required></textarea>
+        <input class="inputElementStyles" type="text" name="state" placeholder="State" required>
+        <div>
+          <input class="inputElementStyles" name="district" placeholder="District" type="text" required>
+          <input class="inputElementStyles" name="city" placeholder="City" type="text" required>
+          <input class="inputElementStyles" name="pincode" placeholder="ZIP code" type="text" required>
+        </div>
+        <input class="inputElementStyles" type="number" name="phone" placeholder="Phone" required>
+        <div>
+          <input type="checkbox" id="addressInput" class="addressCheckbox1">
+          <label for="addressInput">Use this address</label>
+        </div>
+      </div>
+      </form>
+     </div>
+      
+             <span class="orText fs-5">Or</span>
+     
+     <div class="ms-5">
+      <form action="" class="defaultAddressForm">
+      <div class="d-flex w-50 p-3 flex-column defalutAddress">
+        <span><%= address.personName %></span>
+        <input type="hidden" value="<%= address.personName %>" name="personName">
+        <span><%= address.address %></span>
+        <input type="hidden" value="<%= address.address %>" name="address">
+        <span><%= address.state %></span>
+        <input type="hidden" value="<%= address.state %>" name="state">
+        <span><%= address.district %></span>
+        <input type="hidden" value="<%= address.district %>" name="district">
+        <span><%= address.city %></span>
+        <input type="hidden" value="<%= address.city %>" name="city">
+        <span><%= address.pincode %></span>
+        <input type="hidden" value="<%= address.pincode %>" name="pincode">
+        <span><%= address.phone %></span>
+        <input type="hidden" value="<%= address.phone %>" name="phone">
+      </div>
+     </form>
+     <input id="defalutAddressSelect" type="checkbox" class="addressCheckbox2">
+     <label for="defalutAddressSelect">Use defalut address</label>
+     </div>
+             
     </div>
   </div>
 
-  
+  <div class="w-25 container">
+    <div class="checkoutPgeProductDetails mx-2 my-3 px-3 py-2">
+      <div>
+        <h3>Order summary</h3>
+        <p>The total cost consist of the tax,insurace and the shipping charges</p>
+        <hr>
+        <div>
+          <label class="fw-medium" for="">Coupon</label>
+          <div class="d-flex">
+            <input class="rounded couponValue border border-0" type="text" placeholder="xxx-xxx">
+            <button class="ms-2 couponApply btn btn-dark d-inline">Apply</button>
+          </div>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+          <span class="text-secondary ">Subtotal</span>
+          <span class="subTotal text-secondary">₹499.00</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="text-secondary">Coupon discount</span>
+          <span class="text-secondary">₹000.00</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="text-secondary">Shipping charges</span>
+          <span class="text-secondary">₹000.00</span>
+        </div>
+        <hr>
+        <div>
+          <span class="fs-4 fw-medium">Total</span>
+          <span class="fs-4 fw-medium totalAmount">₹<%= product.price %></span>
+        </div>
+        <div class="d-flex flex-column">
+          <button class="btn btn-light mb-2 border">Cancel</button>
+          <button productIdData="<%= product._id %>" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-dark">Make payment</button>
+        </div>
+      </div>
+   </div>
+  </div>
+
 </div>
 
 <!-- Modal -->

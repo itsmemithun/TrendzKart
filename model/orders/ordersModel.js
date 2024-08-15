@@ -5,9 +5,13 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema({
     productId : {
       type : Schema.Types.ObjectId,
+      ref : 'product'
    },
     orderAmount : {
        type : Number
+    },
+    dateOfOrderPlaced : {
+        type : String
     },
     paymentStatus : {
        type : String
@@ -17,13 +21,41 @@ const orderSchema = new Schema({
     },
     userId : {
       type : Schema.Types.ObjectId,
-      required : true
+      required : true,
+      ref : 'User'
     },
     orderTransactionId :{
       type : String,
     },
     paymentMethod : {
        type : String
+    },
+    shippingAddress : {
+       personName : {
+       type : String,
+       required : true
+       },
+       address : {
+       type : String,
+       required : true
+       },
+       district : {
+       type : String,
+       required : true
+       },
+       state : {
+       type : String,
+       required : true
+       },
+       pincode : {
+       type : String,
+       required : true
+       },
+       phone : {
+       type : String,
+       required : true
+       },
+       
     },
     status : {
       type : String,
