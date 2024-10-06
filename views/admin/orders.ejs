@@ -1,0 +1,72 @@
+<% layout('layouts/adminboilerplate.ejs') %>
+
+<div class="vw-100 vh-100 d-flex mt-4">
+  <div class="side-bar d-flex flex-column rounded border-0 ms-3" style="width: 18rem;">
+    <a href="/admin/panel" class="d-inline-flex  focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2">
+      Dash Board
+    </a>
+    <a href="/admin/panel/products" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      Products
+    </a>
+    <a href="/admin/panel/user_management" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      User's
+    </a>
+    <a href="/admin/panel/orders" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      Order's
+    </a>
+    <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      Coupons
+    </a>
+    <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      Collections
+    </a>
+    <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      Banner
+    </a>
+    <a href="/admin/panel/category" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+      Category
+    </a>
+  </div>
+
+  <div class="flex-grow-1 card-containers">
+    <% for(order of orders){ %>
+     <div class="card me-5 mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Order Id : #<%= order.orderId %></h5>
+        <div class="card-text"><span class="fw-medium">Ordered by : </span><%= order.userId.username %></div>
+        <div class="card-text"><span class="fw-medium">Contact email : </span><%= order.userId.email %></div>
+        <div class="card-text"><span class="fw-medium">Contact phone : </span><%= order.userId.phone %></div>
+        <div class="product-details">
+            <% order.productId.image[0] = order.productId.image[0].replace('public','') %>
+            <div class="product_image">
+              <img class="w-100 h-100" src="<%= order.productId.image[0] %>" alt="">
+            </div>
+            <div class="d-flex flex-column">
+              <span class="fs-4 fw-medium ms-3 productName"><%= order.productId.productName %></span>
+              <span class="fs-5 fw-medium ms-3 text-danger">Payment Method : <span class="text-success"><%= order.paymentMethod %></span></span>
+              <span class="text-danger ms-3">Order placed : <span class="text-dark"><%= order.dateOfOrderPlaced %></span></span>
+              <span class="text-danger ms-3">Order amount : <span class="text-dark">₹<%= order.orderAmount %></span></span>
+              <span class="ms-3 text-danger">Payment status : <span class="text-success"><%= order.paymentStatus %></span></span>
+              <% if(order.returnRequested == true){ %>
+                <div class="ms-3 mt-2 returnSection">
+                  <div>Reason for returning : <%= order.returnReqId.issue %></div>
+                  <span>Return requested :</span>
+                  <button data-attribute-orderId="<%= order.orderId %>" class="btn btn-success returnApproveButton">Approve</button>
+                  <button class="btn btn-secondary" >Cancel</button>
+                </div>
+              <% } %>
+              <% if(order.cancelRequested == true){ %>
+              <div class="ms-3 mt-2">
+                <span>Cancel requested :</span>
+                <button data-attribute-orderId="<%= order.orderId %>" class="btn btn-success cancelApproveButton">Approve</button>
+                <button class="btn btn-secondary">Cancel</button>
+              </div>
+              <% } %>
+            </div>
+        </div>
+      </div>
+     </div>
+    <% } %>
+  </div>
+</div>
+

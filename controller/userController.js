@@ -7,6 +7,7 @@ import otpGenerator from 'otp-generator';
 import dotenv from 'dotenv';
 import couponModel from '../model/admin/couponmodel.js';
 import orderModel from '../model/orders/ordersModel.js'
+import orderReturnModel from '../model/orders/orderReturnModel.js';
 
 dotenv.config();
 
@@ -37,7 +38,7 @@ export default  {
 
 //  <<< Home Route >>> //
    home : async(req,res) => {
-      const products = await productModel.find({});
+      const products = await productModel.find({}).limit(10);
       const categories = await categoryModel.find({});
       if(!req.user){
          res.locals.userPurpose = "login"
@@ -488,6 +489,34 @@ export default  {
       res.json({result : order});
    },
 
+   return : async (req,res)=>{
+      const orderId = req.params.id;
+      const order = await orderModel.findOne({orderId : orderId});
+      res.render('user/returnOrder.ejs',{order});
+   },
+
+   returnProcess : async (req,res)=>{
+      const data = req.body;
+      const userId = req.session.account;
+      const order = await orderModel.findOne({orderId : req.body.orderId});
+      order.returnStatus = "Requested";
+      order.returnRequested = true;
+      const returnOrder = new orderReturnModel({...data,userId});
+      order.returnReqId = returnOrder._id;
+      returnOrder.save();
+      order.save();
+      res.redirect('/user/myorders');
+   },
+
+   cancel : async (req,res)=>{
+      const orderId = req.params.id;
+      const order = await orderModel.findOne({orderId : orderId});
+      order.cancelRequested = true;
+      order.canceledStatus = 'Requested'
+      order.save();
+      res.redirect('/user/myorders');
+   },
+
    validateCoupon : async (req,res)=>{
       const coupon = req.body.data;
       let data;
@@ -508,5 +537,9 @@ export default  {
       }
       res.json({result : data});
    },
+
+   categoryProduct : (req,res)=>{
+      res.render('user/categoryview.ejs');
+   }
    
 }

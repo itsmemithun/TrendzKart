@@ -54,5 +54,10 @@ router.get('/panel/coupon_management', admincontroller.coupon);
 router.post('/panel/coupon_management', admincontroller.addCoupon);
 // Route to delete coupon
 router.get('/panel/coupon_management/delete/:id', admincontroller.deleteCoupon);
-
+// Route to see orders
+router.get('/panel/orders', admincontroller.orders);
+// Route to approve the return  requested
+router.post('/panel/orders/return_request/approve', admincontroller.approveReturn);
+// Route to approve the cancel request
+router.post('/panel/orders/cancel_request/approve', admincontroller.approveCancellation);
 export default router;

@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap');
+
+body{
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.card-containers{
+  overflow-y : scroll;
+}
+
+.product_image{
+  height : 150px;
+  width  : 150px;
+  border: rgba(112, 106, 106, 0.803) solid 2px;
+  border-radius : 10px;
+}
+
+.product-details{
+  display: inline-flex;
+  flex-direction: row;
+  margin-top : 14px;
+}
+
+
+.product_image img{
+  border-radius : 9px;
+}

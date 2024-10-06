@@ -14,18 +14,18 @@ const modal = document.querySelector('.modal');
 const checkOutBtn = document.querySelector('.checkOutBtn');
 const modal2 = document.getElementById('checkoutPaymentModal');
 const addressWarningText = document.querySelector('.selectAddressWarning');
+const addressForm = document.getElementById('addressForm');
 
-
-function createOrder(paymentMethod,productId){
-  console.log(paymentMethod);
-  console.log(productId);
+function createOrder(paymentMethod,productId,address){
+  
   const res = fetch(`/orderCompletion/${paymentMethod}`,{
     method : "POST",
     headers : {
       "Content-type" : "application/json"
     },
     body : JSON.stringify({
-      productId : productId
+      productId : productId,
+      address : address
     })
   })
   res.then((response)=>{
@@ -52,13 +52,12 @@ async function getPrice(productId){
     return data.result;  
   }
 
-  function initiateCodPayment(){
-   console.log('function called');
+  function initiateCodPayment(address){
+    console.log('helloooo')
     let cartProductIds = [];
     for(let product of productIds){
       cartProductIds.push(product.getAttribute('data-product-id'));
     }
-
     const res = fetch(`/view/buy/proceedToCodPayment`,{
       method : "POST",
       headers : {
@@ -71,7 +70,7 @@ async function getPrice(productId){
     res.then((response)=>{
       return response.json(); 
     }).then((data)=>{
-       createOrder(data.paymentMethod,data.result);
+       createOrder(data.paymentMethod,data.result,address);
     })
 }  
 
@@ -85,18 +84,25 @@ checkOutBtn.addEventListener('click', function(){
 })
 
 cartPaymentBtn.addEventListener('click', submitForm);
+
 address.addEventListener('click', function(){
   addressWarning.classList.add('d-none');
 })
 
 async function submitForm(event){
+  let arr = [];
+  const addressFormData = new FormData(addressForm);
+  for(let a of addressFormData){
+    arr.push(a);
+  }
+  const addressData = Object.fromEntries(arr);
   event.preventDefault();
   if(address.checked === true){
     let form = document.getElementById('paymentForm');
     let formData = new FormData(form);
     let paymentMethod = formData.get("paymentSelect");
     if(paymentMethod == 'COD'){
-     initiateCodPayment();
+     initiateCodPayment(addressData);
     }else if(paymentMethod == 'UPI'){
      initiateUpiPayment();
     }else if(paymentMethod == 'Debit Card'){

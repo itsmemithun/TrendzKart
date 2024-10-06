@@ -1,0 +1,58 @@
+<% layout('layouts/boilerplate') %>
+
+
+<div class="min-vh-100 mt-5 min-vw-100 d-flex">
+   <div class="flex-grow-1 row">
+      <div class="col-2 mt-4 d-flex justify-content-center ">
+         <div class="border h-75 w-75 rounded p-2 d-flex flex-column justify-content-between">
+            <div>
+               <div>
+                  <input id="0-499" class="radio-btn-clr" name="pricing_data" type="radio">
+                  <label for="0-499">₹0 - ₹499</label>
+                </div>
+                <div>
+                  <input id="500-999" class="radio-btn-clr" name="pricing_data" type="radio">
+                  <label for="500-999">₹500 - ₹999</label>
+                </div>
+                <div>
+                  <input id="1000-1499" class="radio-btn-clr" name="pricing_data" type="radio">
+                  <label for="1000-1499">₹1000 - ₹1499</label>
+                </div>
+                <div>
+                  <input id="1500-1999" class="radio-btn-clr" name="pricing_data" type="radio">
+                  <label for="1500-1999">₹1500 - ₹1999</label>
+                </div>
+                <div>
+                  <input id="2000-2499" class="radio-btn-clr" name="pricing_data" type="radio">
+                  <label for="2000-2499">₹2000 - ₹2499</label>
+                </div>
+                <div>
+                  <input id="2500-2999" class="radio-btn-clr" name="pricing_data" type="radio">
+                  <label for="2500-2999">₹2500 - ₹2999</label>
+                </div>
+                <div>
+                  <input id="3000-3499" class="radio-btn-clr" name="pricing_data" type="radio">
+                  <label for="3000-3499">₹3000 - ₹3499</label>
+                </div>
+                <div>
+                  <input id="3500&>" class="radio-btn-clr" name="pricing_data" type="radio">
+                  <label for="3500&>">₹3500 & above</label>
+                </div>
+            </div>
+             <button class="btn btn-dark flex-grow-0">Apply</button>
+         </div>
+      </div>
+      <div class="col-10 mt-4 row d-flex justify-content-around align-items-center">
+        <% for(let i=0; i<10; i++){ %>
+          <div class="product-card d-flex flex-column border rounded col-3">
+              <img src="" alt="">             
+                <div class="d-inline-flex flex-column" style="margin-top : 16px">
+                  <span class="product-title">Text</span>
+                  <span class="product-price">$0</span>
+                  <span class="product-txt">Body text</span>
+                </div>
+          </div>
+        <% } %>
+      </div>
+   </div>
+</div>

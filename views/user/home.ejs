@@ -31,15 +31,18 @@
 
 <% for(let category of categories){ %>
   <div class="container">
-    <h2><%= category.category %> -></h2>
-    <div class="d-inline-flex w-100 product-scroll">
+    <div class="d-flex flex-row justify-content-between">
+      <h2><%= category.category %> -></h2>
+      <a href="/user/productCategory?category=<%= category.category %>"><button type="button" class="btn btn-sm btn-outline-secondary"> More...</button></a>
+    </div>
+    <div class="d-inline-flex w-100 mt-2 product-scroll">
       <div class="card-container">
-        <% for(let product of products){ %>
-          <% if(product.category == category.category){ %>
+        <% for(let product of products){ %>  
+          <% if(category._id.equals(product.category)){ %>
           <% product.image[0] = product.image[0].replace('public', '') %>
           <a class="text-decoration-none" href="/view/<%= product._id %>">
            <div class="card me-3" style="width: 186px;">
-             <img class="product-img rounded object-fit-contain" src="<%= product.image[0] %>" class="card-img-top" alt="...">
+             <img class="product-img rounded object-fit-cover" src="<%= product.image[0] %>" class="card-img-top" alt="...">
              <div class="card-body ps-1 pt-1">
                <h5 class="card-title text-dark text-capitalize font-monospace"><%= product.productName %></h5>
                <p class="card-text text-dark">₹: <%= product.price %></p>
@@ -51,6 +54,7 @@
           <% } %>
         </div>
       </div>  
+         
   </div>
 <% } %>
 

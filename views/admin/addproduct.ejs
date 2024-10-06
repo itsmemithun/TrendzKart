@@ -12,7 +12,7 @@
     <a href="/admin/panel/user_management" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
       User's
     </a>
-    <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
+    <a href="/admin/panel/orders" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
       Order's
     </a>
     <a href="#" class="d-inline-flex focus-ring py-1 px-2 text-dark text-decoration-none border bg-light rounded-2 mx-2 mt-2">
@@ -50,7 +50,7 @@
         <select class="form-select" name="category" aria-label="Default select example">
           <option selected>None</option>
           <% for(let category of categories){ %>
-            <option value="<%= category.category %>"><%= category.category  %></option>
+            <option value="<%= category._id %>"><%= category.category  %></option>
           <% } %>
         </select>
       </div>

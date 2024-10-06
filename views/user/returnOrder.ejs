@@ -1,0 +1,33 @@
+<% layout('layouts/boilerplate') %>
+    <div class="vw-100 vh-100 d-flex align-items-center justify-content-center flex-column">
+        <h3 class="font mt-2 text-decoration-underline">Order return request</h3>
+        <div class="orderReturnPgeContainer shadow border d-flex flex-column align-items-center justify-content-center">
+            <form action="/user/myorders/return" method="POST">
+            <div>
+               <h3 class="text-secondary mt-3 font">Order Id : <%= order.orderId %></h3>
+               <input type="hidden" value="<%= order.orderId %>" name="orderId">
+               <h4 >Order Value : ₹<%= order.orderAmount %>/-</h4>
+               <select class="form-select form-select-sm" name="issue" aria-label="Small select example" required>
+                <option selected>Reason for returning the order</option>
+                <option value="Quality issue">Quality issue</option>
+                <option value="Product missmatch">Product missmatch</option>
+                <option value="Recieved damaged product">Recieved damaged product</option>
+                <option value="Item missing">Item missing</option>
+                <option value="Size missmatch">Size missmatch</option>
+               </select>
+               <div class="d-flex flex-column">
+                   <p class="mb-2">Enter your bank details for initiating refund</p>
+                   <input class="mt-2" type="text" name="accountHolderName" placeholder="Name">
+                   <input class="mt-2" type="text" name="accountNumber" placeholder="Account number">
+                   <input class="mt-2" type="text" name="bankIFSCCode" placeholder="IFSC Code">
+                   <input class="mt-2" type="text" name="branchName" placeholder="Branch">
+               </div>
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+                <button type="button" class="btn btn-secondary btn-sm">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-sm ms-2">Confirm</button>
+            </div>
+            </form>
+        </div>
+    </div>
+

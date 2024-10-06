@@ -30,6 +30,26 @@ const orderSchema = new Schema({
     paymentMethod : {
        type : String
     },
+    returnReqId : {
+       type : Schema.Types.ObjectId,
+       ref : 'returnOrder'
+    },
+    returnRequested : {
+       type : Boolean,
+       default : false
+    },
+    cancelRequested : {
+       type : Boolean,
+       default : false
+    },
+    cancelledStatus : {
+      type : String,
+      default : ""
+    },
+    returnStatus : {
+       type : String,
+       default : ''
+    },
     shippingAddress : {
        personName : {
        type : String,

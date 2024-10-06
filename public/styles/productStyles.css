@@ -10,9 +10,6 @@
   width: 24rem!important;
 }
 
-.extraProductImagesContainer{
-
-}
 
 .font-sizing{
   font-size : 1em;
@@ -54,27 +51,31 @@
   position : relative;
 }
 
-.lens{
-  width : 100px;
-  height : 100px;
+.bsi{
+  display : none;
+  width : 150px;
+  z-index: 2;
+  height : 150px;
+ 
+  background-image: url(http://localhost:3000/asset/product_images/1725738226116-373245420-download.jpg);
+}
+
+.zoomImage{   
+  display : none;
   position : absolute;
   top : 0;
   left : 0;
-  background-color: rgba(255,255,255,0.6);
-  animation : fadeIn 0.5s ease-in-out;
-}
-
-.result{
-  position : absolute;
-  left : calc(100% + 73px);
-  background-repeat : no-repeat;
-  width : 21rem;
-  height : 21rem;
+  width : 100%;
+  height : 100%;
+  background-color: black;
+  background-size: 200%;
+  background-position : 0% 0%;
 }
 
 .image{
   height : 100%!important;
   width  : 100%!important;
+  object-fit: cover;
 }
 
 .description{

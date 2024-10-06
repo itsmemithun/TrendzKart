@@ -18,7 +18,9 @@ const bannerSubmitButton2 = document.querySelector('.bannerSubmitButton2');
 const bannerSubmitButton3 = document.querySelector('.bannerSubmitButton3');
 const bannerSubmitButton4 = document.querySelector('.bannerSubmitButton4');
 const productImgDltBtn = document.querySelectorAll('.productImgDltBtn');
-
+const returnApproveBtn = document.querySelector('.returnApproveButton');
+const cancelApproveBtn = document.querySelector('.cancelApproveButton');
+const returnSection = document.querySelector('.returnSection');
 
 
 const emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
@@ -216,6 +218,51 @@ if(productEditImgInputTag){
           })
         })
      }
+  }
+
+
+
+  if(returnApproveBtn){
+    returnApproveBtn.addEventListener('click', function(){
+      const res = fetch('/admin/panel/orders/return_request/approve',{
+        method : 'POST',
+        headers : {
+          "Content-type" : 'application/json',
+        },
+        body : JSON.stringify({
+          orderId : this.getAttribute('data-attribute-orderId')
+        })
+      })
+      res.then((response)=>{
+        return response.json();
+      }).then((data)=>{
+        if(data.result == 'success'){
+          returnSection.classList.add('d-none');
+        }
+      })
+    })
+  }
+
+
+  if(cancelApproveBtn){
+    cancelApproveBtn.addEventListener('click', function(){
+      console.log(this.getAttribute('data-attribute-orderId'));
+      const res = fetch('/admin/panel/orders/cancel_request/approve',{
+        method : 'POST',
+        headers : {
+          "Content-type" : "application/json",
+        },
+        body : JSON.stringify({
+          orderId : this.getAttribute('data-attribute-orderId')
+        })
+      })
+      res.then((response)=>{
+        response.json();
+      })
+      .then((data)=>{
+        console.log(data);
+      })
+    })
   }
 
 

@@ -72,6 +72,10 @@ body{
   white-space: nowrap;
 }
 
+.radio-btn-clr{
+  accent-color: rgba(101, 85, 143, 1);
+}
+
 .product-scroll::-webkit-scrollbar{
   height : 10px;
   background-color: white;
@@ -79,6 +83,40 @@ body{
 .product-scroll::-webkit-scrollbar-thumb{
   background-color : grey;
   border-radius : 20px;
+}
+
+.product-card{
+  height : 375px;
+  width : 240px!important;
+  background-color: white;
+  padding : 16px;
+  margin-right : 10px;
+  margin-bottom : 10px;
+
+}
+
+.product-title{
+  font-family : "Inter", sans-serif;
+  font-size: 16px!important;   
+}
+
+.product-price{
+  font-family : "Inter", sans-serif;
+  font-size : 16px!important;
+  font-weight: 200;
+}
+
+.product-txt{
+  font-weight: normal!important;
+  color : rgba(117, 117, 117, 1);
+  font-family : "Inter", sans-serif;
+  font-size : 14px;
+}
+
+.product-card img{
+  height : 247px;
+  width : 208px;
+
 }
 
 .card-container{
@@ -339,12 +377,20 @@ th, td {
    animation : 0.2s 5 tilt-shaking;
 }
 
+
 @keyframes tilt-shaking {
   0% { transform: translateX(0) }
   25% { transform: translateX(5px) }
   50% { transform: translateX(-4px) }
   75% { transform: translateX(4px) }
   100% { transform: translateX(0) } 
+}
+
+
+.orderReturnPgeContainer{
+  width : 50%;
+  height : 50%;
+  
 }
 
 

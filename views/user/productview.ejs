@@ -11,8 +11,9 @@
             <div class="imgMagnifierContainer">
               <% product.image[0] = product.image[0].replace('public','') %>
               <img class="image" src="<%= product.image[0] %>" alt="">
-              <div class="lens"></div>
-              <div class="result"></div>
+              <div class="zoomImage">
+
+              </div>
             </div>
           </div>
 
@@ -84,4 +85,4 @@
   <div class="alert-data"></div>
 </div>
 
-<script src="/script/productviewscript.js"></script>
+<script src="/script/productviewscript.js" defer></script>

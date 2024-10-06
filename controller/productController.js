@@ -7,16 +7,18 @@ import sha256 from "sha256";
 import date from 'date-and-time';
 
 
-async function cartOrder(paymentMethod,paymentStatus,userId,productId){
+async function cartOrder(paymentMethod,address,paymentStatus,userId,productId){
   try{
-    let address;
+    // let address;
+    console.log(address);
     const user = await userModel.findById({_id : userId});
-    for(let e of user.address){
-      address = e.selected == true ? e : '' 
-    }
+    
+    // for(let e of user.address){
+    //   address = e.selected == true ? e : '' 
+    // }
     for(let data of productId){
       console.log("Order data "+data);
-      const orderId = uniqid("#");
+      const orderId = uniqid();
       const product = await productModel.findById({_id : data});
       const orderData = {
         userId : userId,
@@ -40,7 +42,7 @@ async function cartOrder(paymentMethod,paymentStatus,userId,productId){
 async function singleOrder(paymentMethod,address,paymentStatus,userId,productId){
   try{
     console.log('singleOrder');
-    const orderId = uniqid('#');
+    const orderId = uniqid();
     const now = new Date();
     let currentDateAndTime = date.format(now, 'YYYY/MM/DD HH:mm:ss');
     const product = await productModel.findById({_id : productId});

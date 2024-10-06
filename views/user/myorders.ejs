@@ -123,28 +123,8 @@
           <span class="fw-medium font">Order placed on : </span><span class="orderPlacedOn"></span>
         </div>
         <div>
-
-          <button class="btn btn-danger returnRequestBtn">Request return</button>
-          <button class="btn btn-danger">Cancel the order</button>
-
-          <select class="form-select form-select-sm mt-2" aria-label="Small select example">
-            <option selected>Select the reason for canceling the order</option>
-            <option value="1">Item mismatch</option>
-            <option value="2">Damaged product</option>
-            <option value="3">Quality issue</option>
-            <option value="4">Recieved wrong size</option>
-            <option value="5">Others</option>
-          </select>
-
-          <select class="form-select form-select-sm mt-2" aria-label="Small select example">
-            <option selected>Select the reason for returning the order</option>
-            <option value="1">Item mismatch</option>
-            <option value="2">Damaged product</option>
-            <option value="3">Quality issue</option>
-            <option value="4">Recieved wrong size</option>
-            <option value="5">Others</option>
-          </select>
-
+          <a class="returnRequestBtn" href="/user/myorders/return"><button class="btn btn-danger">Request return</button></a>
+          <a class="cancelRequestBtn" href="/user/myorders/cancel"><button class="btn btn-danger">Cancel the order</button></a>
         </div>
       </div>
       <div class="modal-footer">

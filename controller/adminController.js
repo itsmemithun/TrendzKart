@@ -4,9 +4,11 @@ import userModel from '../model/usermodel.js';
 import productModel from '../model/product/product.js';
 import categoryModel from '../model/admin/category.js';
 import bannerModel from '../model/banner/banner.js';
+import orderModel from '../model/orders/ordersModel.js'
 import { unlink } from 'fs';
 import couponModel from '../model/admin/couponmodel.js'
 import { deleteImage } from '../middleware/admin_middleware.js'
+import returnModel from '../model/orders/orderReturnModel.js';
 
 
 function countUser(users){
@@ -343,6 +345,48 @@ export default {
       const id = req.params.id;
       const coupon = await couponModel.findByIdAndDelete({_id : id})
       res.redirect('/admin/panel/coupon_management');
+    }catch(e){
+      console.log(e);
+    }
+  },
+
+  orders : async (req,res)=>{
+    try{
+      const orders = await orderModel.find({}).populate('userId').populate('productId').populate('returnReqId');
+      res.render('admin/orders.ejs', {orders});
+    }catch(e){
+      console.log(e);
+    }
+  },
+
+  approveReturn : async (req,res)=>{
+    try{
+      const orderId = req.body.orderId;
+      const order = await orderModel.findOne({orderId : orderId});
+      const returnReqId = order.returnReqId; 
+      const returnRequest = await returnModel.findById({_id : returnReqId});
+      order.returnStatus = 'Approved';
+      order.status = 'Order return'
+      order.returnStatus = true;
+      returnRequest.status = 'Approved';
+      order.save();
+      returnRequest.save();
+      res.json({result : 'success'});
+    }catch(e){
+      console.log(e);
+    }
+  },
+
+
+  approveCancellation : async (req,res)=>{
+    try{
+      const orderId = req.body.orderId;
+      console.log(orderId);
+      const order = await orderModel.findOne({ orderId : orderId });
+      order.status = 'cancelled';
+      order.cancelledStatus = 'cancelled';
+      order.save();
+      res.json({result : 'success'});
     }catch(e){
       console.log(e);
     }

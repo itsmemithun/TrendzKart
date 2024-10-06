@@ -17,9 +17,9 @@
         <span class="seperator"></span>
         <% for(let product of cart_products){ %>
         <% product.image[0] = product.image[0].replace('public', '') %>
-        <div class="products px-3 d-flex justify-content-between">
+        <div class="products mb-2 mt-2 px-3 d-flex justify-content-between">
           <div class="d-flex align-items-center">
-            <img class="productImg object-fit-contain" src="<%= product.image[0] %>" alt="">
+            <img class="productImg object-fit-cover" src="<%= product.image[0] %>" alt="">
             <div class="ms-3">
                <h4 class="font product-name" data-product-id="<%= product._id %>"><%= product.productName  %></h4>
                <p class="font">small</p>
@@ -43,49 +43,58 @@
       </div>
     </div>
   
-  <div class="rightContainer shadow border ms-3 rounded ">
-    <div class="addressSection border m-3 rounded p-2">
-       <h4 class="text-decoration-underline">Delivery Address</h4>
-       <div class="d-flex">
-        <input value="useDefaultAddress" id="addressCheckBox" type="checkbox">
-        <label for="addressCheckBox" class="ms-2 border border-secondary rounded p-2">
-         <p class="m-0"><%= userAddress.personName %></p>
-         <p class="m-0"><%= userAddress.address %></p>
-         <p class="m-0"><%= userAddress.pincode  %></p>
-         <p class="m-0"><%= userAddress.district  %></p>
-         <p class="m-0"><%= userAddress.phone %></p>
-        </label>
-       </div>
-       <div class="text-danger addressWarning d-none">Please select an address to continue*</div>
+    <div class="rightContainer shadow border ms-3 rounded ">
+      <div class="addressSection border m-3 rounded p-2">
+        <h4 class="text-decoration-underline">Delivery Address</h4>
+        <form action="" id="addressForm">
+        <div class="d-flex">
+          <input value="useDefaultAddress" id="addressCheckBox" type="checkbox">
+          <label for="addressCheckBox" class="ms-2 border border-secondary rounded p-2">
+          <p class="m-0"><%= userAddress.personName %></p>
+          <input type="hidden" name="personName" value="<%= userAddress.personName %>">
+          <p class="m-0"><%= userAddress.address %></p>
+          <input type="hidden" name="address" value="<%= userAddress.address %>">
+          <p class="m-0"><%= userAddress.pincode  %></p>
+          <input type="hidden" name="pincode" value="<%= userAddress.pincode  %>">
+          <p class="m-0"><%= userAddress.district  %></p>
+          <input type="hidden" name="district" value="<%= userAddress.district %>">
+          <p class="m-0"><%= userAddress.phone %></p>
+          <input type="hidden" name="phone" value="<%= userAddress.phone %>">
+          <p class="m-0"><%= userAddress.state %></p>
+          <input type="hidden" name="state" value="<%= userAddress.state %>">
+          </label>
+        </div>
+        </form>
+        <div class="text-danger addressWarning d-none">Please select an address to continue*</div>
+        </div>
+      <div class="couponSection  ms-3">
+        <h3>Apply Coupon</h3>
+        <input class="couponInput" type="text">
+        <button class="btn couponApplyBtn btn-dark px-3">Apply</button>
       </div>
-    <div class="couponSection  ms-3">
-       <h3>Apply Coupon</h3>
-       <input class="couponInput" type="text">
-       <button class="btn couponApplyBtn btn-dark px-3">Apply</button>
+      <div class="totalAmount m-3">
+        <div class="subtotal d-flex justify-content-between">
+          <span class="font mb-3">Subtotal</span>
+          <span class="subtotalValue">₹<%= productSum  %> </span>
+        </div>
+        
+        <div class="discount d-flex justify-content-between">
+          <span class="font mb-3">Discount(Coupon)</span>
+          <span class="coupon">₹</span>
+        </div>
+        
+        <div class="delivey d-flex justify-content-between">
+          <span class="font mb-3">Delivery</span>
+          <span>₹000</span>
+        </div>
+        <span class="seperator mb-3"></span>
+        <div class="grandTotal d-flex justify-content-between">
+          <span class="font fs-3 mb-3">Grand Total</span>
+          <span class="product-sum fs-3">₹<%= productSum %></span>
+        </div>
+        <button class="btn shadow btn-dark font checkOutBtn" data-bs-toggle="modal" data-bs-target="#checkoutPaymentModal">Checkout</button>
+      </div>
     </div>
-    <div class="totalAmount m-3">
-      <div class="subtotal d-flex justify-content-between">
-         <span class="font mb-3">Subtotal</span>
-         <span class="subtotalValue">₹<%= productSum  %> </span>
-      </div>
-      
-      <div class="discount d-flex justify-content-between">
-        <span class="font mb-3">Discount(Coupon)</span>
-        <span class="coupon">₹</span>
-      </div>
-      
-      <div class="delivey d-flex justify-content-between">
-         <span class="font mb-3">Delivery</span>
-         <span>₹000</span>
-      </div>
-      <span class="seperator mb-3"></span>
-      <div class="grandTotal d-flex justify-content-between">
-         <span class="font fs-3 mb-3">Grand Total</span>
-         <span class="product-sum fs-3">₹<%= productSum %></span>
-      </div>
-      <button class="btn shadow btn-dark font checkOutBtn" data-bs-toggle="modal" data-bs-target="#checkoutPaymentModal">Checkout</button>
-    </div>
-  </div>
 
   </div>
 

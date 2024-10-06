@@ -77,8 +77,16 @@ router.post('/user/category', usercontroller.categoryFilter);
 router.get('/user/myorders', usercontroller.myorders);
 // orderDetails rotue
 router.post('/user/getorderdetails', usercontroller.getOrderDetails);
+//  Order return route 
+router.get('/user/myorders/return/:id', usercontroller.return);
+//  Order return request is proccessing here
+router.post('/user/myorders/return',usercontroller.returnProcess);
+// Order cancel route
+router.get('/user/myorders/cancel/:id', usercontroller.cancel);
 // validate Coupon 
 router.post('/user/validateCoupon', usercontroller.validateCoupon);
+// product view by category route
+router.get('/user/productCategory', usercontroller.categoryProduct)
 
 
 //🔥 Product Routes 🔥//
